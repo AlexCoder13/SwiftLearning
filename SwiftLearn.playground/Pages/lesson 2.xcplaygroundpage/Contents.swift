@@ -1,3 +1,3 @@
-import Cocoa
+import Foundation
 
-var greeting = "Hello, playground"
+// Lesson 2

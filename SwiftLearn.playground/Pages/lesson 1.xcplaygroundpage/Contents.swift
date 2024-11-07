@@ -1,7 +1,5 @@
-//: [Previous](@previous)
-
 import Foundation
 
-var greeting = "Hello, playground"
+// Lesson 1
 
-//: [Next](@next)
+
