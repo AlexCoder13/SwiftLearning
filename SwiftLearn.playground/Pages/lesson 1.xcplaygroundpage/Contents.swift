@@ -26,7 +26,7 @@ print(secondTask)
 //3 задание
 //Создайте переменную с явным указанием типа, присвойте ей значение 0.5 и напечатайте её содержимое с помощью команды print().
 
-var thirdTask:Double = 0.5
+var thirdTask: Double = 0.5
 print(thirdTask)
 
 
@@ -35,9 +35,13 @@ print(thirdTask)
 //
 //var swiftString: String = "Swift"
 
-var swiftString: String? = "Swift"
-let anotherSwiftString = swiftString!
+var swiftString: String? = nil
+let anotherSwiftString = swiftString ?? "ОШИБКА"
 print(anotherSwiftString)
+
+if let swiftString = swiftString {
+    print(swiftString)
+}
 
 
 //5 задание
