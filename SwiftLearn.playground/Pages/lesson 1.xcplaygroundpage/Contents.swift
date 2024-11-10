@@ -33,7 +33,7 @@ print(thirdTask)
 //4 задание
 //Возьмите optional-переменную ниже, извлеките из неё значение (раскройте optional) и напечатайте её значение. Результат не должен содержать обозначения optional.
 //
-//var swiftString: String = "Swift"
+//var swiftString: String? = "Swift"
 
 var swiftString: String? = nil
 let anotherSwiftString = swiftString ?? "ОШИБКА"
