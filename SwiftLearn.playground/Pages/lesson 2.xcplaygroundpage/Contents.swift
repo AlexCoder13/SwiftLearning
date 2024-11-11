@@ -66,3 +66,24 @@ print(concatinateStrings(firstString: string1, secondString: string2))
 //Дата задана в формате yyyy-MM-dd.
 //
 //Подсказка: для преобразования строки в дату используйте DateFormatter(). DateFormatter при форматировании возвращает optional Date. Чтобы раскрыть optional, используйте значение по умолчанию — текущую дату.
+
+
+
+//var myNumber = 90
+//
+//func nextNumber(number: inout Int) {
+//    number += 1
+//}
+//print(myNumber)
+//nextNumber(number: &myNumber)
+//print(myNumber)
+
+//var myNumber = 90
+//
+//func nextNumber(number: Int) {
+//    var a = number
+//    a += 1
+//}
+//print(myNumber)
+//nextNumber(number: myNumber)
+//print(myNumber)
