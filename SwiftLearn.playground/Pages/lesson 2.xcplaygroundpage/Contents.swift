@@ -14,11 +14,9 @@ import Foundation
 // Вывод в консоль: 6
 
 func nextNumber(number: Int) -> Int {
-    var anyNumber = number
-    return anyNumber + 1
+    number + 1
 }
-var anyNumber = nextNumber(number: 0)
-print(anyNumber)
+print(nextNumber(number: 90))
 
 
 //Задание 2
@@ -28,11 +26,9 @@ print(anyNumber)
 //Дан вызов функции. Превратите его в функцию, которая вызывается так: getSquare(number: 3) — и возвращает квадрат целого числа, в данном случае 9.
 
 func getSquare(number: Int) -> Int {
-    var secondNumber = number
-    return secondNumber*secondNumber
+    number*number
 }
-let value = getSquare(number: 37)
-print(value)
+print(getSquare(number: 15))
 
 
 //Задание 3
@@ -48,20 +44,21 @@ print(value)
 //Вызовите вашу функцию и выведите количество минут и секунд отдельными инструкциями print().
 
 func time(allSeconds: Int) -> (minutes: Int, seconds: Int) {
-    var minutes = allSeconds / 60
-    var seconds = allSeconds % 60
-    var time = (minutes, seconds)
-    return time
+    (allSeconds / 60, allSeconds % 60)
 }
-var timeMe = time(allSeconds: 570)
-print(timeMe)
+print(time(allSeconds: 640).minutes)
+print(time(allSeconds: 640).seconds)
 
 
 //Задание 4
 //Напишите функцию, которая будет конкатенировать (объединять) две строки в одну. Вызовите вашу функцию и сохраните результат в переменную. Выведите результат в консоль. Для проверки используйте константы ниже.
 //
-let string1 = "Writing Swift code "
+let string1 = "Writing Swift code"
 let string2 = "is interactive and fun"
+func concatinateStrings(firstString: String, secondString: String) -> String {
+    firstString + " " + secondString
+}
+print(concatinateStrings(firstString: string1, secondString: string2))
 
 //Задание 5
 //Напишите функцию, которая на входе будет получать дату в виде строки (например, "2004-11-23"), а на выходе возвращать сущность типа Date.
