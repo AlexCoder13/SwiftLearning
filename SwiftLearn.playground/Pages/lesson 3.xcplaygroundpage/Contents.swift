@@ -6,18 +6,18 @@ import Foundation
 // Если первое число больше второго, то вывести слово «больше».
 // Если первое число меньше, то вывести слово «меньше».
 
-// РАБОТАЕТ
-//func twoEqualNumbers(firstNumber: Int, secondNumber: Int) -> String {
-//    let result: String
-//    if firstNumber == secondNumber {
-//        result = "равно"
-//    } else if firstNumber > secondNumber {
-//        result = "больше"
-//    } else {
-//    }
-//    return result
-//}
-//print(twoEqualNumbers(firstNumber: 19, secondNumber: 8))
+func twoEqualNumbers(firstNumber: Int, secondNumber: Int) -> String {
+    var result: String
+    if firstNumber == secondNumber {
+        result = "равно"
+    } else if firstNumber > secondNumber {
+        result = "больше"
+    } else {
+        result = "меньше"
+    }
+    return result
+}
+print(twoEqualNumbers(firstNumber: 19, secondNumber: 8))
 
 // НЕ РАБОТАЕТ
 //func twoEqualNumbers(firstNumber: Int, secondNumber: Int) {
@@ -29,7 +29,7 @@ import Foundation
 //    case firstNumber < secondNumber:
 //        print("меньше")
 //    default:
-//        break 
+//        break
 //    }
 //}
 //print(twoEqualNumbers(firstNumber: 13, secondNumber: 7))
@@ -45,18 +45,18 @@ import Foundation
 // print(result)
 // Вывод в консоль: 2500
 
-//func summ(toValue: Int) -> Int {
-//    var result = 0
-//    var number = 0
-//    while number < toValue {
-//        number += 1
-//        if number % 2 != 0 {
-//            result += number
-//        }
-//    }
-//    return result
-//}
-//print(summ(toValue: 15))
+func summ(toValue: Int) -> Int {
+    var resultSumm = 0
+    var number = 0
+    while number < toValue {
+        number += 1
+        if number % 2 != 0 {
+            resultSumm += number
+        }
+    }
+    return resultSumm
+}
+print(summ(toValue: 15))
 
 
 
@@ -68,17 +68,17 @@ import Foundation
 // 2
 // 3
 
-//func squareNumbers(number: Int) {
-//    var num = 0
-//    while num*num <= number {
-//        num += 1
-//        if num*num > number {
-//            break
-//        }
-//        print(num)
-//    }
-//}
-//print(squareNumbers(number: 225))
+func squareNumbers(number: Int) {
+    var num = 0
+    while num*num <= number {
+        num += 1
+        if num*num > number {
+            break
+        }
+        print(num)
+    }
+}
+print(squareNumbers(number: 9))
 
 
 
@@ -90,14 +90,14 @@ import Foundation
 // handleDiceRoll(result: 5)
 // Вывод в консоль: Победа
 
-//func handleDiceRoll(result: Int) {
-//    switch result {
-//    case 1...3:
-//        print("проигрыш")
-//    case 4...6:
-//        print("победа")
-//    default:
-//        break
-//    }
-//}
-//print(handleDiceRoll(result: 5))
+func handleDiceRoll(result: Int) {
+    switch result {
+    case 1...3:
+        print("проигрыш")
+    case 4...6:
+        print("победа")
+    default:
+        break
+    }
+}
+print(handleDiceRoll(result: 5))
