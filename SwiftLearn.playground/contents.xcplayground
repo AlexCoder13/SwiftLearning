@@ -4,5 +4,6 @@
         <page name='myPlayground'/>
         <page name='lesson 1'/>
         <page name='lesson 2'/>
+        <page name='lesson 3'/>
     </pages>
 </playground>
