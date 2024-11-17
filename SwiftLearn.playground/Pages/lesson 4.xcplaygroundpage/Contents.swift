@@ -5,25 +5,25 @@
 // let randomInt = Int.random(in: -10...10),
 // где −10...10 — диапазон, в пределах которого будет сгенерированное число.
 
-func makeArray() -> [Int] {
-    var randomArray: [Int] = []
-    for _ in 0..<10 {
-        randomArray.append(Int.random(in: -10...10))
-    }
-    return randomArray
-}
-
-var randomArray = makeArray()
-
-func sortedArray(array: [Int]) -> [Int] {
-    for index in 0..<randomArray.count {
-        if randomArray[index] < 0 {
-            randomArray[index] = 0
-        }
-    }
-    return(randomArray.sorted())
-}
-print(sortedArray(array: randomArray))
+//func makeArray() -> [Int] {
+//    var randomArray: [Int] = []
+//    for _ in 0..<10 {
+//        randomArray.append(Int.random(in: -10...10))
+//    }
+//    return randomArray
+//}
+//
+//var randomArray = makeArray()
+//
+//func sortedArray(array: [Int]) -> [Int] {
+//    for index in 0..<randomArray.count {
+//        if randomArray[index] < 0 {
+//            randomArray[index] = 0
+//        }
+//    }
+//    return(randomArray.sorted())
+//}
+//print(sortedArray(array: randomArray))
 
 
 
@@ -31,26 +31,26 @@ print(sortedArray(array: randomArray))
 // Задание 2
 // Напишите функцию, которая принимает в качестве параметра массив и возвращает его в обратном порядке.
 
-var sortArray = makeArray()
-func arraySorted(arrSort: [Int]) -> [Int] {
-for index in 0..<sortArray.count {
-    for i in (index+1)..<sortArray.count {
-        if sortArray[index] < sortArray[i] {
-            let tmp = sortArray[i]
-            sortArray[i] = sortArray[index]
-            sortArray[index] = tmp
-        }
-        }
-    }
-    return sortArray
-}
-print(arraySorted(arrSort: sortArray))
-
-func anotherArraySorted(arrSort: [Int]) -> [Int] {
-    var array = sortArray.sorted()
-    return array.reversed()
-}
-print(anotherArraySorted(arrSort: sortArray))
+//var sortArray = makeArray()
+//func arraySorted(arrSort: [Int]) -> [Int] {
+//for index in 0..<sortArray.count {
+//    for i in (index+1)..<sortArray.count {
+//        if sortArray[index] < sortArray[i] {
+//            let tmp = sortArray[i]
+//            sortArray[i] = sortArray[index]
+//            sortArray[index] = tmp
+//        }
+//        }
+//    }
+//    return sortArray
+//}
+//print(arraySorted(arrSort: sortArray))
+//
+//func anotherArraySorted(arrSort: [Int]) -> [Int] {
+//    var array = sortArray.sorted()
+//    return array.reversed()
+//}
+//print(anotherArraySorted(arrSort: sortArray))
 
 
 //Задание 3
