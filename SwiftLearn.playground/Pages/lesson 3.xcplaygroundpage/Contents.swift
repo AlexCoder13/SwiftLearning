@@ -6,18 +6,16 @@ import Foundation
 // Если первое число больше второго, то вывести слово «больше».
 // Если первое число меньше, то вывести слово «меньше».
 
-func twoEqualNumbers(firstNumber: Int, secondNumber: Int) -> String {
-    var result: String
+func twoCompareNumbers(firstNumber: Int, secondNumber: Int) {
     if firstNumber == secondNumber {
-        result = "равно"
+        print("равно")
     } else if firstNumber > secondNumber {
-        result = "больше"
+        print("больше")
     } else {
-        result = "меньше"
+        print("меньше")
     }
-    return result
 }
-print(twoEqualNumbers(firstNumber: 19, secondNumber: 8))
+print(twoCompareNumbers(firstNumber: 19, secondNumber: 8))
 
 // НЕ РАБОТАЕТ
 //func twoEqualNumbers(firstNumber: Int, secondNumber: Int) {
@@ -45,7 +43,7 @@ print(twoEqualNumbers(firstNumber: 19, secondNumber: 8))
 // print(result)
 // Вывод в консоль: 2500
 
-func summ(toValue: Int) -> Int {
+func summ(toValue: Int) {
     var resultSumm = 0
     var number = 0
     while number < toValue {
@@ -54,9 +52,9 @@ func summ(toValue: Int) -> Int {
             resultSumm += number
         }
     }
-    return resultSumm
+    print(resultSumm)
 }
-print(summ(toValue: 15))
+print(summ(toValue: 69))
 
 
 
@@ -70,9 +68,9 @@ print(summ(toValue: 15))
 
 func squareNumbers(number: Int) {
     var num = 0
-    while num*num <= number {
+    while num^2 <= number {
         num += 1
-        if num*num > number {
+        if num^2 > number {
             break
         }
         print(num)
@@ -97,6 +95,7 @@ func handleDiceRoll(result: Int) {
     case 4...6:
         print("победа")
     default:
+        print("У кубика всего 6 сторон, выбери другое значение")
         break
     }
 }
