@@ -5,24 +5,37 @@
 // let randomInt = Int.random(in: -10...10),
 // где −10...10 — диапазон, в пределах которого будет сгенерированное число.
 
-func makeArray() -> [Int] {
+func makeArray(count: Int) -> [Int] {
     var randomArray: [Int] = []
-    for _ in 0..<10 {
+    for _ in 0..<count {
         randomArray.append(Int.random(in: -10...10))
     }
     return randomArray
 }
 
-var randomArray = makeArray()
+var randomArray = makeArray(count: 10)
+
+//func sortedArray(array: [Int]) -> [Int] {
+//    for index in 0..<randomArray.count {
+//        if randomArray[index] < 0 {
+//            randomArray[index] = 0
+//        }
+//    }
+//    return(randomArray.sorted())
+//}
 
 func sortedArray(array: [Int]) -> [Int] {
-    for index in 0..<randomArray.count {
-        if randomArray[index] < 0 {
-            randomArray[index] = 0
-        }
+    let result = array.map {
+//        if $0 > 0 {
+//            return $0
+//        } else {
+//            return 0
+//        }
+        $0 > 0 ? $0 : 0
     }
-    return(randomArray.sorted())
+    return result.sorted { _, _ in false }
 }
+print(randomArray)
 print(sortedArray(array: randomArray))
 
 
@@ -31,16 +44,16 @@ print(sortedArray(array: randomArray))
 // Задание 2
 // Напишите функцию, которая принимает в качестве параметра массив и возвращает его в обратном порядке.
 
-var sortArray = makeArray()
+var sortArray = makeArray(count: 10)
 
 func arraySorted(arrSort: [Int]) -> [Int] {
-for index in 0..<sortArray.count {
-    for i in (index+1)..<sortArray.count {
-        if sortArray[index] < sortArray[i] {
-            let tmp = sortArray[i]
-            sortArray[i] = sortArray[index]
-            sortArray[index] = tmp
-        }
+    for index in 0..<sortArray.count {
+        for i in (index+1)..<sortArray.count {
+            if sortArray[index] < sortArray[i] {
+                let tmp = sortArray[i]
+                sortArray[i] = sortArray[index]
+                sortArray[index] = tmp
+            }
         }
     }
     return sortArray
@@ -54,10 +67,19 @@ func anotherArraySorted(arrSort: [Int]) -> [Int] {
 print(anotherArraySorted(arrSort: sortArray))
 
 // хз, зачем я в предыдущих двух функциях его еще и отсортировал, просто задание прочитал нормально только что)))
+//func newArraySorted(arrSort: [Int]) -> [Int] {
+//    print(sortArray)
+//    return sortArray.reversed()
+//}
+
 func newArraySorted(arrSort: [Int]) -> [Int] {
-    print(sortArray)
-    return sortArray.reversed()
+    var result: [Int] = []
+    arrSort.forEach {
+        result.insert($0, at: 0)
+    }
+    return result
 }
+print("\(sortArray) + нужный принт")
 print(newArraySorted(arrSort: sortArray))
 
 
@@ -66,13 +88,64 @@ print(newArraySorted(arrSort: sortArray))
 // Напишите замыкание, которое принимает в качестве параметра целое число и затем печатает в консоль название месяца, порядковый номер которого соответствует переданному параметру.
 // Например: если передаётся 1, печатается «январь», 2 — «февраль». Если число выходит за рамки номеров месяцев, то должно печататься: «Такого месяца не бывает».
 // Вызовите функцию, передав в неё значения для проверки.
-//
 
+func months(numOfMonth: Int, whichMonth: (Int) -> String) -> String {
+    whichMonth(numOfMonth)
+}
+
+let whichMonth: (Int) -> String = { month in
+    switch month {
+    case 1: "январь"
+    case 2: "февраль"
+    case 3: "март"
+    case 4: "апрель"
+    case 5: "май"
+    case 6: "июнь"
+    case 7: "июль"
+    case 8: "август"
+    case 9: "сентябрь"
+    case 10: "октябрь"
+    case 11: "ноябрь"
+    case 12: "декабрь"
+    default: "Месяцев нет"
+    }
+}
+
+let newCalendar: (Int) -> String = { month in
+    switch month {
+    case 1...2, 12: "ЗИМА"
+    case 3...5: "ВЕСНА"
+    case 6...8: "ЛЕТО"
+    case 9...11: "ОСЕНЬ"
+    default: "Месяцев нет"
+    }
+}
+
+let number = 9
+months(numOfMonth: number, whichMonth: newCalendar)
+months(numOfMonth: number, whichMonth: whichMonth)
+//months(numOfMonth: 8) { number in
+//    String(number*number)
+//}
+
+months(numOfMonth: 8, whichMonth: { number in
+    String(number*number)
+})
 
 // Задание 4
 //Напишите функцию, которая принимает в качестве параметров массив целых чисел и замыкание из задания 3. Внутри функции напишите код, где для каждого элемента в массиве вызывается передаваемое замыкание методом forEach(). Если передаётся пустой массив, то печатается «Месяцев нет».
-//
-
+var newArray: [Int] = []
+for _ in 0..<12 {
+    newArray.append(Int.random(in: 1...12))
+}
+func newCalendar(array: [Int], closure: (Int) -> String) {
+    if array == [] {
+        print("Месяцев нет")
+    } else {
+        array.forEach { print(closure($0)) }
+    }
+}
+print(newCalendar(array: newArray, closure: whichMonth))
 
 //Задание 5
 // Создайте пустое множество строк fruits и добавьте в него фрукты: orange, apple, banana, grapefruit.
