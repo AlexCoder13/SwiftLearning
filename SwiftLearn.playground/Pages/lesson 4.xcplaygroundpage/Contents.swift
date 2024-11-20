@@ -15,72 +15,36 @@ func makeArray(count: Int) -> [Int] {
 
 var randomArray = makeArray(count: 10)
 
-//func sortedArray(array: [Int]) -> [Int] {
-//    for index in 0..<randomArray.count {
-//        if randomArray[index] < 0 {
-//            randomArray[index] = 0
-//        }
-//    }
-//    return(randomArray.sorted())
-//}
-
 func sortedArray(array: [Int]) -> [Int] {
     let result = array.map {
-//        if $0 > 0 {
-//            return $0
-//        } else {
-//            return 0
-//        }
         $0 > 0 ? $0 : 0
     }
-    return result.sorted { _, _ in false }
+    return result.sorted(by: <)
 }
-print(randomArray)
+
+print("\(randomArray) - просто рандомный массив")
 print(sortedArray(array: randomArray))
-
-
 
 
 // Задание 2
 // Напишите функцию, которая принимает в качестве параметра массив и возвращает его в обратном порядке.
 
-var sortArray = makeArray(count: 10)
-
-func arraySorted(arrSort: [Int]) -> [Int] {
-    for index in 0..<sortArray.count {
-        for i in (index+1)..<sortArray.count {
-            if sortArray[index] < sortArray[i] {
-                let tmp = sortArray[i]
-                sortArray[i] = sortArray[index]
-                sortArray[index] = tmp
-            }
-        }
-    }
-    return sortArray
-}
-print(arraySorted(arrSort: sortArray))
-
-func anotherArraySorted(arrSort: [Int]) -> [Int] {
-    var array = sortArray.sorted()
-    return array.reversed()
-}
-print(anotherArraySorted(arrSort: sortArray))
-
-// хз, зачем я в предыдущих двух функциях его еще и отсортировал, просто задание прочитал нормально только что)))
-//func newArraySorted(arrSort: [Int]) -> [Int] {
-//    print(sortArray)
-//    return sortArray.reversed()
-//}
-
+// Решил оставить два варианта
+// 1 вариант.
 func newArraySorted(arrSort: [Int]) -> [Int] {
+    return randomArray.reversed()
+}
+// 2 вариант.
+func anotherArraySorted(arrSort: [Int]) -> [Int] {
     var result: [Int] = []
     arrSort.forEach {
         result.insert($0, at: 0)
     }
     return result
 }
-print("\(sortArray) + нужный принт")
-print(newArraySorted(arrSort: sortArray))
+
+print(newArraySorted(arrSort: randomArray))
+print(anotherArraySorted(arrSort: randomArray))
 
 
 //Задание 3
@@ -89,55 +53,39 @@ print(newArraySorted(arrSort: sortArray))
 // Например: если передаётся 1, печатается «январь», 2 — «февраль». Если число выходит за рамки номеров месяцев, то должно печататься: «Такого месяца не бывает».
 // Вызовите функцию, передав в неё значения для проверки.
 
-func months(numOfMonth: Int, whichMonth: (Int) -> String) -> String {
-    whichMonth(numOfMonth)
-}
-
-let whichMonth: (Int) -> String = { month in
+let number = 10
+let nameOfMonth: (Int) -> String = { month in
     switch month {
-    case 1: "январь"
-    case 2: "февраль"
-    case 3: "март"
-    case 4: "апрель"
-    case 5: "май"
-    case 6: "июнь"
-    case 7: "июль"
-    case 8: "август"
-    case 9: "сентябрь"
-    case 10: "октябрь"
-    case 11: "ноябрь"
-    case 12: "декабрь"
-    default: "Месяцев нет"
+    case 1: "ЯНВАРЬ"
+    case 2: "ФЕВРАЛЬ"
+    case 3: "МАРТ"
+    case 4: "АПРЕЛЬ"
+    case 5: "МАЙ"
+    case 6: "ИЮНЬ"
+    case 7: "ИЮЛЬ"
+    case 8: "АВГУСТ"
+    case 9: "СЕНТЯБРЬ"
+    case 10: "ОКТЯБРЬ"
+    case 11: "НОЯБРЬ"
+    case 12: "ДЕКАБРЬ"
+    default: "Эй, малщик, в году всего 12 месяцев. Такого месяца не бывает."
     }
 }
 
-let newCalendar: (Int) -> String = { month in
-    switch month {
-    case 1...2, 12: "ЗИМА"
-    case 3...5: "ВЕСНА"
-    case 6...8: "ЛЕТО"
-    case 9...11: "ОСЕНЬ"
-    default: "Месяцев нет"
-    }
+func calendar(numOfMonth: Int, nameOfMonth: (Int) -> String) {
+    print(nameOfMonth(numOfMonth))
 }
+print(calendar(numOfMonth: number, nameOfMonth: nameOfMonth))
 
-let number = 9
-months(numOfMonth: number, whichMonth: newCalendar)
-months(numOfMonth: number, whichMonth: whichMonth)
-//months(numOfMonth: 8) { number in
-//    String(number*number)
-//}
-
-months(numOfMonth: 8, whichMonth: { number in
-    String(number*number)
-})
 
 // Задание 4
 //Напишите функцию, которая принимает в качестве параметров массив целых чисел и замыкание из задания 3. Внутри функции напишите код, где для каждого элемента в массиве вызывается передаваемое замыкание методом forEach(). Если передаётся пустой массив, то печатается «Месяцев нет».
+
 var newArray: [Int] = []
 for _ in 0..<12 {
     newArray.append(Int.random(in: 1...12))
 }
+
 func newCalendar(array: [Int], closure: (Int) -> String) {
     if array == [] {
         print("Месяцев нет")
@@ -145,7 +93,10 @@ func newCalendar(array: [Int], closure: (Int) -> String) {
         array.forEach { print(closure($0)) }
     }
 }
-print(newCalendar(array: newArray, closure: whichMonth))
+
+print("\(newArray) - еще один рандомный массив")
+print(newCalendar(array: newArray, closure: nameOfMonth))
+
 
 //Задание 5
 // Создайте пустое множество строк fruits и добавьте в него фрукты: orange, apple, banana, grapefruit.
@@ -155,10 +106,13 @@ print(newCalendar(array: newArray, closure: whichMonth))
 let fruits: Set = ["orange", "apple", "banana", "grapefruit"]
 let redFood: Set = ["apple", "tomato", "grapefruit", "strawberry"]
 
+
 let redFruits: Set = fruits.intersection(redFood)
 print(redFruits)
+
 let redProducts: Set = redFood.symmetricDifference(redFruits)
 print(redProducts)
+
 let allFood: Set = fruits.union(redFood)
 let anotherAllFood: Set = allFood.symmetricDifference(redFruits)
 print(anotherAllFood)
@@ -177,18 +131,6 @@ func arrayWithoutCopy(array: [Int]) -> [Int] {
 }
 print(arrayWithoutCopy(array: randomArray))
 
-// НЕ РАБОТАЕТ
-//func anotherArrayWithoutCopy(array: [Int]) -> [Int] {
-//    for value in randomArray {
-//        if !randomArray.contains(value) {
-//            randomArray.append(value)
-//        }
-//    }
-//    return randomArray
-//}
-//print(anotherArrayWithoutCopy(array: randomArray))
-
-
 func anotherArrayWithoutCopy(array: [Int]) -> [Int] {
     var newArray: [Int] = []
     for element in randomArray {
@@ -198,6 +140,19 @@ func anotherArrayWithoutCopy(array: [Int]) -> [Int] {
     }
     return newArray
 }
+
+func newArrayWithoutCopy(array: [Int]) -> [Int] {
+    randomArray.filter { element in
+        if randomArray.contains(element) {
+            return false
+        } else {
+            randomArray.append(element)
+            return true
+        }
+    }
+    }
+
 print(anotherArrayWithoutCopy(array: randomArray))
+print(newArrayWithoutCopy(array: randomArray))
 
 // принты кое-где оставил специально, чтобы было видно, что код работает
