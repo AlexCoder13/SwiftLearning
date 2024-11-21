@@ -6,56 +6,51 @@ import Foundation
 // Если первое число больше второго, то вывести слово «больше».
 // Если первое число меньше, то вывести слово «меньше».
 
-func twoCompareNumbers(firstNumber: Int, secondNumber: Int) {
-    if firstNumber == secondNumber {
-        print("равно")
-    } else if firstNumber > secondNumber {
-        print("больше")
-    } else {
-        print("меньше")
-    }
-}
-print(twoCompareNumbers(firstNumber: 19, secondNumber: 8))
-
-// НЕ РАБОТАЕТ
-//func twoEqualNumbers(firstNumber: Int, secondNumber: Int) {
-//    switch firstNumber; secondNumber {
-//    case firstNumber == secondNumber:
+//func twoCompareNumbers(firstNumber: Int, secondNumber: Int) {
+//    if firstNumber == secondNumber {
 //        print("равно")
-//    case firstNumber > secondNumber:
+//    } else if firstNumber > secondNumber {
 //        print("больше")
-//    case firstNumber < secondNumber:
+//    } else {
 //        print("меньше")
-//    default:
-//        break
 //    }
 //}
-//print(twoEqualNumbers(firstNumber: 13, secondNumber: 7))
-
-
-
+//print(twoCompareNumbers(firstNumber: 19, secondNumber: 8))
 //
-// Задание 2
-// Напишите функцию func summ(toValue: Int), которая посчитает и выведет сумму всех нечётных чисел от 1 до заданного числа.
-// Для определения нечётного числа нужно использовать оператор остатка от целочисленного деления %. Если остаток от деления на 2 не равен 0, это число нечётное.
+//// НЕ РАБОТАЕТ
+////func twoEqualNumbers(firstNumber: Int, secondNumber: Int) {
+////    switch firstNumber; secondNumber {
+////    case firstNumber == secondNumber:
+////        print("равно")
+////    case firstNumber > secondNumber:
+////        print("больше")
+////    case firstNumber < secondNumber:
+////        print("меньше")
+////    default:
+////        break
+////    }
+////}
+////print(twoEqualNumbers(firstNumber: 13, secondNumber: 7))
 //
-// let result = summ(toValue: 100)
-// print(result)
-// Вывод в консоль: 2500
-
-func summ(toValue: Int) {
-    var resultSumm = 0
-    var number = 0
-    while number < toValue {
-        number += 1
-        if number % 2 != 0 {
-            resultSumm += number
-        }
-    }
-    print(resultSumm)
-}
-print(summ(toValue: 69))
-
+//
+//
+////
+//// Задание 2
+//// Напишите функцию func summ(toValue: Int), которая посчитает и выведет сумму всех нечётных чисел от 1 до заданного числа.
+//// Для определения нечётного числа нужно использовать оператор остатка от целочисленного деления %. Если остаток от деления на 2 не равен 0, это число нечётное.
+////
+//// let result = summ(toValue: 100)
+//// print(result)
+//// Вывод в консоль: 2500
+//
+//func summ(toValue: Int) {
+//    var resultSumm = 0
+//    for number in 1...toValue where number % 2 != 0 {
+//        resultSumm += number
+//    }
+//    print(resultSumm)
+//}
+//summ(toValue: 10)
 
 
 //Задание 3
@@ -67,16 +62,13 @@ print(summ(toValue: 69))
 // 3
 
 func squareNumbers(number: Int) {
-    var num = 0
-    while num^2 <= number {
-        num += 1
-        if num^2 > number {
-            break
-        }
+    var num = 1
+    while num * num <= number {
         print(num)
+        num += 1
     }
 }
-print(squareNumbers(number: 9))
+squareNumbers(number: 100)
 
 
 
@@ -96,7 +88,6 @@ func handleDiceRoll(result: Int) {
         print("победа")
     default:
         print("У кубика всего 6 сторон, выбери другое значение")
-        break
     }
 }
-print(handleDiceRoll(result: 5))
+handleDiceRoll(result: 5)
