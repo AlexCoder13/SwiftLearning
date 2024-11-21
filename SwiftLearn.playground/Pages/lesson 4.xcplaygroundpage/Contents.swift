@@ -155,4 +155,3 @@ func newArrayWithoutCopy(array: [Int]) -> [Int] {
 print(anotherArrayWithoutCopy(array: randomArray))
 print(newArrayWithoutCopy(array: randomArray))
 
-// принты кое-где оставил специально, чтобы было видно, что код работает
