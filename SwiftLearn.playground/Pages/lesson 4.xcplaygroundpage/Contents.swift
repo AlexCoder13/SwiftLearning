@@ -32,7 +32,7 @@ print(sortedArray(array: randomArray))
 // Решил оставить два варианта
 // 1 вариант.
 func newArraySorted(arrSort: [Int]) -> [Int] {
-    return randomArray.reversed()
+    randomArray.reversed()
 }
 // 2 вариант.
 func anotherArraySorted(arrSort: [Int]) -> [Int] {
@@ -75,19 +75,21 @@ let nameOfMonth: (Int) -> String = { month in
 func calendar(numOfMonth: Int, nameOfMonth: (Int) -> String) {
     print(nameOfMonth(numOfMonth))
 }
-print(calendar(numOfMonth: number, nameOfMonth: nameOfMonth))
+calendar(numOfMonth: number, nameOfMonth: nameOfMonth)
 
 
 // Задание 4
 //Напишите функцию, которая принимает в качестве параметров массив целых чисел и замыкание из задания 3. Внутри функции напишите код, где для каждого элемента в массиве вызывается передаваемое замыкание методом forEach(). Если передаётся пустой массив, то печатается «Месяцев нет».
 
 var newArray: [Int] = []
+var emptyArray: [Int] = []
+
 for _ in 0..<12 {
     newArray.append(Int.random(in: 1...12))
 }
 
 func newCalendar(array: [Int], closure: (Int) -> String) {
-    if array == [] {
+    if array.isEmpty {
         print("Месяцев нет")
     } else {
         array.forEach { print(closure($0)) }
@@ -95,17 +97,20 @@ func newCalendar(array: [Int], closure: (Int) -> String) {
 }
 
 print("\(newArray) - еще один рандомный массив")
-print(newCalendar(array: newArray, closure: nameOfMonth))
-
+newCalendar(array: newArray, closure: nameOfMonth)
+newCalendar(array: emptyArray, closure: nameOfMonth)
 
 //Задание 5
 // Создайте пустое множество строк fruits и добавьте в него фрукты: orange, apple, banana, grapefruit.
 // Создайте множество redFood из элементов apple, tomato, grapefruit, strawberry.
 // Найдите с помощью операций над множествами множества красных фруктов, множество красных продуктов, но не фруктов, и множество всей еды, кроме красных фруктов.
 
-let fruits: Set = ["orange", "apple", "banana", "grapefruit"]
+var fruits: Set<String> = []
+fruits.insert("orange")
+fruits.insert("apple")
+fruits.insert("banana")
+fruits.insert("grapefruit")
 let redFood: Set = ["apple", "tomato", "grapefruit", "strawberry"]
-
 
 let redFruits: Set = fruits.intersection(redFood)
 print(redFruits)
@@ -113,8 +118,7 @@ print(redFruits)
 let redProducts: Set = redFood.symmetricDifference(redFruits)
 print(redProducts)
 
-let allFood: Set = fruits.union(redFood)
-let anotherAllFood: Set = allFood.symmetricDifference(redFruits)
+let anotherAllFood: Set = fruits.symmetricDifference(redFood)
 print(anotherAllFood)
 
 
@@ -122,36 +126,24 @@ print(anotherAllFood)
 //Напишите две функции, которые принимают в качестве параметра массив, удаляют из него дубликаты и возвращают массив с уникальными значениями.
 //Первая функция не должна использовать свойства множеств для удаления дубликатов, вторая функция — должна.
 
-print(randomArray)
+let coolAray = [1, 1, 2, 45, 45, 23, 23, -100, -1, 0, -1, 100, -100]
+let anotherArray = [5, 5, 5, 3, 3]
 
 func arrayWithoutCopy(array: [Int]) -> [Int] {
-    var makeSet = Set(array)
-    var makeArrayAgain = Array(makeSet)
-    return makeArrayAgain
+    Array(Set(array))
 }
-print(arrayWithoutCopy(array: randomArray))
+print(arrayWithoutCopy(array: coolAray))
 
 func anotherArrayWithoutCopy(array: [Int]) -> [Int] {
     var newArray: [Int] = []
-    for element in randomArray {
-        if newArray.contains(element) == false {
+    for element in array {
+        if !newArray.contains(element) {
             newArray.append(element)
         }
     }
     return newArray
 }
 
-func newArrayWithoutCopy(array: [Int]) -> [Int] {
-    randomArray.filter { element in
-        if randomArray.contains(element) {
-            return false
-        } else {
-            randomArray.append(element)
-            return true
-        }
-    }
-    }
+print("\(anotherArrayWithoutCopy(array: coolAray)) - новый массив")
 
-print(anotherArrayWithoutCopy(array: randomArray))
-print(newArrayWithoutCopy(array: randomArray))
 
