@@ -264,3 +264,105 @@
 //
 //print(anotherArrayWithoutCopy(array: randomArray))
 //print(newArrayWithoutCopy(array: randomArray))
+
+
+// ПЕРЕЧИСЛЕНИЯ (ENUM)
+
+enum Seasons {
+    case winter
+    case spring
+    case summer
+    case autumn
+}
+
+let summer = Seasons.summer
+let spring: Seasons = .spring
+
+let season = Seasons.autumn
+switch season {
+case .winter:
+    print("winter")
+case .spring:
+    print("spring")
+case .summer:
+    print("summer")
+case .autumn:
+    print("autumn")
+}
+
+//switch season {
+//case .winter:
+//    <#code#>
+//case .spring:
+//    <#code#>
+//case .summer:
+//    <#code#>
+//case .autumn:
+//    <#code#>
+//}
+
+// ИТЕРАЦИЯ ПО КЕЙСАМ. Подписываем на протокол, появляются свойства, можем посчитать кол-во кейсов.
+enum Sides: CaseIterable {
+    case left
+    case right
+    case up
+    case down
+}
+let sidesCount = Sides.allCases.count
+for side in Sides.allCases {
+    print(side)
+}
+
+// Ассоциативные значения.
+enum PaymentMethod {
+    case creditCard(cardNumber: String, expiryDate: String, cvv: Int)
+    case debitCard(cardNumber: String, expiryDate: String, cvv: Int)
+    case payPal(email: String)
+    case applePay(id: String)
+}
+let paymentMethod1 = PaymentMethod.payPal(email: "sanyok@develop.ru")
+let paymentMethod2 = PaymentMethod.applePay(id: "123zxcd")
+let paymentMethod3 = PaymentMethod.debitCard(cardNumber: "1323234234", expiryDate: "11.11.2031", cvv: 123)
+switch paymentMethod3 {
+case .creditCard(let cardNumber, let expiryDate, let cvv):
+    print("Credit Card: cardNumber: \(cardNumber) expiryDate: \(expiryDate) cvv: \(cvv)")
+case .debitCard(let cardNumber, let expiryDate, let cvv):
+    print("Debit Card: cardNumber: \(cardNumber) expiryDate: \(expiryDate) cvv: \(cvv)")
+case .payPal(let email):
+    print("Paypal: email: \(email)")
+case .applePay(let id):
+    print("ApplePay: id: \(id)")
+}
+
+// Исходные Значения.
+enum OrderStatus: String {
+    case pending = "Заказ ожидает обработки"
+    case processing = "Заказ в обработке"
+    case shipped = "Заказ отправлен"
+    case delivered = "Заказ доставлен"
+    case canceled = "Заказ отменен"
+}
+let orderStatus = OrderStatus.delivered.rawValue
+print(orderStatus)
+
+enum OrderStatusNumber: Int {
+    case pending = 1  // Можно не прописывать значение. Все будет установлено НЕЯВНО, только начнется с 0.
+    case processing
+    case shipped
+    case delivered
+    case canceled
+}
+print(OrderStatusNumber.shipped.rawValue)
+
+
+
+enum Animals {
+    case cat (legs: Int, head: Int, eyes: Int)
+    case dog (legs: Int, head: Int, eyes: Int)
+    case bird (legs: Int, head: Int, eyes: Int)
+    case spider (legs: Int, head: Int, eyes: Int)
+}
+
+let animal1 = Animals.spider(legs: 8, head: 1, eyes: 8)
+let animal2 = Animals.cat(legs: 4, head: 1, eyes: 2)
+let animal3 = Animals.bird(legs: 2, head: 1, eyes: 2)

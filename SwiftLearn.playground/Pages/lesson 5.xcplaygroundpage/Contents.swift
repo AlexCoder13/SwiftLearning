@@ -14,8 +14,8 @@ print(dayNumbers["ПЯТНИЦА"])
 //С помощью итерирования по созданному словарю выведите названия всех дней недели и их номера.
 // Вывод должен осуществляться в консоль. Пример вывода: «Четверг — 4».
 
-for (Key, Value) in dayNumbers {
-    print("\(Key) - \(Value)")
+for (key, value) in dayNumbers {
+    print("\(key) - \(value)")
 }
 
 
@@ -42,13 +42,51 @@ print(userPasswords)
 //     }
 // }
 //Выше приведён код, в котором объявляется новый тип ошибки с помощью enum. Добавьте в него ещё два случая ошибки. Назовите их userNotFound и invalidUsername. Не забудьте добавить описание ошибок для новых случаев в соответствующий метод. Ошибка invalidUsername должна иметь ассоциированное значение — некорректный символ в имени пользователя.
-//
 
+import Foundation
+enum CustomError: Error, LocalizedError {
+    case invalidPassword
+    case invalidUsername
+    case userNotFound
+    
+    var errorDescription: String? {
+        switch self {
+        case .invalidPassword:
+            "Неправильный пароль"
+        case .invalidUsername:
+            "Неверное имя Пользователя"
+        case .userNotFound:
+            "Пользователь не найден"
+        }
+    }
+}
+let errorUserName: CustomError = .invalidUsername
+print(errorUserName.errorDescription ?? "")
+let errorUserData: CustomError = .userNotFound
+print(errorUserData.errorDescription ?? "")
 
 //Задание 5
 //Напишите функцию обработки имени пользователя и пароля. Функция должна принимать два аргумента и, если такая запись в базе данных отсутствует или имя пользователя неверное, выбрасывать соответствующую ошибку. invalidUsername должна иметь ассоциированное значение — некорректный символ в имени пользователя.
-//
 
+func checkUserData(userData: [String: String], userName: String) {
+    if userPasswords.keys.contains { _ in 
+        userName != "ALEX" &&
+        userName != "DANILA" &&
+        userName != "NICKOLAY" &&
+        userName != "ROMAN" &&
+        userName != "VLAD" } {
+        print(errorUserName.errorDescription ?? "")
+    }
+    if userPasswords.contains { _ in 
+        userData != ["ALEX": "YaTrahalPodval_123"] &&
+        userData != ["NICKOLAY": "YaTrahalYaroslava_75raz"] &&
+        userData != ["DANILA": "YaVoobsheVSYOtrahal_228"] &&
+        userData != ["ROMAN": "Vlad_SkolkoRazYouNatiralOrla?"] &&
+        userData != ["VLAD": "348"] } {
+        print(errorUserData.errorDescription ?? "")
+    }
+}
+checkUserData(userData: ["DANIL": "YaVoobsheVSYOtrahal_228"], userName: "DANIL")
 
 //Задание 6
 //Напишите код обработки ошибки из функции в задании 5. Выведите описание ошибки, если она произошла, а иначе выведите сообщение, что вход в систему успешно осуществлён.
