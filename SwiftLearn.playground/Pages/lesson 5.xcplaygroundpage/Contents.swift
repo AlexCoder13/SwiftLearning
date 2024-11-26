@@ -46,7 +46,7 @@ print(userPasswords)
 import Foundation
 enum CustomError: Error, LocalizedError {
     case invalidPassword
-    case invalidUsername
+    case invalidUsername(nonCorrectSymbol: String)
     case userNotFound
     
     var errorDescription: String? {
@@ -60,36 +60,45 @@ enum CustomError: Error, LocalizedError {
         }
     }
 }
-let errorUserName: CustomError = .invalidUsername
-print(errorUserName.errorDescription ?? "")
+let errorUserName: CustomError = .invalidUsername(nonCorrectSymbol: "!")
+//print(errorUserName.errorDescription ?? "")
 let errorUserData: CustomError = .userNotFound
-print(errorUserData.errorDescription ?? "")
+//print(errorUserData.errorDescription ?? "")
 
 //Задание 5
 //Напишите функцию обработки имени пользователя и пароля. Функция должна принимать два аргумента и, если такая запись в базе данных отсутствует или имя пользователя неверное, выбрасывать соответствующую ошибку. invalidUsername должна иметь ассоциированное значение — некорректный символ в имени пользователя.
 
-func checkUserData(userData: [String: String], userName: String) {
-    if userPasswords.keys.contains { _ in 
-        userName != "ALEX" &&
-        userName != "DANILA" &&
-        userName != "NICKOLAY" &&
-        userName != "ROMAN" &&
-        userName != "VLAD" } {
-        print(errorUserName.errorDescription ?? "")
+// ЗАДАНИЕ 5 + ЗАДАНИЕ 6 без try?
+
+func checkUserData(userName: String, userData: [String: String]) throws {
+    guard userName == "ALEX" ||
+    userName == "VLAD" ||
+    userName == "NICKOLAY" ||
+    userName == "ROMAN" ||
+    userName == "DANILA" else {
+        throw CustomError.invalidUsername(nonCorrectSymbol: "!")
     }
-    if userPasswords.contains { _ in 
-        userData != ["ALEX": "YaTrahalPodval_123"] &&
-        userData != ["NICKOLAY": "YaTrahalYaroslava_75raz"] &&
-        userData != ["DANILA": "YaVoobsheVSYOtrahal_228"] &&
-        userData != ["ROMAN": "Vlad_SkolkoRazYouNatiralOrla?"] &&
-        userData != ["VLAD": "348"] } {
-        print(errorUserData.errorDescription ?? "")
+    guard userData == ["ALEX": "YaTrahalPodval_123"] ||
+    userData == ["VLAD": "348"] ||
+    userData == ["NICKOLAY": "YaTrahalYaroslava_75raz"] ||
+    userData == ["ROMAN": "Vlad_SkolkoRazYouNatiralOrla"] ||
+    userData == ["DANILA": "YaVoobsheVSYOtrahal_228"] else {
+        throw CustomError.userNotFound
     }
+    print("Вход в систему осуществлен усппешно")
 }
-checkUserData(userData: ["DANIL": "YaVoobsheVSYOtrahal_228"], userName: "DANIL")
+
+do {
+    try checkUserData(userName: "ROMAN", userData: ["ALEX": "YaTrahalPodval_123"])
+} catch CustomError.invalidUsername(nonCorrectSymbol: "!") {
+    print("Некорректное имя пользователя")
+} catch CustomError.userNotFound {
+    print("Пользователь не найден")
+}
 
 //Задание 6
 //Напишите код обработки ошибки из функции в задании 5. Выведите описание ошибки, если она произошла, а иначе выведите сообщение, что вход в систему успешно осуществлён.
 // Обработку ошибки сделайте двумя способами:
 // С помощью конструкции do-catch.
 // С помощью try?.
+
