@@ -366,3 +366,61 @@ enum Animals {
 let animal1 = Animals.spider(legs: 8, head: 1, eyes: 8)
 let animal2 = Animals.cat(legs: 4, head: 1, eyes: 2)
 let animal3 = Animals.bird(legs: 2, head: 1, eyes: 2)
+
+
+// СТРУКТУРЫ (STRUCT).
+
+// Синтаксис.
+
+struct Phone {
+    private var model: String  // private - уровень доступа, который не позволяет получать свойство экземпляра и изменять его
+    var brand: String
+    let year: Int
+    var memory: Int
+    
+    func sayModel() -> String {
+        let myModel = " My model is \(model)"
+        return myModel
+    }
+    
+    init(model: String, brand: String, year: Int, memory: Int) {
+        self.model = model
+        self.brand = brand
+        self.year = year
+        self.memory = memory
+    }
+}
+
+
+// Экземпляры струткуры.
+
+let phone1 = Phone(model: "iPhone", brand: "Apple", year: 2020, memory: 128)  // с прайветом(выше в экземпляре) ругается без инита, с инитом на прайвет не ругается
+phone1.sayModel()
+phone1.brand
+phone1.year
+
+// Как работает value type.
+
+var myPhone = Phone(model: "iPhone", brand: "Apple", year: 2021, memory: 128)
+var myPhone1 = myPhone  // скопировал значение одной переменной в другую, можно менять параметры без проблем
+var myPhone2 = myPhone1
+myPhone1.brand = "fiv"
+myPhone1.brand
+myPhone2.brand
+myPhone.brand
+
+myPhone.memory == myPhone1.memory
+myPhone1.memory = 256
+myPhone.memory == myPhone1.memory
+
+// Уровни доступа.
+
+/*
+ Open
+ Public
+ Internal(default)
+ File-Private
+ Private
+ */
+
+
