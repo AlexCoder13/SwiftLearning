@@ -1,3 +1,5 @@
+import Foundation
+
 //Задание 1
 //Мы можем воспользоваться массивом строк [String], чтобы по номеру дня недели получать название дня недели: let days = [“Monday”, “Tuesday”, “Wednesday”, “Thursday”, “Friday”, “Saturday”, “Sunday”].
 // day[0] — первый день недели
@@ -7,7 +9,7 @@ let days = ["ПОНЕДЕЛЬНИК", "ВТОРНИК", "СРЕДА", "ЧЕТВ�
 let numbers = [1, 2, 3, 4, 5, 6, 7]
 let dayNumbers = Dictionary(uniqueKeysWithValues: zip(days, numbers))
 print(dayNumbers)
-print(dayNumbers["ПЯТНИЦА"])
+print(dayNumbers["ПЯТНИЦА"] ?? "")
 
 
 //Задание 2
@@ -23,7 +25,7 @@ for (key, value) in dayNumbers {
 //Создайте словарь, который будет представлять собой базу данных паролей пользователей. По строке имени пользователя мы будем хранить строку с паролем.
 // Добавьте в этот словарь три любые записи.
 
-var userPasswords = ["ALEX": "YaTrahalPodval_123", "NICKOLAY": "YaTrahalYaroslava_75raz"]
+var userPasswords: [String: String] = ["ALEX": "YaTrahalPodval_123", "NICKOLAY": "YaTrahalYaroslava_75raz"]
 userPasswords["DANILA"] = "YaVoobsheVSYOtrahal_228"
 userPasswords["ROMAN"] = "Vlad_SkolkoRazYouNatiralOrla?"
 userPasswords["VLAD"] = "348"
@@ -33,7 +35,7 @@ print(userPasswords)
 // Задание 4
 // enum CustomError: Error, LocalizedError {
 //     case invalidPassword
-//     
+//
 //     var errorDescription: String? {
 //         switch self {
 //         case .invalidPassword:
@@ -43,62 +45,65 @@ print(userPasswords)
 // }
 //Выше приведён код, в котором объявляется новый тип ошибки с помощью enum. Добавьте в него ещё два случая ошибки. Назовите их userNotFound и invalidUsername. Не забудьте добавить описание ошибок для новых случаев в соответствующий метод. Ошибка invalidUsername должна иметь ассоциированное значение — некорректный символ в имени пользователя.
 
-import Foundation
 enum CustomError: Error, LocalizedError {
     case invalidPassword
-    case invalidUsername(nonCorrectSymbol: String)
+    case invalidUsername(Character)
     case userNotFound
     
     var errorDescription: String? {
         switch self {
         case .invalidPassword:
             "Неправильный пароль"
-        case .invalidUsername:
-            "Неверное имя Пользователя"
+        case .invalidUsername(let nonCorrectSymbol):
+            "Неверное имя Пользователя \(nonCorrectSymbol)"
         case .userNotFound:
             "Пользователь не найден"
+            
         }
     }
 }
-let errorUserName: CustomError = .invalidUsername(nonCorrectSymbol: "!")
-//print(errorUserName.errorDescription ?? "")
-let errorUserData: CustomError = .userNotFound
-//print(errorUserData.errorDescription ?? "")
 
 //Задание 5
 //Напишите функцию обработки имени пользователя и пароля. Функция должна принимать два аргумента и, если такая запись в базе данных отсутствует или имя пользователя неверное, выбрасывать соответствующую ошибку. invalidUsername должна иметь ассоциированное значение — некорректный символ в имени пользователя.
 
 // ЗАДАНИЕ 5 + ЗАДАНИЕ 6 без try?
 
-func checkUserData(userName: String, userData: [String: String]) throws {
-    guard userName == "ALEX" ||
-    userName == "VLAD" ||
-    userName == "NICKOLAY" ||
-    userName == "ROMAN" ||
-    userName == "DANILA" else {
-        throw CustomError.invalidUsername(nonCorrectSymbol: "!")
+func checkUserData(userName: String, userPassword: String, userData: [String: String]) throws {
+    for _ in userName {
+        if userName.contains("!") {
+            throw CustomError.invalidUsername("!")
+        }
+        guard userData[userName] != nil else {
+            throw CustomError.userNotFound
+        }
+        guard userData[userName] == userPassword else {
+            throw CustomError.invalidPassword
+        }
+        
     }
-    guard userData == ["ALEX": "YaTrahalPodval_123"] ||
-    userData == ["VLAD": "348"] ||
-    userData == ["NICKOLAY": "YaTrahalYaroslava_75raz"] ||
-    userData == ["ROMAN": "Vlad_SkolkoRazYouNatiralOrla"] ||
-    userData == ["DANILA": "YaVoobsheVSYOtrahal_228"] else {
-        throw CustomError.userNotFound
-    }
-    print("Вход в систему осуществлен усппешно")
+    print("Вход в систему осуществлен успешно")
 }
 
-do {
-    try checkUserData(userName: "ROMAN", userData: ["ALEX": "YaTrahalPodval_123"])
-} catch CustomError.invalidUsername(nonCorrectSymbol: "!") {
-    print("Некорректное имя пользователя")
-} catch CustomError.userNotFound {
-    print("Пользователь не найден")
+func firstAuth(userName: String, userPassword: String, userData: [String: String]) {
+    do {
+        try checkUserData(userName: userName, userPassword: userPassword, userData: userData)
+    } catch {
+        print(error.localizedDescription)
+    }
 }
 
+firstAuth(userName: "VLAD!", userPassword: "348", userData: userPasswords)
 //Задание 6
 //Напишите код обработки ошибки из функции в задании 5. Выведите описание ошибки, если она произошла, а иначе выведите сообщение, что вход в систему успешно осуществлён.
 // Обработку ошибки сделайте двумя способами:
 // С помощью конструкции do-catch.
 // С помощью try?.
 
+func secondAuth(userName: String, userPassword: String, userData: [String: String]) {
+    let result = try? checkUserData(userName: userName, userPassword: userPassword, userData: userData)
+    if result == nil {
+        print("Ошибка входа")
+    }
+}
+
+secondAuth(userName: "ROMAN!", userPassword: "Vlad_SkolkoRazYouNatiralOrla?", userData: userPasswords)

@@ -268,150 +268,150 @@
 
 // ПЕРЕЧИСЛЕНИЯ (ENUM)
 
-enum Seasons {
-    case winter
-    case spring
-    case summer
-    case autumn
-}
-
-let summer = Seasons.summer
-let spring: Seasons = .spring
-
-let season = Seasons.autumn
-switch season {
-case .winter:
-    print("winter")
-case .spring:
-    print("spring")
-case .summer:
-    print("summer")
-case .autumn:
-    print("autumn")
-}
-
+//enum Seasons {
+//    case winter
+//    case spring
+//    case summer
+//    case autumn
+//}
+//
+//let summer = Seasons.summer
+//let spring: Seasons = .spring
+//
+//let season = Seasons.autumn
 //switch season {
 //case .winter:
-//    <#code#>
+//    print("winter")
 //case .spring:
-//    <#code#>
+//    print("spring")
 //case .summer:
-//    <#code#>
+//    print("summer")
 //case .autumn:
-//    <#code#>
+//    print("autumn")
 //}
-
-// ИТЕРАЦИЯ ПО КЕЙСАМ. Подписываем на протокол, появляются свойства, можем посчитать кол-во кейсов.
-enum Sides: CaseIterable {
-    case left
-    case right
-    case up
-    case down
-}
-let sidesCount = Sides.allCases.count
-for side in Sides.allCases {
-    print(side)
-}
-
-// Ассоциативные значения.
-enum PaymentMethod {
-    case creditCard(cardNumber: String, expiryDate: String, cvv: Int)
-    case debitCard(cardNumber: String, expiryDate: String, cvv: Int)
-    case payPal(email: String)
-    case applePay(id: String)
-}
-let paymentMethod1 = PaymentMethod.payPal(email: "sanyok@develop.ru")
-let paymentMethod2 = PaymentMethod.applePay(id: "123zxcd")
-let paymentMethod3 = PaymentMethod.debitCard(cardNumber: "1323234234", expiryDate: "11.11.2031", cvv: 123)
-switch paymentMethod3 {
-case .creditCard(let cardNumber, let expiryDate, let cvv):
-    print("Credit Card: cardNumber: \(cardNumber) expiryDate: \(expiryDate) cvv: \(cvv)")
-case .debitCard(let cardNumber, let expiryDate, let cvv):
-    print("Debit Card: cardNumber: \(cardNumber) expiryDate: \(expiryDate) cvv: \(cvv)")
-case .payPal(let email):
-    print("Paypal: email: \(email)")
-case .applePay(let id):
-    print("ApplePay: id: \(id)")
-}
-
-// Исходные Значения.
-enum OrderStatus: String {
-    case pending = "Заказ ожидает обработки"
-    case processing = "Заказ в обработке"
-    case shipped = "Заказ отправлен"
-    case delivered = "Заказ доставлен"
-    case canceled = "Заказ отменен"
-}
-let orderStatus = OrderStatus.delivered.rawValue
-print(orderStatus)
-
-enum OrderStatusNumber: Int {
-    case pending = 1  // Можно не прописывать значение. Все будет установлено НЕЯВНО, только начнется с 0.
-    case processing
-    case shipped
-    case delivered
-    case canceled
-}
-print(OrderStatusNumber.shipped.rawValue)
-
-
-
-enum Animals {
-    case cat (legs: Int, head: Int, eyes: Int)
-    case dog (legs: Int, head: Int, eyes: Int)
-    case bird (legs: Int, head: Int, eyes: Int)
-    case spider (legs: Int, head: Int, eyes: Int)
-}
-
-let animal1 = Animals.spider(legs: 8, head: 1, eyes: 8)
-let animal2 = Animals.cat(legs: 4, head: 1, eyes: 2)
-let animal3 = Animals.bird(legs: 2, head: 1, eyes: 2)
-
-
-// СТРУКТУРЫ (STRUCT).
-
-// Синтаксис.
-
-struct Phone {
-    private var model: String  // private - уровень доступа, который не позволяет получать свойство экземпляра и изменять его
-    var brand: String
-    let year: Int
-    var memory: Int
-    
-    func sayModel() -> String {
-        let myModel = " My model is \(model)"
-        return myModel
-    }
-    
-    init(model: String, brand: String, year: Int, memory: Int) {
-        self.model = model
-        self.brand = brand
-        self.year = year
-        self.memory = memory
-    }
-}
-
-
-// Экземпляры струткуры.
-
-let phone1 = Phone(model: "iPhone", brand: "Apple", year: 2020, memory: 128)  // с прайветом(выше в экземпляре) ругается без инита, с инитом на прайвет не ругается
-phone1.sayModel()
-phone1.brand
-phone1.year
-
-// Как работает value type.
-
-var myPhone = Phone(model: "iPhone", brand: "Apple", year: 2021, memory: 128)
-var myPhone1 = myPhone  // скопировал значение одной переменной в другую, можно менять параметры без проблем
-var myPhone2 = myPhone1
-myPhone1.brand = "fiv"
-myPhone1.brand
-myPhone2.brand
-myPhone.brand
-
-myPhone.memory == myPhone1.memory
-myPhone1.memory = 256
-myPhone.memory == myPhone1.memory
+//
+////switch season {
+////case .winter:
+////    <#code#>
+////case .spring:
+////    <#code#>
+////case .summer:
+////    <#code#>
+////case .autumn:
+////    <#code#>
+////}
+//
+//// ИТЕРАЦИЯ ПО КЕЙСАМ. Подписываем на протокол, появляются свойства, можем посчитать кол-во кейсов.
+//enum Sides: CaseIterable {
+//    case left
+//    case right
+//    case up
+//    case down
+//}
+//let sidesCount = Sides.allCases.count
+//for side in Sides.allCases {
+//    print(side)
+//}
+//
+//// Ассоциативные значения.
+//enum PaymentMethod {
+//    case creditCard(cardNumber: String, expiryDate: String, cvv: Int)
+//    case debitCard(cardNumber: String, expiryDate: String, cvv: Int)
+//    case payPal(email: String)
+//    case applePay(id: String)
+//}
+//let paymentMethod1 = PaymentMethod.payPal(email: "sanyok@develop.ru")
+//let paymentMethod2 = PaymentMethod.applePay(id: "123zxcd")
+//let paymentMethod3 = PaymentMethod.debitCard(cardNumber: "1323234234", expiryDate: "11.11.2031", cvv: 123)
+//switch paymentMethod3 {
+//case .creditCard(let cardNumber, let expiryDate, let cvv):
+//    print("Credit Card: cardNumber: \(cardNumber) expiryDate: \(expiryDate) cvv: \(cvv)")
+//case .debitCard(let cardNumber, let expiryDate, let cvv):
+//    print("Debit Card: cardNumber: \(cardNumber) expiryDate: \(expiryDate) cvv: \(cvv)")
+//case .payPal(let email):
+//    print("Paypal: email: \(email)")
+//case .applePay(let id):
+//    print("ApplePay: id: \(id)")
+//}
+//
+//// Исходные Значения.
+//enum OrderStatus: String {
+//    case pending = "Заказ ожидает обработки"
+//    case processing = "Заказ в обработке"
+//    case shipped = "Заказ отправлен"
+//    case delivered = "Заказ доставлен"
+//    case canceled = "Заказ отменен"
+//}
+//let orderStatus = OrderStatus.delivered.rawValue
+//print(orderStatus)
+//
+//enum OrderStatusNumber: Int {
+//    case pending = 1  // Можно не прописывать значение. Все будет установлено НЕЯВНО, только начнется с 0.
+//    case processing
+//    case shipped
+//    case delivered
+//    case canceled
+//}
+//print(OrderStatusNumber.shipped.rawValue)
+//
+//
+//
+//enum Animals {
+//    case cat (legs: Int, head: Int, eyes: Int)
+//    case dog (legs: Int, head: Int, eyes: Int)
+//    case bird (legs: Int, head: Int, eyes: Int)
+//    case spider (legs: Int, head: Int, eyes: Int)
+//}
+//
+//let animal1 = Animals.spider(legs: 8, head: 1, eyes: 8)
+//let animal2 = Animals.cat(legs: 4, head: 1, eyes: 2)
+//let animal3 = Animals.bird(legs: 2, head: 1, eyes: 2)
+//
+//
+//// СТРУКТУРЫ (STRUCT).
+//
+//// Синтаксис.
+//
+//struct Phone {
+//    private var model: String  // private - уровень доступа, который не позволяет получать свойство экземпляра и изменять его
+//    var brand: String
+//    let year: Int
+//    var memory: Int
+//    
+//    func sayModel() -> String {
+//        let myModel = " My model is \(model)"
+//        return myModel
+//    }
+//    
+//    init(model: String, brand: String, year: Int, memory: Int) {
+//        self.model = model
+//        self.brand = brand
+//        self.year = year
+//        self.memory = memory
+//    }
+//}
+//
+//
+//// Экземпляры струткуры.
+//
+//let phone1 = Phone(model: "iPhone", brand: "Apple", year: 2020, memory: 128)  // с прайветом(выше в экземпляре) ругается без инита, с инитом на прайвет не ругается
+//phone1.sayModel()
+//phone1.brand
+//phone1.year
+//
+//// Как работает value type.
+//
+//var myPhone = Phone(model: "iPhone", brand: "Apple", year: 2021, memory: 128)
+//var myPhone1 = myPhone  // скопировал значение одной переменной в другую, можно менять параметры без проблем
+//var myPhone2 = myPhone1
+//myPhone1.brand = "fiv"
+//myPhone1.brand
+//myPhone2.brand
+//myPhone.brand
+//
+//myPhone.memory == myPhone1.memory
+//myPhone1.memory = 256
+//myPhone.memory == myPhone1.memory
 
 // Уровни доступа.
 
@@ -423,4 +423,84 @@ myPhone.memory == myPhone1.memory
  Private
  */
 
+
+
+
+
+// КЛАССЫ (CLASS).
+
+// Синтаксис.
+//class Person {
+//    
+//}
+
+//enum Item {
+//    case weapon(Int, Int)
+//    case food(Int)
+//    case armor
+//    
+//    var description: String {
+//        switch self {
+//        case .weapon(let hitPoints, _):
+//            "weapon"
+//    //        player.attack(hitPoints)
+//        case .food(let health):
+//            "Пришел food \(health) кг"
+//    //        player.health += health
+//        case .armor:
+//            "armor"
+//    //        player.damageThreshold = Double(damageThreshold) * condition
+//        }
+//    }
+//}
+// 
+//var sword = Item.food(13)
+//
+//func use(item: Item) {
+//    switch item {
+//    case .weapon(let hitPoints, _):
+//        print("weapon")
+////        player.attack(hitPoints)
+//    case .food(let health):
+//        print("Пришел food \(health) кг")
+////        player.health += health
+//    case .armor:
+//        print("armor")
+////        player.damageThreshold = Double(damageThreshold) * condition
+//    }
+//}
+//
+//use(item: sword)
+
+import Foundation
+enum CustomError: Error, LocalizedError {
+    case invalidUsername(String)
+    case test
+    
+    var errorDescription: String? {
+        switch self {
+        case .invalidUsername(let nonCorrectSymbol):
+            "Неверное имя Пользователя \(nonCorrectSymbol)"
+        case .test:
+            "TEST"
+        }
+    }
+}
+
+func getError(error: String) throws {
+    print("start1")
+    if Bool.random() {
+        throw CustomError.invalidUsername(error)
+    } else {
+        throw CustomError.test
+    }
+}
+
+do {
+    print("start")
+    try getError(error: "bbb")
+    print("finish")
+} catch {
+    print(error.localizedDescription)
+}
 

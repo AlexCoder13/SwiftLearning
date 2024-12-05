@@ -29,31 +29,31 @@ import Foundation
 struct Person {
     var name: String
     var age: Int
-    lazy var info: String = infoPerson()
+   
+    lazy var info: String = {
+        if self.age == 24 {
+            "\(name) \(age) года"
+        } else if self.age == 36 {
+            "\(name) \(age) лет"
+        } else {
+            "aaa"
+        }
+    }()
     
     func getAgeComparisonString(_ p: Person) -> String {
         if self.age < p.age {
-            return "\(p.name) старше меня"
+            "\(p.name) старше меня"
         } else if self.age > p.age {
-            return "\(p.name) младше меня"
-        } else if self.age == p.age {
-            return "\(p.name) такого же возраста, как я"
+            "\(p.name) младше меня"
+        } else {
+            "\(p.name) такого же возраста, как я"
         }
-        return ""
-    }
-    private func infoPerson() -> String {
-        if self.age == 24 {
-            return "\(name) \(age) года"
-        } else if self.age == 36 {
-            return "\(name) \(age) лет"
-        }
-        return ""
     }
 }
 
-var p1 = Person(name: "Антон", age: 24)
-var p2 = Person(name: "Андрей", age: 36)
-var p3 = Person(name: "Ольга", age: 24)
+var p1 = Person(name: "Антон", age: 1)
+var p2 = Person(name: "Андрей", age: 21)
+var p3 = Person(name: "Ольга", age: 14)
 
 print(p2.getAgeComparisonString(p3))
 print(p1.getAgeComparisonString(p2))
@@ -77,11 +77,14 @@ print(p3.info)
 //Создайте класс Hero. Добавьте свойство «количество жизней» — lifeCount. Количество жизней задаётся при создании героя в инициализаторе. Добавьте метод «попадание», который уменьшает количество жизней, — hit().
 
 class Hero {
-    let name: String
+    private let name: String
     private var lifeCount: UInt
-    //    var isLive: Bool = heroIsLive()
     
-    init(name: String, lifeCount: UInt, isLive: Bool) {
+    var isLive: Bool {
+        lifeCount > 0
+    }
+    
+    init(name: String, lifeCount: UInt) {
         self.name = name
         self.lifeCount = lifeCount
     }
@@ -90,26 +93,18 @@ class Hero {
         lifeCount -= 1
     }
     
-    func isLive() -> Bool {
-        if lifeCount > 0 {
-            return true
-        } else {
-            return false
-        }
-    }
 }
 
-let superHero = Hero(name: "YarocookGlinomess", lifeCount: 2, isLive: true)
-print(superHero.lifeCount)
+let superHero = Hero(name: "YarocookGlinomess", lifeCount: 2)
 superHero.hit()
-print(superHero.lifeCount)
+print(superHero.name)
 
 //Задание 4
 //Добавьте в класс Hero вычисляемое свойство, жив или нет герой, — isLive. Если количество жизней больше 0, то возвращает true, в остальных случаях false.
 
-print(superHero.isLive())
+print(superHero.isLive)
 superHero.hit()
-print(superHero.isLive())
+print(superHero.isLive)
 
 
 //Задание 5
