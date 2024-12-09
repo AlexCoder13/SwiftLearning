@@ -95,15 +95,15 @@ class Hero {
     
 }
 
-let superHero = Hero(name: "YarocookGlinomess", lifeCount: 2)
-superHero.hit()
+let newHero = Hero(name: "YarocookGlinomess", lifeCount: 2)
+newHero.hit()
 
 //Задание 4
 //Добавьте в класс Hero вычисляемое свойство, жив или нет герой, — isLive. Если количество жизней больше 0, то возвращает true, в остальных случаях false.
 
-print(superHero.isLive)
-superHero.hit()
-print(superHero.isLive)
+print(newHero.isLive)
+newHero.hit()
+print(newHero.isLive)
 
 
 //Задание 5
@@ -113,3 +113,14 @@ print(superHero.isLive)
 
 //Задание 6
 // Отнаследуйтесь от класса Hero, создав дочерний класс SuperHero. Переопределите метод «попадание» для нового класса так, чтобы SuperHero не получал повреждения.
+
+class SuperHero: Hero {
+    override func hit() {
+        lifeCount -= 0
+    }
+}
+
+let myHero = SuperHero(name: "SpiderMan", lifeCount: 99)
+print(myHero.lifeCount)
+myHero.hit()
+print(myHero.lifeCount)  // чтобы проверить работу кода, нужно убрать модификатор private в суперклассе
