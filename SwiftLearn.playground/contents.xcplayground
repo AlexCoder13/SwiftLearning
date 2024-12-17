@@ -8,5 +8,7 @@
         <page name='lesson 5'/>
         <page name='lesson 6'/>
         <page name='lesson 4'/>
+        <page name='lesson 7'/>
+        <page name='SwiftPractice'/>
     </pages>
 </playground>

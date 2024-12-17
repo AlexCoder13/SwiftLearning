@@ -32,11 +32,17 @@ struct Person {
     
     lazy var info: String = {
         switch age {
-        case 11...19:
-            (String(name) + " " + String(age) + " " + "лет")
+        case 11...14:
+            "\(self.name) - \(self.age) лет"
         default:
-            age % 10 == 1 ? (String(name) + " " + String(age) + " " + "год") :
-            (age % 10 >= 2 && age % 10 <= 4 ? (String(name) + " " + String(age) + " " + "года") : (String(name) + " " + String(age) + " " + "лет"))
+            switch age % 10 {
+            case 1: 
+                "\(self.name) - \(self.age) год"
+            case 2...4:
+                "\(self.name) - \(self.age) года"
+            default:
+                "\(self.name) - \(self.age) лет"
+            }
         }
     }()
     
@@ -51,9 +57,9 @@ struct Person {
     }
 }
 
-var p1 = Person(name: "Антон", age: 17)
-var p2 = Person(name: "Андрей", age: 31)
-var p3 = Person(name: "Ольга", age: 92)
+var p1 = Person(name: "Антон", age: 1)
+var p2 = Person(name: "Андрей", age: 3)
+var p3 = Person(name: "Ольга", age: 111)
 
 print(p2.getAgeComparisonString(p3))
 print(p1.getAgeComparisonString(p2))
@@ -116,11 +122,12 @@ print(newHero.isLive)
 
 class SuperHero: Hero {
     override func hit() {
-        lifeCount -= 0
+        print("Супергерои не носят трусы, потому что он на штанах")
     }
 }
 
 let myHero = SuperHero(name: "SpiderMan", lifeCount: 99)
+myHero.isLive
 print(myHero.lifeCount)
 myHero.hit()
 print(myHero.lifeCount)  // чтобы проверить работу кода, нужно убрать модификатор private в суперклассе

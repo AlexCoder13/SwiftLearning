@@ -1,4 +1,4 @@
-////import Foundation
+import Foundation
 //
 ////var coinsInNewChest = "nil"
 ////var allCoinsCount = 1301
@@ -472,35 +472,41 @@
 //
 //use(item: sword)
 
-import Foundation
-enum CustomError: Error, LocalizedError {
-    case invalidUsername(String)
-    case test
-    
-    var errorDescription: String? {
-        switch self {
-        case .invalidUsername(let nonCorrectSymbol):
-            "Неверное имя Пользователя \(nonCorrectSymbol)"
-        case .test:
-            "TEST"
-        }
-    }
-}
 
-func getError(error: String) throws {
-    print("start1")
-    if Bool.random() {
-        throw CustomError.invalidUsername(error)
-    } else {
-        throw CustomError.test
-    }
-}
-
-do {
-    print("start")
-    try getError(error: "bbb")
-    print("finish")
-} catch {
-    print(error.localizedDescription)
-}
-
+//enum CustomError: Error, LocalizedError {
+//    case invalidUsername(String)
+//    case test
+//    
+//    var errorDescription: String? {
+//        switch self {
+//        case .invalidUsername(let nonCorrectSymbol):
+//            "Неверное имя Пользователя \(nonCorrectSymbol)"
+//        case .test:
+//            "TEST"
+//        }
+//    }
+//}
+//
+//func getError(error: String) throws {
+//    print("start1")
+//    if Bool.random() {
+//        throw CustomError.invalidUsername(error)
+//    } else {
+//        throw CustomError.test
+//    }
+//}
+//
+//do {
+//    print("start")
+//    try getError(error: "bbb")
+//    print("finish")
+//} catch {
+//    print(error.localizedDescription)
+//}
+//
+//
+//
+//let a = [1, 2, 3, 4, 5]
+//for element in a {
+//    print(element)
+//}

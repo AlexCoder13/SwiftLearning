@@ -55,7 +55,7 @@ enum CustomError: Error, LocalizedError {
         case .invalidPassword:
             "Неправильный пароль"
         case .invalidUsername(let nonCorrectSymbol):
-            "Неверное имя Пользователя \(nonCorrectSymbol)"
+            "Неверный символ в имени пользователя - '\(nonCorrectSymbol)'"
         case .userNotFound:
             "Пользователь не найден"
             
@@ -69,17 +69,17 @@ enum CustomError: Error, LocalizedError {
 // ЗАДАНИЕ 5 + ЗАДАНИЕ 6 без try?
 
 func checkUserData(userName: String, userPassword: String, userData: [String: String]) throws {
-    for _ in userName {
-        if userName.contains("!") {
-            throw CustomError.invalidUsername("!")
+    for element in userName {
+        if !element.isLetter {
+            throw CustomError.invalidUsername(element)
         }
-        guard userData[userName] != nil else {
-            throw CustomError.userNotFound
-        }
-        guard userData[userName] == userPassword else {
-            throw CustomError.invalidPassword
-        }
-        
+    }
+    
+    guard userData[userName] != nil else {
+        throw CustomError.userNotFound
+    }
+    guard userData[userName] == userPassword else {
+        throw CustomError.invalidPassword
     }
     print("Вход в систему осуществлен успешно")
 }
@@ -92,7 +92,10 @@ func firstAuth(userName: String, userPassword: String, userData: [String: String
     }
 }
 
-firstAuth(userName: "VLAD!", userPassword: "348", userData: userPasswords)
+firstAuth(userName: "VLAD", userPassword: "YaVoobsheVSYOtrahal_228", userData: userPasswords)
+firstAuth(userName: "ROMA", userPassword: "346", userData: userPasswords)
+firstAuth(userName: "V @LAD", userPassword: "348", userData: userPasswords)
+firstAuth(userName: "VLAD", userPassword: "348", userData: userPasswords)
 //Задание 6
 //Напишите код обработки ошибки из функции в задании 5. Выведите описание ошибки, если она произошла, а иначе выведите сообщение, что вход в систему успешно осуществлён.
 // Обработку ошибки сделайте двумя способами:
@@ -100,10 +103,16 @@ firstAuth(userName: "VLAD!", userPassword: "348", userData: userPasswords)
 // С помощью try?.
 
 func secondAuth(userName: String, userPassword: String, userData: [String: String]) {
-    let result = try? checkUserData(userName: userName, userPassword: userPassword, userData: userData)
-    if result == nil {
+    if let _ = try? checkUserData(userName: userName, userPassword: userPassword, userData: userData) {
+        print("Я в системе")
+    } else {
         print("Ошибка входа")
     }
 }
+print("------------------------")
+secondAuth(userName: "VLAD", userPassword: "YaVoobsheVSYOtrahal_228", userData: userPasswords)
+secondAuth(userName: "ROMA", userPassword: "346", userData: userPasswords)
+secondAuth(userName: "VLAD!", userPassword: "348", userData: userPasswords)
+secondAuth(userName: "VLAD", userPassword: "348", userData: userPasswords)
 
-secondAuth(userName: "ROMAN!", userPassword: "Vlad_SkolkoRazYouNatiralOrla?", userData: userPasswords)
+
