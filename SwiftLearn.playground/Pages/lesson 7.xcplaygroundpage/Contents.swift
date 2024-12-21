@@ -39,7 +39,7 @@ import Foundation
 
 class Animal {
     let name: String
-    var currentAge: Int = 5
+    var currentAge: Int = 0
     let maxAge: Int
     var weight: Int
     var energy: Int
@@ -56,50 +56,65 @@ class Animal {
     }
     
     func sleep() {
-        self.energy += 5
-        self.currentAge += 1
-        print("\(self.name) is sleeping, Energy - \(self.energy), Weight - \(self.weight), currentAge - \(self.currentAge)")
+        if !isTooOld {
+            energy += 5
+            currentAge += 1
+            print("\(name) is sleeping, Energy - \(energy), Weight - \(weight), currentAge - \(currentAge)")
+        } else {
+            print("Животное \(name) слишком дряхлое для жизни в этом мире")
+        }
+        
     }
     
     func eat() {
-        self.energy += 3
-        self.weight += 1
-        tryIncrementAge()
-        print("\(self.name) is eating, Energy - \(self.energy), Weight - \(self.weight), currentAge - \(self.currentAge)")
+        if !isTooOld {
+            energy += 3
+            weight += 1
+            tryIncrementAge()
+            print("\(name) is eating, Energy - \(energy), Weight - \(weight), currentAge - \(currentAge)")
+        } else {
+            print("Животное \(name) слишком дряхлое для жизни в этом мире")
+        }
     }
     
     func move() {
-        self.energy -= 5
-        self.weight -= 1
-        tryIncrementAge()
-        print("\(self.name) is moving, Energy - \(self.energy), Weight - \(self.weight), currentAge - \(self.currentAge)")
+        if energy >= 5 && weight >= 1 && !isTooOld {
+            energy -= 5
+            weight -= 1
+            tryIncrementAge()
+            print("\(name) is moving, Energy - \(energy), Weight - \(weight), currentAge - \(currentAge)")
+        } else {
+            print("Животное \(name) слишком дряхлое для жизни в этом мире")
+        }
     }
     
     private func tryIncrementAge() {
         if Bool.random() {
-            self.currentAge += 1
+            currentAge += 1
         }
     }
     
-    func reproduce() -> Animal {
-        if Bool.random() {
-            self.energy = Int.random(in: 1...10)
-            self.weight = Int.random(in: 1...5)
-            print("The Animal was born: Name - \(self.name), Max age - \(self.maxAge), Energy - \(self.energy), Weight - \(self.weight)")
+    func reproduce() -> Animal? {
+        if energy > 0 && weight > 0 && !isTooOld {
+            let babyAnimal = Animal(name: name, maxAge: maxAge, weight: Int.random(in: 1...5), energy: Int.random(in: 1...10))
+            print("The Animal was born: Name - \(name), Max age - \(maxAge), weight - \(babyAnimal.weight), energy - \(babyAnimal.energy)")
+            return babyAnimal
         } else {
-            print("There is no new Animal")
+            return nil
         }
-        return self
     }
 }
 
-let myAnimal = Animal(name: "Lion Alex", maxAge: 20, weight: 200, energy: 85)
+let myAnimal = Animal(name: "Lion Alex", maxAge: 20, weight: 1, energy: 0)
 print("The Animal: Name - \(myAnimal.name), Max age - \(myAnimal.maxAge), Current age - \(myAnimal.currentAge), Energy - \(myAnimal.energy), Weight - \(myAnimal.weight)")
 print(myAnimal.isTooOld)
+myAnimal.sleep()
 myAnimal.eat()
 myAnimal.move()
-myAnimal.sleep()
-myAnimal.reproduce()
+let babyAnimal = myAnimal.reproduce() ?? myAnimal
+print(Unmanaged.passUnretained(myAnimal).toOpaque())
+print(Unmanaged.passUnretained(babyAnimal).toOpaque())
+print(myAnimal === babyAnimal)
 
 myAnimal.currentAge = 20
 print(myAnimal.isTooOld)
@@ -120,56 +135,86 @@ print("---------------------------------")
 // ## По желанию: добейтесь, чтобы дополнительное сообщение выводилось только если выполнилась родительская реализация.
 // ## В каждом из наследников переопределите функцию, отвечающую за рождение потомка. Класс Fish должен возвращать объект класса Fish. Аналогично с Bird и Dog.
 
-class Bird: Animal {
+final class Bird: Animal {
     override func move() {
         super.move()
-        print("\(self.name) is flying, energy - \(self.energy), weight - \(self.weight)")
+        if energy >= 5 && weight >= 1 && !isTooOld {
+            print("\(name) is flying, energy - \(energy), weight - \(weight)")
+        }
     }
     
-    override func reproduce() -> Bird {
-        super.reproduce()
-        return self
+    override func reproduce() -> Bird? {
+        if energy > 0 && weight > 0 && !isTooOld {
+            let babyBird = Bird(name: name, maxAge: maxAge, weight: Int.random(in: 1...5), energy: Int.random(in: 1...10))
+            print("The Bird was born: Name - \(name), Max age - \(maxAge), weight - \(babyBird.weight), energy - \(babyBird.energy)")
+            return babyBird
+        } else {
+            return nil
+        }
     }
 }
 let myBird = Bird(name: "Chiko", maxAge: 7, weight: 2, energy: 35)
-print(myBird.move())
-print(myBird.reproduce())
+myBird.move()
+let babyBird = myBird.reproduce() ?? myBird
+print(Unmanaged.passUnretained(myBird).toOpaque())
+print(Unmanaged.passUnretained(babyBird).toOpaque())
+print(myBird === babyBird)
 
 
 
-class Fish: Animal {
+final class Fish: Animal {
     override func move() {
         super.move()
-        print("\(self.name) is swimming, energy - \(self.energy), weight - \(self.weight)")
+        if energy >= 5 && weight >= 1 && !isTooOld {
+            print("\(name) is swimming, energy - \(energy), weight - \(weight)")
+        }
     }
     
-    override func reproduce() -> Fish {
-        super.reproduce()
-        return self
+    override func reproduce() -> Fish? {
+        if energy > 0 && weight > 0 && !isTooOld {
+            let babyFish = Fish(name: name, maxAge: maxAge, weight: Int.random(in: 1...5), energy: Int.random(in: 1...10))
+            print("The Fish was born: Name - \(name), Max age - \(maxAge), weight - \(babyFish.weight), energy - \(babyFish.energy)")
+            return babyFish
+        } else {
+            return nil
+        }
     }
 }
 let myFish = Fish(name: "Nemo", maxAge: 10, weight: 3, energy: 78)
-print(myFish.move())
-print(myFish.reproduce())
+myFish.move()
+let babyFish = myFish.reproduce() ?? myFish
+print(Unmanaged.passUnretained(myFish).toOpaque())
+print(Unmanaged.passUnretained(babyFish).toOpaque())
+print(myFish === babyFish)
 
 
 
-class Dog: Animal {
+final class Dog: Animal {
     override func move() {
         super.move()
-        print("\(self.name) is running, energy - \(self.energy), weight - \(self.weight)")
+        if energy >= 5 && weight >= 1 && !isTooOld {
+            print("\(name) is running, energy - \(energy), weight - \(weight)")
+        }
     }
     
-    override func reproduce() -> Dog {
-        super.reproduce()
-        return self
+    override func reproduce() -> Dog? {
+        if energy > 0 && weight > 0 && !isTooOld {
+            let babyDog = Dog(name: name, maxAge: maxAge, weight: Int.random(in: 1...5), energy: Int.random(in: 1...10))
+            print("The Dog was born: Name - \(name), Max age - \(maxAge), weight - \(babyDog.weight), energy - \(babyDog.energy)")
+            return babyDog
+        } else {
+            return nil
+        }
     }
 }
 let myDog = Dog(name: "Barboss", maxAge: 20, weight: 13, energy: 64)
-print(myDog.move())
-print(myDog.reproduce())
+myDog.move()
+let babyDog = myDog.reproduce() ?? myDog
+print(Unmanaged.passUnretained(myDog).toOpaque())
+print(Unmanaged.passUnretained(babyDog).toOpaque())
+print(myDog === babyDog)
 
-print("---------------------------------")
+print("------------------------------------------------------------------")
 
 
 //# Задание 3
@@ -182,3 +227,53 @@ print("---------------------------------")
 // ### В конце итерации все животные, у которых возраст превысил максимальный, удаляются из заповедника.
 // ### По окончании работы должно выводиться число животных в заповеднике, которые остались живы.
 // ### Если все животные исчезли — программа должна прерываться, с выводом соответствующего сообщения.
+
+class NatureReserve {
+    var animals: [Animal] = []
+    
+    func lifeCircle(birdItteration: Int, fishItteration: Int, dogItteration: Int, circleItteration: Int) {
+        for _ in 1...birdItteration {
+            animals.append(Bird(name: "Bird", maxAge: 7, weight: Int.random(in: 1...5), energy: Int.random(in: 1...100)))
+        }
+        
+        for _ in 1...fishItteration {
+            animals.append(Fish(name: "Fish", maxAge: 10, weight: Int.random(in: 1...7), energy: Int.random(in: 1...100)))
+        }
+        
+        for _ in 1...dogItteration {
+            animals.append(Dog(name: "Dog", maxAge: 20, weight: Int.random(in: 1...25), energy: Int.random(in: 1...100)))
+        }
+        
+        for _ in 1...circleItteration {
+            for animal in animals {
+                switch Int.random(in: 1...4) {
+                case 1:
+                    animal.sleep()
+                case 2:
+                    animal.eat()
+                case 3:
+                    animal.move()
+                case 4:
+                    let animalBaby = animal.reproduce() ?? animal
+                    animals.append(animalBaby)
+                default:
+                    break
+                }
+            }
+            
+            print(animals.count)
+            
+            let youngAnimals = animals.filter { $0.currentAge < $0.maxAge }    // 1 способ
+            print("В заповеднике осталось \(youngAnimals.count) животных")
+            
+            animals.removeAll { $0.isTooOld }                                  // 2 способ
+            print("В заповеднике все еще \(animals.count) животных")
+            
+            if animals.isEmpty {
+                print("Все животные исчезли")
+            }
+        }
+    }
+}
+let lifeNatureReserve = NatureReserve()
+lifeNatureReserve.lifeCircle(birdItteration: 5, fishItteration: 3, dogItteration: 2, circleItteration: 1)
