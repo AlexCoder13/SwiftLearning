@@ -10,5 +10,6 @@
         <page name='lesson 4'/>
         <page name='lesson 7'/>
         <page name='SwiftPractice'/>
+        <page name='First Console App'/>
     </pages>
 </playground>
