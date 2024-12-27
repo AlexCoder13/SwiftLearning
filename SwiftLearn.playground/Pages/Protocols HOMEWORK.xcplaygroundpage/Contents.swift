@@ -317,6 +317,7 @@ let value: Double = 9.0
 print(value.squared)
 print(value.isGreaterThan(5.0))
 
+print("----------------------------------")
 
 //Задача 5: Расширение со вложенными типами
 //Уровень: Сложный
@@ -326,3 +327,53 @@ print(value.isGreaterThan(5.0))
 //
 //let calc = Calculator()
 //print(calc.perform(.add, on: [1, 2, 3])) // 6.0
+
+struct Calculator {
+    func perform(_ operation: Operation, on numbers: [Double]) -> Double {
+        switch operation {
+        case .add:
+            var result: Double = 0
+            for number in numbers {
+                result += number
+            }
+            return result
+        case .substract:
+            var result: Double = numbers[0]
+            let newNumbers = numbers.dropFirst()
+            for number in newNumbers {
+                result -= number
+            }
+            return result
+        case .multiply:
+            var result: Double = 1
+            for number in numbers {
+                result *= number
+            }
+            return result
+        case .divide:
+            var result: Double = numbers[0]
+            let newNumbers = numbers.dropFirst()
+            for number in newNumbers {
+                result /= number
+            }
+            return result
+        }
+    }
+}
+
+extension Calculator {
+    enum Operation {
+        case add
+        case substract
+        case multiply
+        case divide
+    }
+}
+
+let calc = Calculator()
+print(calc.perform(.divide, on: [100, 2, 2, 5, -5]))
+print(calc.perform(.multiply, on: [5, 5, 4]))
+print(calc.perform(.add, on: [10, 15, 74, 1]))
+print(calc.perform(.substract, on: [45, 10, 5, 15, 15]))
+
+print("----------------------------------")
