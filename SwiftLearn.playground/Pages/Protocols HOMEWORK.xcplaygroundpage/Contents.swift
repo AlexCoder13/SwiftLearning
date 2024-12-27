@@ -109,12 +109,15 @@ struct Book {
     var author: String
 }
 
-struct Library: Storage {
+class Library: Storage {
     typealias Item = Book
     
     func add(item: Book) {
         libraryBook.append(item)
     }
+    
+    var libraryBook: [Book] = []
+    
     func getAllItems() -> [Book] {
         for book in libraryBook {
             print(book)
@@ -122,8 +125,6 @@ struct Library: Storage {
         return libraryBook
     }
 }
-
-var libraryBook: [Book] = []
 
 let book1 = Book(title: "WOW", author: "M.H.WOOOW")
 let book2 = Book(title: "HEY", author: "T.P.HEEEY")
@@ -158,6 +159,7 @@ class Tesla: ElectricVehicle {
     func drive() {
         print("Driving electric car.")
     }
+    
     func charge() -> String {
         "Charging..."
     }
@@ -192,13 +194,24 @@ struct NewCircle: Drawable, Colorable {
     func draw() -> String {
         "Drawing a circle"
     }
+    
     func color() -> String {
         "with red color"
     }
 }
 
-struct ColoredShape {
-    var item: NewCircle
+struct AnotherNewCircle: Drawable, Colorable {
+    func draw() -> String {
+        "Drawing aboba"
+    }
+    
+    func color() -> String {
+        "with blue color"
+    }
+}
+
+struct ColoredShape<T: Drawable & Colorable> {
+    var item: T
     
     func describe() -> String {
         (item.draw() + " " + item.color())
@@ -206,7 +219,9 @@ struct ColoredShape {
 }
 
 let shape = ColoredShape(item: NewCircle())
+let newShape = ColoredShape(item: AnotherNewCircle())
 print(shape.describe())
+print(newShape.describe())
 
 print("----------------------------------")
 
@@ -246,23 +261,25 @@ print("----------------------------------")
 //let numbers = [1, 2, 3, 4, 5]
 //print(numbers.average()) // 3.0
 
-let numbers = [3, 4, 5, 6, 1, 2, 3, 4, 13, 54, 3, 21]
+let numbers: [Int] = [5, 6, 12, 35, 567, 116]
 
-extension Array {
+extension Array where Element == Int {
     func average() -> Double? {
         var summNumber = 0
-        for number in numbers {
-            if numbers.isEmpty {
-                return nil
-            } else {
-                summNumber += number
-            }
+        guard !self.isEmpty else { return nil }
+        
+        for element in self {
+            summNumber += element
         }
-        return Double(summNumber / numbers.count)
+        return Double(summNumber / self.count)
     }
 }
 
-print(numbers.average() ?? 0)
+if let averegeArray = numbers.average() {
+    print(averegeArray)
+} else {
+    print("Массив пуст")
+}
 
 print("----------------------------------")
 
@@ -329,37 +346,41 @@ print("----------------------------------")
 //print(calc.perform(.add, on: [1, 2, 3])) // 6.0
 
 struct Calculator {
-    func perform(_ operation: Operation, on numbers: [Double]) -> Double {
-        switch operation {
-        case .add:
-            var result: Double = 0
-            for number in numbers {
-                result += number
+    func perform(_ operation: Operation, on numbers: [Double]) -> Double? {
+        guard !numbers.isEmpty else { return nil }
+        
+        var finalResult: Double = 0
+            switch operation {
+            case .add:
+                var result: Double = 0
+                for number in numbers {
+                    result += number
+                }
+                finalResult += result
+            case .substract:
+                var result: Double = numbers[0]
+                let newNumbers = numbers.dropFirst()
+                for number in newNumbers {
+                    result -= number
+                }
+                finalResult += result
+            case .multiply:
+                var result: Double = 1
+                for number in numbers {
+                    result *= number
+                }
+                finalResult += result
+            case .divide:
+                var result: Double = numbers[0]
+                let newNumbers = numbers.dropFirst()
+                for number in newNumbers {
+                    result /= number
+                }
+                finalResult += result
             }
-            return result
-        case .substract:
-            var result: Double = numbers[0]
-            let newNumbers = numbers.dropFirst()
-            for number in newNumbers {
-                result -= number
-            }
-            return result
-        case .multiply:
-            var result: Double = 1
-            for number in numbers {
-                result *= number
-            }
-            return result
-        case .divide:
-            var result: Double = numbers[0]
-            let newNumbers = numbers.dropFirst()
-            for number in newNumbers {
-                result /= number
-            }
-            return result
+        return finalResult
         }
     }
-}
 
 extension Calculator {
     enum Operation {
@@ -371,9 +392,25 @@ extension Calculator {
 }
 
 let calc = Calculator()
-print(calc.perform(.divide, on: [100, 2, 2, 5, -5]))
-print(calc.perform(.multiply, on: [5, 5, 4]))
-print(calc.perform(.add, on: [10, 15, 74, 1]))
-print(calc.perform(.substract, on: [45, 10, 5, 15, 15]))
+if let divCalc = calc.perform(.divide, on: [100, 5, 2, 5, 1]) {
+    print(divCalc)
+} else {
+    print("Массив пуст")
+}
+if let multCalc = calc.perform(.multiply, on: [5, 5, 4]) {
+    print(multCalc)
+} else {
+    print("Массив пуст")
+}
+if let addCalc = calc.perform(.add, on: [10, 15, 74, 1]) {
+    print(addCalc)
+} else {
+    print("Массив пуст")
+}
+if let subCalc = calc.perform(.substract, on: [45, 10, 5, 15, 15]) {
+    print(subCalc)
+} else {
+    print("Массив пуст")
+}
 
 print("----------------------------------")
