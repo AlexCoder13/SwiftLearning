@@ -45,23 +45,16 @@ enum CalorieCountEnum: CalorieCountProtocol {
     var calories: Int {
         switch self {
         case .breakfast:
-            return 850
+            850
         case .dinner:
-            return 650
+            650
         case .lunch:
-            return 450
+            450
         }
     }
     
     func description() -> String {
-        switch self {
-        case .breakfast:
-            return "Завтрак содержит \(calories) калорий"
-        case .dinner:
-            return "Обед содержит \(calories) калорий"
-        case .lunch:
-            return "Ужин содержит \(calories) калорий"
-        }
+        "In \(self) \(calories) calories"
     }
 }
 
@@ -121,6 +114,10 @@ class BalanceObject: Equatable {
     static func == (lhs: BalanceObject, rhs: BalanceObject) -> Bool {
         lhs.amount == rhs.amount
     }
+    
+    static func == (lhs: Balance, rhs: BalanceObject) -> Bool {
+        lhs.amount == rhs.amount
+    }
 }
 
 let balance = Balance(type: .neutral, amount: 0)
@@ -137,6 +134,8 @@ print("-----")
 
 print(balance.amount == balanceObject.amount)
 print(anotherBalance.amount == anotherBalanceObject.amount)
+
+anotherBalance == anotherBalanceObject
 
 print("---------------------------------------------")
 
@@ -212,6 +211,6 @@ arrayDog.append(haski)
 arrayDog.append(corgi)
 arrayDog.append(hound)
 
-for element in arrayDog {
+arrayDog.forEach { element in
     print("Имя собакена - \(element.name), Цвет собакена - \(element.color), Собакен \(element.name) говорит \(element.speak())")
 }
