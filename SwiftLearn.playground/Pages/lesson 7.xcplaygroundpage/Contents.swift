@@ -56,24 +56,18 @@ class Animal {
     }
     
     func sleep() {
-        if !isTooOld {
-            energy += 5
-            currentAge += 1
-            print("\(name) is sleeping, Energy - \(energy), Weight - \(weight), currentAge - \(currentAge)")
-        } else {
-            print("Животное \(name) слишком дряхлое для жизни в этом мире")
-        }
+        guard !isTooOld else { return }
+        energy += 5
+        currentAge += 1
+        print("\(name) is sleeping, Energy - \(energy), Weight - \(weight), currentAge - \(currentAge)")
     }
     
     func eat() {
-        if !isTooOld {
-            energy += 3
-            weight += 1
-            tryIncrementAge()
-            print("\(name) is eating, Energy - \(energy), Weight - \(weight), currentAge - \(currentAge)")
-        } else {
-            print("Животное \(name) слишком дряхлое для жизни в этом мире")
-        }
+        guard !isTooOld else { return }
+        energy += 3
+        weight += 1
+        tryIncrementAge()
+        print("\(name) is eating, Energy - \(energy), Weight - \(weight), currentAge - \(currentAge)")
     }
     
     func move() -> Bool {
@@ -95,14 +89,10 @@ class Animal {
     }
     
     func reproduce() -> Animal? {
-        if !isTooOld {
-            let babyAnimal = Animal(name: name, maxAge: maxAge, weight: Int.random(in: 1...5), energy: Int.random(in: 1...10))
-            print("The Animal was born: Name - \(babyAnimal.name), Max age - \(babyAnimal.maxAge), weight - \(babyAnimal.weight), energy - \(babyAnimal.energy)")
-            return babyAnimal
-        } else {
-            print("Животное \(name) слишком дряхлое чтобы рожать")
-            return nil
-        }
+        guard !isTooOld else { return nil }
+        let babyAnimal = Animal(name: name, maxAge: maxAge, weight: Int.random(in: 1...5), energy: Int.random(in: 1...10))
+        print("The Animal was born: Name - \(babyAnimal.name), Max age - \(babyAnimal.maxAge), weight - \(babyAnimal.weight), energy - \(babyAnimal.energy)")
+        return babyAnimal
     }
 }
 
@@ -149,12 +139,9 @@ final class Bird: Animal {
     }
     
     override func reproduce() -> Bird? {
-        if !isTooOld {
-            let babyBird = Bird(name: name, maxAge: maxAge, weight: Int.random(in: 1...5), energy: Int.random(in: 1...10))
-            print("The Bird was born: Name - \(babyBird.name), Max age - \(babyBird.maxAge), weight - \(babyBird.weight), energy - \(babyBird.energy)")
-            return babyBird
+        if let babyBird = super.reproduce() {
+            return Bird(name: babyBird.name, maxAge: babyBird.maxAge, weight: Int.random(in: 1...5), energy: Int.random(in: 1...10))
         } else {
-            print("Животное \(name) слишком дряхлое чтобы рожать")
             return nil
         }
     }
@@ -180,12 +167,9 @@ final class Fish: Animal {
     }
     
     override func reproduce() -> Fish? {
-        if !isTooOld {
-            let babyFish = Fish(name: name, maxAge: maxAge, weight: Int.random(in: 1...5), energy: Int.random(in: 1...10))
-            print("The Fish was born: Name - \(babyFish.name), Max age - \(babyFish.maxAge), weight - \(babyFish.weight), energy - \(babyFish.energy)")
-            return babyFish
+        if let babyFish = super.reproduce() {
+            return Fish(name: babyFish.name, maxAge: babyFish.maxAge, weight: Int.random(in: 1...5), energy: Int.random(in: 1...10))
         } else {
-            print("Животное \(name) слишком дряхлое чтобы рожать")
             return nil
         }
     }
@@ -211,12 +195,9 @@ final class Dog: Animal {
     }
     
     override func reproduce() -> Dog? {
-        if !isTooOld {
-            let babyDog = Dog(name: name, maxAge: maxAge, weight: Int.random(in: 1...5), energy: Int.random(in: 1...10))
-            print("The Dog was born: Name - \(babyDog.name), Max age - \(babyDog.maxAge), weight - \(babyDog.weight), energy - \(babyDog.energy)")
-            return babyDog
+        if let babyDog = super.reproduce() {
+            return Dog(name: babyDog.name, maxAge: babyDog.maxAge, weight: Int.random(in: 1...5), energy: Int.random(in: 1...10))
         } else {
-            print("Животное \(name) слишком дряхлое чтобы рожать")
             return nil
         }
     }
@@ -243,7 +224,7 @@ print("------------------------------------------------------------------")
 // ### По окончании работы должно выводиться число животных в заповеднике, которые остались живы.
 // ### Если все животные исчезли — программа должна прерываться, с выводом соответствующего сообщения.
 
-class NatureReserve {
+final class NatureReserve {
     var animals: [Animal]
     
     init(animals: [Animal]) {
@@ -261,11 +242,14 @@ class NatureReserve {
                     animal.move()
                 case 3:
                     if let animalBaby = animal.reproduce() {
-                        animalBaby
                         animals.append(animalBaby)
                     }
                 default:
                     animal.sleep()
+                }
+                
+                if animal.isTooOld {
+                    print("Животное \(animal.name) состарилось и было удалено из заповедника")
                 }
             }
         }
@@ -281,16 +265,16 @@ class NatureReserve {
 func animalArray(birdItteration: Int, fishItteration: Int, dogItteration: Int) -> [Animal] {
     var animals: [Animal] = []
     
-    for _ in 1...birdItteration {
-        animals.append(Bird(name: "Bird", maxAge: 7, weight: Int.random(in: 1...5), energy: Int.random(in: 1...100)))
+    for index in 1...birdItteration {
+        animals.append(Bird(name: "Bird - \(index)", maxAge: 7, weight: Int.random(in: 1...5), energy: Int.random(in: 1...100)))
     }
     
-    for _ in 1...fishItteration {
-        animals.append(Fish(name: "Fish", maxAge: 10, weight: Int.random(in: 1...7), energy: Int.random(in: 1...100)))
+    for index in 1...fishItteration {
+        animals.append(Fish(name: "Fish - \(index)", maxAge: 10, weight: Int.random(in: 1...7), energy: Int.random(in: 1...100)))
     }
     
-    for _ in 1...dogItteration {
-        animals.append(Dog(name: "Dog", maxAge: 20, weight: Int.random(in: 1...25), energy: Int.random(in: 1...100)))
+    for index in 1...dogItteration {
+        animals.append(Dog(name: "Dog - \(index)", maxAge: 20, weight: Int.random(in: 1...25), energy: Int.random(in: 1...100)))
     }
     return animals
 }
