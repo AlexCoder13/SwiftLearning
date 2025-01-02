@@ -31,16 +31,8 @@ enum TaskStatus {
 let status: TaskStatus = .completed
 print(status.statusMessage(for: status))
 
-
-
-
-
-
-
-
 //Уровень 2: Enum с raw value
 //Задание: Создай enum для типов валют:
-//
 //usd (1),
 //eur (2),
 //gbp (3).
@@ -48,8 +40,43 @@ print(status.statusMessage(for: status))
 //Реализуй функцию, которая принимает enum и возвращает строку, например:
 //let currency = Currency(rawValue: 2)
 //print(describeCurrency(currency)) // "EUR currency"
-//
-//
+
+enum Currency: Int {
+    case usd = 1
+    case eur = 2
+    case gbp = 3
+    
+    init?(rawValue: Int) {
+        switch rawValue {
+        case 1: self = .usd
+        case 2: self = .eur
+        case 3: self = .gbp
+        default: return nil
+        }
+    }
+}
+
+func describeCurrency(currency: Currency?) -> String {
+    switch currency {
+    case .usd:
+        "USD currency"
+    case .eur:
+        "EUR currency"
+    case .gbp:
+        "GBP currency"
+    case nil:
+        "Такой валюты нет"
+    }
+}
+
+let currency = Currency(rawValue: 1)
+print(describeCurrency(currency: currency))
+
+
+
+
+
+
 //Уровень 3: Enum с ассоциированными значениями
 //Задание: Создай enum PaymentMethod, описывающий способы оплаты:
 //cash,
