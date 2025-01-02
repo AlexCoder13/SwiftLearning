@@ -31,6 +31,8 @@ enum TaskStatus {
 let status: TaskStatus = .completed
 print(status.statusMessage(for: status))
 
+
+
 //Уровень 2: Enum с raw value
 //Задание: Создай enum для типов валют:
 //usd (1),
@@ -74,9 +76,6 @@ print(describeCurrency(currency: currency))
 
 
 
-
-
-
 //Уровень 3: Enum с ассоциированными значениями
 //Задание: Создай enum PaymentMethod, описывающий способы оплаты:
 //cash,
@@ -86,10 +85,31 @@ print(describeCurrency(currency: currency))
 //Например:
 //let payment = PaymentMethod.card(bank: "Visa")
 //print(describePaymentMethod(payment)) // "Payment via Visa card"
-//
+
+enum PaymentMethod {
+    case cash
+    case card(bank: String)
+    case online(service: String)
+}
+
+func describePaymentMethod(method: PaymentMethod) -> String {
+    switch method {
+    case .cash:
+        "Payment via cash"
+    case .card(let bank):
+        "Payment via \(bank) card"
+    case .online(let service):
+        "Payment via \(service) online"
+    }
+}
+
+let payment = PaymentMethod.online(service: "'Dolyami'")
+print(describePaymentMethod(method: payment))
+
+
+
 //Уровень 4: Enum с методами и вычисляемыми свойствами
 //Задание: Создай enum Weather для описания погоды:
-//
 //sunny,
 //cloudy,
 //rainy(chance: Int).
@@ -97,8 +117,29 @@ print(describeCurrency(currency: currency))
 //Пример:
 //let today = Weather.rainy(chance: 70)
 //print(today.description()) // "Rainy weather with 70% chance of rain"
-//
-//
+
+enum Weather {
+    case sunny
+    case cloudy
+    case rainy(chance: Int)
+    
+    var description: String {
+        switch self {
+        case .sunny:
+            "Sunny weather will be today"
+        case .cloudy:
+            "Cloudy weather will be today"
+        case .rainy(let chance):
+            "Rainy weather with \(chance)% chance of rain"
+        }
+    }
+}
+
+let today = Weather.rainy(chance: 70)
+print(today.description)
+
+
+
 //Уровень 5: Сложный Enum с логикой
 //Задание: Создай enum File для описания файла:
 //
@@ -113,3 +154,23 @@ print(describeCurrency(currency: currency))
 //Пример:
 //let file = File.image(name: "Sunset", resolution: (1920, 1080))
 //print(file.info()) // "Image 'Sunset', resolution: 1920x1080"
+
+enum File {
+    case text(name: String, size: Int)
+    case image(name: String, resolution: (width: Int, height: Int))
+    case video(name: String, duration: Int)
+    
+    func info() -> String {
+        switch self {
+        case .text(let name, let size):
+            "Text file \(name), size: \(size)KB"
+        case .image(let name, let resolution):
+            "Image \(name), resolution: \(resolution.width)x\(resolution.height)"
+        case .video(let name, let duration):
+            "Video \(name), duration: \(duration) seconds"
+        }
+    }
+}
+
+let imageFile = File.image(name: "'Sunset'", resolution: (1920, 1080))
+print(imageFile.info())
