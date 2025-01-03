@@ -126,8 +126,8 @@ class SuperHero: Hero {
     }
 }
 
-let myHero = SuperHero(name: "SpiderMan", lifeCount: 99)
-myHero.isLive
-print(myHero.lifeCount)
-myHero.hit()
-print(myHero.lifeCount)  // чтобы проверить работу кода, нужно убрать модификатор private в суперклассе
+//let myHero = SuperHero(name: "SpiderMan", lifeCount: 99)
+//myHero.isLive
+//print(myHero.lifeCount)
+//myHero.hit()
+//print(myHero.lifeCount)  // чтобы проверить работу кода, нужно убрать модификатор private в суперклассе
