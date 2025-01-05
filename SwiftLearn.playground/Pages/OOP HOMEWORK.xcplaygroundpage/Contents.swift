@@ -39,7 +39,7 @@ class Book {
 class LibraryUser {
     let name: String
     let userID: Int
-    private var borrowedBooks: [Book]
+    var borrowedBooks: [Book]
     
     init(name: String, userID: Int) {
         self.name = name
@@ -48,54 +48,89 @@ class LibraryUser {
     }
     
     func listBorrowedBooks() {
-        for book in borrowedBooks {
-            print(book.title, book.author, book.genre, book.year)
+        if borrowedBooks.count > 0 {
+            for book in borrowedBooks {
+                print("В библиотеке у '\(self.name)' книга: '\(book.title)', \(book.author), \(book.genre), \(book.year). Всего в библиотеке у '\(self.name)' \(borrowedBooks.count) книг(-и, -а).")
+            }
+        } else {
+            print("В библиотеке у пользовтаеля нет книг.")
         }
     }
     
     func borrowBook(book: Book) {
-        if borrowedBooks.count >= 3 {
-            print("Слишком много книг. Верни одну в библиотеку.")
+        guard !borrowedBooks.contains(where: { $0.title == book.title }) else {
+            print("Такой книги нет в библиотеке.")
+            return
         }
+        guard borrowedBooks.count < 3 else {
+            print("Слишком много книг. Необходимо вернуть одну книгу в библиотеку.")
+            return
+        }
+        
         borrowedBooks.append(book)
+        print("Пользователь арендовал книгу: \(book.title)")
     }
     
-    func removeBook(title: String) {
-        borrowedBooks.removeAll { $0.title == title }
-//        guard let book = getBorrowedBook(by: title) else { return }
-//        books.append(book)
+    func removeBook(book: Book) {
+        if borrowedBooks.isEmpty {
+            print("В библиотеке пользователя нет книг.")
+        } else {
+            borrowedBooks.removeAll { $0.title == book.title }
+            print("Пользователь вернул книгу '\(book.title)' в библиотеку.")
+        }
     }
-    
-//    private func getBorrowedBook(by title: String) -> Book? {
-//        guard let book = borrowedBooks.first(where: {$0.title == title}) else { return nil }
-//        return book
-//    }
 }
 
 class Library {
-    var books: [Book] = []
-    var users: [LibraryUser] = []
+    private var books: [Book] = []
+    private var users: [LibraryUser] = []
     
     func addBook(book: Book) {
         books.append(book)
+        print("В библиотеку была добавлена книга: '\(book.title)', \(book.author), \(book.genre), \(book.year). Сейчас в библиотеке \(books.count) книг(-и, -а).")
     }
     
     func registerUser(user: LibraryUser) {
         users.append(user)
+        print("Зарегистрирован пользователь '\(user.name)' с номером '\(user.userID)'.")
     }
     
     func borrowBook(userID: Int, bookTitle: String) {
-        guard let user = getUser(by: userID) else { return }
-        guard let book = getBook(by: bookTitle) else { return }
+        guard let user = getUser(by: userID) else {
+            print("Такого пользователя не существует.")
+            return
+        }
+        guard let book = getBook(by: bookTitle) else {
+            print("Такой книги нет в библиотеке.")
+            return
+        }
         
-        user.borrowBook(book: book)  // тут тоже метод а не свойство
-        books.removeAll { $0.title == bookTitle }
+        if user.borrowedBooks.count < 3 {
+            user.borrowBook(book: book)  // тут тоже метод а не свойство
+            books.removeAll { $0.title == bookTitle }
+            print("Пользователем была арендована книга '\(book.title)'.")
+        } else {
+            print("У пользователя слишко много книг, необходимо вернуть одну в библиотеку.")
+        }
     }
     
     func returnBook(userID: Int, bookTitle: String) {
-        guard let user = getUser(by: userID) else { return }
+        guard let user = getUser(by: userID) else {
+            print("Такого пользователя не существует.")
+            return
+        }
+        guard let userBook = getUserBook(by: userID, by: bookTitle) else {
+            print("Такой книги нет в библиотеке.")
+            return
+        }
         
-        user.removeBook(title: bookTitle) // это метод а не свойство
+        if user.borrowedBooks.count > 0 {
+            user.removeBook(book: userBook) // это метод а не свойство
+            books.append(userBook)
+            print("Пользователем была возвращена книга '\(userBook.title)'.")
+        } else {
+            print("У пользователя нет книг.")
+        }
     }
     
     private func getUser(by userID: Int) -> LibraryUser? {
@@ -107,12 +142,19 @@ class Library {
         guard let book = books.first (where: { $0.title == title }) else { return nil }
         return book
     }
+    
+    private func getUserBook(by userID: Int, by title: String) -> Book? {
+        guard let user = users.first (where: { $0.userID == userID }) else { return nil }
+        guard let userBoook = user.borrowedBooks.first(where: {$0.title == title}) else { return nil }
+        return userBoook
+    }
 }
 
 let firstBook = Book(title: "Война и Мир", author: "Лев Толстой", genre: "роман-эпопея", year: 1869)
 let secondBook = Book(title: "Преступление и Наказание", author: "Фёдор Достоевский", genre: "роман", year: 1866)
 let thirdBook = Book(title: "Гарри Поттер и Философский камень", author: "Дж. К. Роулинг", genre: "фентези", year: 1997)
 let forthBook = Book(title: "Гарри Поттер и Тайная комната", author: "Дж. К. Роулинг", genre: "фентези", year: 1998)
+let fithBook = Book(title: "Судьба чеовека", author: "Михаил Шолохов", genre: "Рассказ", year: 1957)
 
 let firstUser = LibraryUser(name: "Alex", userID: 1)
 let secondUser = LibraryUser(name: "Nickolay", userID: 2)
@@ -120,22 +162,48 @@ let thirdUser = LibraryUser(name: "Danila", userID: 3)
 
 
 let library = Library()
-library.books.append(firstBook)
-library.books.append(secondBook)
-library.books.append(thirdBook)
-library.books.append(forthBook)
+library.addBook(book: firstBook)
+library.addBook(book: secondBook)
+library.addBook(book: thirdBook)
+library.addBook(book: forthBook)
+library.addBook(book: fithBook)
 
-library.users.append(firstUser)
-library.users.append(secondUser)
-library.users.append(thirdUser)
+library.registerUser(user: firstUser)
+library.registerUser(user: secondUser)
+library.registerUser(user: thirdUser)
 
-library.books
+print("--- Создание библиотеки завершено ---")
+
 library.borrowBook(userID: 2, bookTitle: "Война и Мир")
 secondUser.listBorrowedBooks()
 
 library.returnBook(userID: 2, bookTitle: "Война и Мир")
-library.books
 secondUser.listBorrowedBooks()
+
+print("---------")
+
+library.borrowBook(userID: 1, bookTitle: "Война и Мир")
+library.borrowBook(userID: 1, bookTitle: "Война и Мир")
+library.borrowBook(userID: 1, bookTitle: "Преступление и Наказание")
+library.borrowBook(userID: 1, bookTitle: "Гарри Поттер и Философский камень")
+library.borrowBook(userID: 1, bookTitle: "Судьба чеовека")
+firstUser.listBorrowedBooks()
+library.returnBook(userID: 1, bookTitle: "Преступление и Наказание")
+firstUser.listBorrowedBooks()
+
+print("---------")
+
+firstUser.listBorrowedBooks()
+firstUser.borrowBook(book: firstBook)
+firstUser.borrowBook(book: secondBook)
+firstUser.borrowBook(book: fithBook)
+firstUser.listBorrowedBooks()
+
+firstUser.removeBook(book: firstBook)
+firstUser.removeBook(book: secondBook)
+firstUser.removeBook(book: thirdBook)
+firstUser.removeBook(book: fithBook)
+firstUser.listBorrowedBooks()
 
 
 
