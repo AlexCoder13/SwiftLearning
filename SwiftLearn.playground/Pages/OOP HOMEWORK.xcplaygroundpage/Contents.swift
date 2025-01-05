@@ -211,20 +211,96 @@ print("-------------------------------------------------------------------------
 //Создайте приложение для работы с интернет-магазином.
 //
 //Создайте классы:
-//
 //Product с полями: name, price, category, stock.
+//
+//В классе Product:
+//Метод reduceStock(quantity: Int) для уменьшения количества товара на складе.
+//
+//Добавьте функционал: Если товар заканчивается, выводите сообщение.
+class Product {
+    let name: String
+    let price: Int
+    let category: String
+    var stock: Int
+    
+    init(name: String, price: Int, category: String, stock: Int) {
+        self.name = name
+        self.price = price
+        self.category = category
+        self.stock = stock
+    }
+    
+    func reduceStock(quantity: Int) {
+        stock -= quantity
+        print("На складе осталось \(stock) товаров.")
+    }
+    
+    func endingProduct() {
+        if stock <= 100 && stock > 0 {
+            print("Товар заканчивается.")
+        } else if stock <= 0 {
+            print("Товар на складе закончился.")
+        }
+    }
+}
+let prod = Product(name: "Socks", price: 10, category: "Clothes", stock: 235)
+prod.reduceStock(quantity: 200)
+prod.endingProduct()
+
 //Customer с полями: name, customerID, cart (массив Product).
-//Order с полями: orderID, customer, products, totalPrice.
-//Реализуйте методы:
 //
 //В классе Customer:
 //Метод addToCart(product: Product) для добавления товара в корзину.
 //Метод removeFromCart(productName: String) для удаления товара из корзины.
+class Customer {
+    let name: String
+    let customerID: Int
+    var cart: [Product]
+    
+    init(name: String, customerID: Int) {
+        self.name = name
+        self.customerID = customerID
+        self.cart = []
+    }
+    
+    func addToCart(product: Product) {
+        cart.append(product)
+        print("В корзину был добавлен товар '\(product.name)'.")
+    }
+    
+    func removeFromCart(productName: String) {
+        guard let product = getCartProduct(by: productName) else { return }
+        
+        cart.removeAll {$0.name == productName}
+        print("Из корзины был удален товар '\(productName)'")
+    }
+    
+    private func getCartProduct(by name: String) -> Product? {
+        guard let product = cart.first(where: {$0.name == name}) else { return nil }
+        return product
+    }
+}
+let cust = Customer(name: "Dan", customerID: 1)
+cust.addToCart(product: prod)
+cust.removeFromCart(productName: "Socks")
+
+//Order с полями: orderID, customer, products, totalPrice.
+//
 //В классе Order:
 //Метод calculateTotalPrice(), чтобы подсчитать общую стоимость заказа.
-//В классе Product:
-//Метод reduceStock(quantity: Int) для уменьшения количества товара на складе.
-//Добавьте функционал:
 //
-//Если товар заканчивается, выводите сообщение.
-//Если общая стоимость заказа превышает определенную сумму, предоставьте скидку (например, 10%).
+//Добавьте функционал: Если общая стоимость заказа превышает определенную сумму, предоставьте скидку (например, 10%).
+class Order {
+    let orderID: Int
+    let customer: String
+    var products: [Product]
+    var totalPrice: Int
+    
+    init(orderID: Int, customer: String) {
+        self.orderID = orderID
+        self.customer = customer
+        self.products = []
+        self.totalPrice = 0
+    }
+}
+
