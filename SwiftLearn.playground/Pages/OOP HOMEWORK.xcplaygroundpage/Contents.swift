@@ -205,7 +205,7 @@ firstUser.removeBook(book: thirdBook)
 firstUser.removeBook(book: fithBook)
 firstUser.listBorrowedBooks()
 
-
+print("-------------------------------------------------------------------------------------------------------")
 
 //Задача 2: Интернет-магазин
 //Создайте приложение для работы с интернет-магазином.
