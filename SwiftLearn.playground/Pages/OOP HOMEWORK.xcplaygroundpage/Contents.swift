@@ -243,9 +243,9 @@ class Product {
         }
     }
 }
-let prod = Product(name: "Socks", price: 10, category: "Clothes", stock: 235)
-prod.reduceStock(quantity: 200)
-prod.endingProduct()
+let firstProd = Product(name: "Socks", price: 200, category: "Clothes", stock: 235)
+firstProd.reduceStock(quantity: 200)
+firstProd.endingProduct()
 
 //Customer с полями: name, customerID, cart (массив Product).
 //
@@ -255,7 +255,7 @@ prod.endingProduct()
 class Customer {
     let name: String
     let customerID: Int
-    var cart: [Product]
+    private var cart: [Product]
     
     init(name: String, customerID: Int) {
         self.name = name
@@ -269,9 +269,12 @@ class Customer {
     }
     
     func removeFromCart(productName: String) {
-        guard let product = getCartProduct(by: productName) else { return }
+        guard let product = getCartProduct(by: productName) else {
+            print("Такого товара нет в корзине.")
+            return
+        }
         
-        cart.removeAll {$0.name == productName}
+        cart.removeAll { $0.name == productName }
         print("Из корзины был удален товар '\(productName)'")
     }
     
@@ -281,7 +284,7 @@ class Customer {
     }
 }
 let cust = Customer(name: "Dan", customerID: 1)
-cust.addToCart(product: prod)
+cust.addToCart(product: firstProd)
 cust.removeFromCart(productName: "Socks")
 
 //Order с полями: orderID, customer, products, totalPrice.
@@ -302,5 +305,26 @@ class Order {
         self.products = []
         self.totalPrice = 0
     }
+    
+    func calculateTotalPrice() {
+        for product in products {
+            totalPrice += product.price
+            if totalPrice >= 1000 {
+                totalPrice -= totalPrice / 10
+                print("Вам предоставлена скидка 10%.")
+            }
+        }
+        print("Стоимость заказа - \(totalPrice)")
+    }
 }
 
+let order = Order(orderID: 999, customer: "Phil")
+
+let secondProd = Product(name: "T-Shirt", price: 600, category: "Clothes", stock: 1235)
+let thirdProd = Product(name: "Sneakers", price: 1100, category: "Sport Wear", stock: 713)
+
+order.products.append(firstProd)
+order.products.append(secondProd)
+order.products.append(thirdProd)
+
+order.calculateTotalPrice()
