@@ -17,20 +17,20 @@ import Foundation
 //}
 //print(twoCompareNumbers(firstNumber: 19, secondNumber: 8))
 //
-//// НЕ РАБОТАЕТ
-////func twoEqualNumbers(firstNumber: Int, secondNumber: Int) {
-////    switch firstNumber; secondNumber {
-////    case firstNumber == secondNumber:
-////        print("равно")
-////    case firstNumber > secondNumber:
-////        print("больше")
-////    case firstNumber < secondNumber:
-////        print("меньше")
-////    default:
-////        break
-////    }
-////}
-////print(twoEqualNumbers(firstNumber: 13, secondNumber: 7))
+// НЕ РАБОТАЕТ
+//func twoEqualNumbers(firstNumber: Int, secondNumber: Int) {
+//    switch firstNumber; secondNumber {
+//    case firstNumber == secondNumber:
+//        print("равно")
+//    case firstNumber > secondNumber:
+//        print("больше")
+//    case firstNumber < secondNumber:
+//        print("меньше")
+//    default:
+//        break
+//    }
+//}
+//print(twoEqualNumbers(firstNumber: 13, secondNumber: 7))
 //
 //
 //

@@ -60,15 +60,66 @@ print("------------------")
 //
 //Задача 6: Объединение массивов
 //Описание: Создай два массива: [1, 2, 3] и [4, 5, 6]. Объедини их в один массив и выведи результат.
+
+// 1 способ
+var sixthArray = [1, 2, 3]
+var anotherSixthArray = [4, 5, 6]
+var newsixthArray = sixthArray + anotherSixthArray
+print(newsixthArray)
+print("---")
+
+// 2 способ
+var newSixthArray: [Int] = []
+for element in sixthArray {
+    newSixthArray.append(element)
+}
+for element in anotherSixthArray {
+    newSixthArray.append(element)
+}
+print(newSixthArray)
+print("---")
+
+// 3 способ
+sixthArray.append(contentsOf: anotherSixthArray)
+print(sixthArray)
+
+print("------------------")
+
 //
 //Задача 7: Сортировка массива
 //Описание: Создай массив [3, 1, 4, 1, 5, 9]. Нужно отсортировать массив по возрастанию и по убыванию.
+var seventhArray = [3, 1, 4, 1, 5, 9]
+seventhArray.sort(by: >)
+print(seventhArray)
+seventhArray.sort(by: <)
+print(seventhArray)
+
+print("------------------")
+
 //
 //Задача 8: Фильтрация массива
 //Описание: Создай массив [10, 15, 20, 25, 30]. При помощи функции высшего порядка оставь в массиве только элементы больше 20.
+var array = [10, 15, 20, 25, 30]
+array.removeAll(where: { $0 <= 20 })
+print(array)
+
+print("------------------")
+
 //
 //Задача 9: Поиск индекса элемента
 //Описание: Создай массив [“cat”, “dog”, “bird”, “fish”]. Найди индекс элемента "bird".
+let newArray = ["cat", "dog", "bird", "fish"]
+if let index = newArray.firstIndex(of: "bird") {
+    print(index)
+}
+
+print("------------------")
+
 //
 //Задача 10: Преобразование массива
 //Описание: Создай массив [1, 2, 3, 4, 5]. Используй функцию высшего порядка, чтобы получить новый массив, в котором каждый элемент будет умножен на 2.
+var anotherArray = [1, 2, 3, 4, 5]
+print(anotherArray.map { $0 * 2 })
+
+print("------------------")
+
