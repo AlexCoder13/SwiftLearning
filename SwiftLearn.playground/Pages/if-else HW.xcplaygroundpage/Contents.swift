@@ -48,6 +48,37 @@ print("--------------------------------")
 //За 20 тикетов начисляют 100 баллов, за 30 – 200 баллов, за 40 – 300 баллов. Лишние тикеты возвращаются игроку.
 //Определите какую сумму начислят клиенту на карту за тикеты, и рассчитайте сколько ему нужно будет доплатить за игрушку, стоимостью 450 рублей. Выведите следующий результат на консоль: “Вам начислено на карту клиента <….> рублей, осталось доплатить <….> рублей”.
 
+var tickets = 0
+var pointsRubles = 0
+
+func buyToy(tickets: Int, points: Int) {
+    
+    var tickets = tickets
+    var points = points
+    
+    if tickets >= 20 && tickets < 30 {
+        points = 100
+        tickets = 30 - tickets
+        print("Вам начислено на карту клиента \(points) рублей, осталось доплатить \(450 - points) рублей. Осталось билетиков: \(tickets).")
+    } else if tickets >= 30 && tickets < 40 {
+        points = 200
+        tickets = 40 - tickets
+        print("Вам начислено на карту клиента \(points) рублей, осталось доплатить \(450 - points) рублей. Осталось билетиков: \(tickets).")
+    } else if tickets >= 40 && tickets < 50 {
+        points = 300
+        tickets = 50 - tickets
+        print("Вам начислено на карту клиента \(points) рублей, осталось доплатить \(450 - points) рублей. Осталось билетиков: \(tickets).")
+    } else if tickets < 20 && tickets >= 1 {
+        points = 0
+        print("Вам начислено на карту клиента \(points) рублей, осталось доплатить \(450 - points) рублей. Осталось билетиков: \(tickets).")
+    } else {
+        print("Неверное кол-во билетиков.")
+    }
+}
+
+buyToy(tickets: 50, points: 0)
+
+print("--------------------------------")
 
 //4.
 //Давайте разработаем приложение для тренера по бегу, он будет вносить в приложение пол спортсмена и секунды, за которые спортсмен пробежал 100 метровку.
@@ -58,3 +89,40 @@ print("--------------------------------")
 //3 разряд у мужчин дают от 12.05 – 12.84, у женщин от 14.35 – 15.34
 //Выведите результат на консоль: “Спортсмену присвоен <….> разряд по бегу на дистанцию 100 метров, в категории <….> “
 
+var gender = "female"
+var seconds: Double = 11.00
+
+func resultRunning(gender: String, seconds: Double) {
+    let firstResultMale = (10.95...11.44)
+    let firstResultFemale = (12.65...13.44)
+    let secondResultMale = (11.45...12.04)
+    let secondResultFemale = (13.45...14.34)
+    let thirdResultMale = (12.05...12.84)
+    let thirdResultFemale = (14.35...15.34)
+    
+    if gender == "male" {
+        if firstResultMale.contains(seconds) || seconds < 10.95 {
+            print("Спортсмену присвоен 1й разряд по бегу на дистанцию 100 метров в категории 'МУЖЧИНЫ'. ")
+        } else if secondResultMale.contains(seconds) {
+            print("Спортсмену присвоен 2й разряд по бегу на дистанцию 100 метров в категории 'МУЖЧИНЫ'. ")
+        } else if thirdResultMale.contains(seconds) {
+            print("Спортсмену присвоен 3й разряд по бегу на дистанцию 100 метров в категории 'МУЖЧИНЫ'. ")
+        } else {
+            print("Спортсмену не присвоено разряда.")
+        }
+    }
+    
+    if gender == "female" {
+        if firstResultFemale.contains(seconds) || seconds < 12.65 {
+            print("Спортсмену присвоен 1й разряд по бегу на дистанцию 100 метров в категории 'ЖЕНЩИНЫ'. ")
+        } else if secondResultFemale.contains(seconds) {
+            print("Спортсмену присвоен 2й разряд по бегу на дистанцию 100 метров в категории 'ЖЕНЩИНЫ'. ")
+        } else if thirdResultFemale.contains(seconds) {
+            print("Спортсмену присвоен 3й разряд по бегу на дистанцию 100 метров в категории 'ЖЕНЩИНЫ'. ")
+        } else {
+            print("Спортсмену не присвоено разряда.")
+        }
+    }
+}
+
+resultRunning(gender: gender, seconds: seconds)
