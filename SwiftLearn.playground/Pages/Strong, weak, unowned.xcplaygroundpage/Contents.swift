@@ -41,13 +41,17 @@ import Foundation
 ////1
 //class Person {
 //    let name: String
-//    init(name: String) { self.name = name }
+//    init(name: String) {
+//        self.name = name
+//    }
 //    var apartment: Apartment?
 //    deinit { print("\(name) освобождается") }
 //}
 //class Apartment {
 //    let unit: String
-//    init(unit: String) { self.unit = unit }
+//    init(unit: String) {
+//        self.unit = unit
+//    }
 //    var tenant: Person?
 //    deinit { print("Апартаменты \(unit) освобождаются") }
 //}
@@ -74,13 +78,17 @@ import Foundation
 ////1
 //class Person {
 //    let name: String
-//    init(name: String) { self.name = name }
+//    init(name: String) {
+//        self.name = name
+//    }
 //    var apartment: Apartment?
 //    deinit { print("\(name) деинициализируется") }
 //}
 //class Apartment {
 //    let unit: String
-//    init(unit: String) { self.unit = unit }
+//    init(unit: String) {
+//        self.unit = unit
+//    }
 //    weak var tenant: Person?
 //    deinit { print("Apartment \(unit) деинициализируется") }
 //}
@@ -134,3 +142,6 @@ import Foundation
 //john = nil
 //// Выведет "John Appleseed деинициализируется"
 //// Выведет "Карта #1234567890123456 деинициализируется"
+
+//let alphabet = "а"..."я"
+//print(alphabet)
