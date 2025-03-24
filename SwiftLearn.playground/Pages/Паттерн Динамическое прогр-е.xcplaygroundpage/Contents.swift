@@ -37,3 +37,29 @@ let n = 10
 print(fibonacci(n)) // Вывод: 55
 
 
+//Пример 2: Задача о рюкзаке (Knapsack Problem). Задача: Даны предметы с весом и стоимостью. Необходимо выбрать набор предметов, чтобы их общий вес не превышал заданный лимит, а общая стоимость была максимальной.
+func knapsack(_ weights: [Int], _ values: [Int], _ capacity: Int) -> Int {
+    let n = weights.count
+    var dp = [[Int]](repeating: [Int](repeating: 0, count: capacity + 1), count: n + 1)
+    
+    for i in 1...n {
+        for w in 0...capacity {
+            if weights[i - 1] <= w {
+                dp[i][w] = max(dp[i - 1][w], dp[i - 1][w - weights[i - 1]] + values[i - 1])
+            } else {
+                dp[i][w] = dp[i - 1][w]
+            }
+        }
+    }
+    
+    return dp[n][capacity]
+}
+
+// Пример использования:
+let weights = [2, 3, 4, 5]
+let values = [3, 4, 5, 6]
+let capacity = 5
+print(knapsack(weights, values, capacity)) // Вывод: 7
+
+
+
