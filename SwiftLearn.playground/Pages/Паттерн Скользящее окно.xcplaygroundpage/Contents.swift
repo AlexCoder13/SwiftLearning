@@ -40,9 +40,9 @@ func minSubarrayLength(_ array: [Int], _ target: Int) -> Int {
 }
 
 // Пример использования:
-let array = [2, 3, 1, 2, 4, 3]
-let target = 7
-print(minSubarrayLength(array, target)) // Вывод: 2 (подмассив [4, 3])
+let array2 = [2, 3, 1, 2, 4, 3]
+let target2 = 7
+print(minSubarrayLength(array2, target2)) // Вывод: 2 (подмассив [4, 3])
 
 print("------------------------------------------------------------------------------------------------------")
 
@@ -89,8 +89,8 @@ func countSubarraysWithSum(_ array: [Int], _ target: Int) -> Int {
 }
 
 // Пример использования:
-let array = [1, 0, 1, 1, 1]
-let target = 2
-print(countSubarraysWithSum(array, target)) // Вывод: 4
+let array3 = [1, 0, 1, 1, 1]
+let target3 = 2
+print(countSubarraysWithSum(array3, target3)) // Вывод: 4
 
 print("------------------------------------------------------------------------------------------------------")
