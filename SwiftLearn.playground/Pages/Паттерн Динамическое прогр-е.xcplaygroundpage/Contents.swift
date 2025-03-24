@@ -89,3 +89,23 @@ let text2 = "ace"
 print(longestCommonSubsequence(text1, text2)) // Вывод: 3
 
 
+//Пример 4: Минимальное количество монет для суммы. Задача: Найти минимальное количество монет, необходимых для составления заданной суммы.
+func coinChange(_ coins: [Int], _ amount: Int) -> Int {
+    var dp = [Int](repeating: amount + 1, count: amount + 1)
+    dp[0] = 0
+    
+    for i in 1...amount {
+        for coin in coins {
+            if coin <= i {
+                dp[i] = min(dp[i], dp[i - coin] + 1)
+            }
+        }
+    }
+    
+    return dp[amount] > amount ? -1 : dp[amount]
+}
+
+// Пример использования:
+let coins = [1, 2, 5]
+let amount = 11
+print(coinChange(coins, amount)) // Вывод: 3 (5 + 5 + 1)
