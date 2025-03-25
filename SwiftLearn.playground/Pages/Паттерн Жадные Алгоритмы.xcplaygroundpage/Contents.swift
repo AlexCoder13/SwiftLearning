@@ -84,3 +84,32 @@ print("Минимальное количество монет: \(minCoins(coins,
 // Вывод: Минимальное количество монет: 3 (5 + 5 + 1)
 
 
+//Пример 4: Задача о расписании (Scheduling Problem). Задача: Дано множество задач, каждая из которых имеет дедлайн и штраф за просрочку. Необходимо составить расписание, чтобы минимизировать общий штраф.
+func scheduleTasks(_ tasks: [(deadline: Int, penalty: Int)]) -> [Int] {
+    let sortedTasks = tasks.sorted { $0.penalty > $1.penalty }
+    var timeSlots = [Bool](repeating: false, count: sortedTasks.count)
+    var schedule = [Int]()
+    
+    for task in sortedTasks {
+        var slot = min(task.deadline - 1, timeSlots.count - 1)
+        while slot >= 0 && timeSlots[slot] {
+            slot -= 1
+        }
+        if slot >= 0 {
+            timeSlots[slot] = true
+            schedule.append(task.deadline)
+        }
+    }
+    
+    return schedule
+}
+
+// Пример использования:
+let tasks = [
+    (deadline: 2, penalty: 10),
+    (deadline: 1, penalty: 5),
+    (deadline: 2, penalty: 15),
+    (deadline: 1, penalty: 20)
+]
+print("Расписание: \(scheduleTasks(tasks))")
+// Вывод: Расписание: [2, 1]
