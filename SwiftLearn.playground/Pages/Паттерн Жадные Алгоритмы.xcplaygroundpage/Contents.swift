@@ -61,3 +61,26 @@ print("Максимальная стоимость: \(fractionalKnapsack(items, 
 // Вывод: Максимальная стоимость: 240.0
 
 
+//Пример 3: Задача о минимальном количестве монет (Coin Change Problem). Задача: Даны монеты определённого номинала. Необходимо найти минимальное количество монет, чтобы составить заданную сумму.
+func minCoins(_ coins: [Int], _ amount: Int) -> Int {
+    let sortedCoins = coins.sorted(by: >)
+    var remainingAmount = amount
+    var count = 0
+    
+    for coin in sortedCoins {
+        while remainingAmount >= coin {
+            remainingAmount -= coin
+            count += 1
+        }
+    }
+    
+    return remainingAmount == 0 ? count : -1
+}
+
+// Пример использования:
+let coins = [1, 2, 5]
+let amount = 11
+print("Минимальное количество монет: \(minCoins(coins, amount))")
+// Вывод: Минимальное количество монет: 3 (5 + 5 + 1)
+
+
