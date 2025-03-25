@@ -85,3 +85,38 @@ if let path = dfsPath(graph, start: start, end: end) {
     print("Путь не найден")
 }
 
+
+//Рекурсивная реализация DFS
+//DFS также можно реализовать с помощью рекурсии, что часто делает код более компактным.
+func dfsRecursive(_ graph: [Int: [Int]], start: Int, end: Int, visited: inout Set<Int>, path: [Int]) -> [Int]? {
+    if start == end {
+        return path + [start]
+    }
+    visited.insert(start)
+    for neighbor in graph[start] ?? [] {
+        if !visited.contains(neighbor) {
+            if let result = dfsRecursive(graph, start: neighbor, end: end, visited: &visited, path: path + [start]) {
+                return result
+            }
+        }
+    }
+    return nil
+}
+
+// Пример использования:
+let graph = [
+    1: [2, 3],
+    2: [1, 4, 5],
+    3: [1, 6],
+    4: [2],
+    5: [2, 6],
+    6: [3, 5]
+]
+let start = 1
+let end = 6
+var visited = Set<Int>()
+if let path = dfsRecursive(graph, start: start, end: end, visited: &visited, path: []) {
+    print("Путь: \(path)") // Вывод: Путь: [1, 3, 6]
+} else {
+    print("Путь не найден")
+}
