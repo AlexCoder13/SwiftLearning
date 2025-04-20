@@ -74,3 +74,93 @@ concurrentQueue.async { // Чтение безопасно
 concurrentQueue.async(flags: .barrier) { // Запись эксклюзивна
     writeData()
 }
+
+
+
+// ОСНОВНЫЕ ПРОБЛЕМЫ МНОГОПОТОЧНОСТИ
+// a) Race Conditions (Гонка данных)
+var balance = 100
+
+DispatchQueue.global().async {
+    balance += 50 // Читает 100, пишет 150
+}
+
+DispatchQueue.global().async {
+    balance -= 20 // Читает 100 (ещё не обновлено), пишет 80
+}
+
+// В итоге balance может быть 80 или 150, а не 130!
+// Решение: Использовать DispatchQueue с .barrier или NSLock.
+
+
+// b) Deadlock (Взаимная блокировка)
+let queue = DispatchQueue(label: "com.example.queue")
+
+queue.sync { // Блокирует текущий поток
+    queue.sync { // Ожидает, пока первый sync завершится → Deadlock!
+        print("Этот код никогда не выполнится")
+    }
+}
+// Решение: Избегать вложенных sync на одной очереди.
+
+
+// c) UI-обновления не в главном потоке
+// Неправильно:
+DispatchQueue.global().async {
+    self.label.text = "Новый текст" // ❌ Может сломать UI
+}
+
+// Правильно:
+DispatchQueue.global().async {
+    let newText = "Новый текст"
+    DispatchQueue.main.async {
+        self.label.text = newText // ✅ UI обновляется в главном потоке
+    }
+}
+
+
+// Практические примеры с подробными комментариями
+// Пример 1: Загрузка изображения с обновлением UI
+// 1. Переходим в фоновый поток для долгой операции
+DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+    // 2. Загружаем данные (может занять время)
+    guard let url = URL(string: "https://example.com/image.jpg"),
+          let data = try? Data(contentsOf: url),
+          let image = UIImage(data: data)
+    else { return }
+
+    // 3. Возвращаемся в главный поток для обновления UI
+    DispatchQueue.main.async {
+        self?.imageView.image = image // Безопасное обновление
+    }
+}
+
+// Пример 2: Синхронизация доступа к данным
+class ThreadSafeArray {
+    private var array = [Int]()
+    private let queue = DispatchQueue(label: "com.example.threadSafeArray", attributes: .concurrent)
+
+    func append(_ value: Int) {
+        queue.async(flags: .barrier) { // Барьер для записи
+            self.array.append(value)
+        }
+    }
+
+    var values: [Int] {
+        queue.sync { // Безопасное чтение
+            return array
+        }
+    }
+}
+
+// Пример 3: Deadlock из-за неправильного использования sync
+let mainQueue = DispatchQueue.main
+
+mainQueue.async {
+    print("1")
+    mainQueue.sync { // ❌ Deadlock! Главный поток ждёт сам себя
+        print("2")
+    }
+    print("3")
+}
+// Вывод: "1" → Зависание
