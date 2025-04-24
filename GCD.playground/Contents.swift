@@ -40,3 +40,63 @@ DispatchQueue.concurrentPerform(iterations: 5) { i in
 // Parallel task 0 on thread: <Thread: 0x...>{number = 3, name = (null)}
 // Parallel task 2 on thread: <Thread: 0x...>{number = 4, name = (null)}
 // Parallel task 1 on thread: <Thread: 0x...>{number = 5, name = (null)}
+
+// Потоки
+// Пример создания потока:
+let thread = Thread {
+    print("Выполняюсь в кастомном потоке: \(Thread.current)")
+}
+thread.name = "Мой поток"  // Даём имя для отладки
+thread.start()  // Запускаем поток
+// Основные свойства потока:
+print(Thread.isMainThread)  // true, если это главный поток
+print(Thread.current.name)  // Имя текущего потока
+print(Thread.threadPriority)  // Приоритет потока (0.0...1.0)
+
+// QoS (Quality of Service)
+// Приоритет выполнения
+// Высокоприоритетная задача
+DispatchQueue.global(qos: .userInteractive).async {
+    renderComplexAnimation()
+}
+// Низкоприоритетная задача
+DispatchQueue.global(qos: .background).async {
+    backupDatabase()
+}
+// Priority Inversion (Инверсия приоритетов)
+let highPriorityQueue = DispatchQueue.global(qos: .userInteractive)
+let lowPriorityQueue = DispatchQueue.global(qos: .background)
+lowPriorityQueue.async {
+    lock.lock()  // ❌ Блокирует ресурс
+    defer { lock.unlock() }
+    sleep(5)
+}
+highPriorityQueue.async {
+    lock.lock()  // Будет ждать lowPriority!
+    defer { lock.unlock() }
+}
+// Решение: Использовать DispatchWorkItem с повышением приоритета:
+let workItem = DispatchWorkItem(qos: .userInteractive) {
+    lock.lock()
+    defer { lock.unlock() }
+}
+// Оптимальное распределение QoS
+// UI-действие (максимальный приоритет)
+DispatchQueue.global(qos: .userInteractive).async {
+    let frames = generateAnimationFrames()
+    DispatchQueue.main.async { applyFrames(frames) }
+}
+
+// Фоновая загрузка (низкий приоритет)
+DispatchQueue.global(qos: .utility).async {
+    let data = fetchRemoteData()
+    Database.save(data)  // Внутри использует .background QoS
+}
+// Автоматическое наследование QoS
+let parentQueue = DispatchQueue(label: "parent", qos: .userInitiated)
+parentQueue.async {
+    // Эта задача унаследует .userInitiated
+    DispatchQueue.global().async {
+        // Эта задача получит QoS вызывающего потока
+    }
+}
