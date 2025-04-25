@@ -100,3 +100,70 @@ parentQueue.async {
         // Эта задача получит QoS вызывающего потока
     }
 }
+
+// Sync vs Async
+// Синхронное выполнение (sync):
+print("Начало")
+DispatchQueue.global().sync {
+    print("Синхронная задача")
+}
+print("Конец")
+// Вывод:
+// Начало
+// Синхронная задача
+// Конец
+
+// Асинхронное выполнение (async):
+print("Начало")
+DispatchQueue.global().async {
+    print("Асинхронная задача")
+}
+print("Конец")
+// Возможный вывод:
+// Начало
+// Конец
+// Асинхронная задача
+
+// Потокобезопасность и взаимоблокировки
+// Опасный пример:
+let queue = DispatchQueue(label: "deadlock.queue")
+queue.sync { // Блокируем текущий поток
+    queue.sync { // Попытка повторной блокировки
+        print("Это никогда не выполнится")
+    }
+}
+// Безопасные альтернативы:
+// Вариант 1: Использовать async
+queue.async {
+    queue.sync {
+        print("Теперь безопасно")
+    }
+}
+
+// Вариант 2: Разные очереди
+let queue1 = DispatchQueue(label: "queue1")
+let queue2 = DispatchQueue(label: "queue2")
+queue1.sync {
+    queue2.sync {
+        print("Нет взаимоблокировки")
+    }
+}
+// Итоговый чеклист:
+func safeOperation() {
+    // 1. Выбираем правильную очередь
+    let queue = DispatchQueue(
+        label: "safe.queue",
+        qos: .userInitiated,
+        attributes: [.concurrent]
+    )
+    // 2. Чтение - sync
+    let value = queue.sync { cachedValue }
+    // 3. Запись - async barrier
+    queue.async(flags: .barrier) {
+        cachedValue = newValue
+    }
+    // 4. UI обновление - main async
+    DispatchQueue.main.async {
+        updateUI()
+    }
+}
