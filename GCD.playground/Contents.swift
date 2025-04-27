@@ -195,3 +195,32 @@ Thread.detachNewThread {
     performSelector(onMainThread: #selector(updateUI), with: data, waitUntilDone: false)
 }
 
+// Отмена задач в GCD
+// DispatchWorkItem
+let workItem = DispatchWorkItem {
+    guard !workItem.isCancelled else { return }
+    // Основной код
+    for i in 0..<100 {
+        guard !workItem.isCancelled else { break }
+        processChunk(i)
+    }
+}
+// Запуск
+DispatchQueue.global().async(execute: workItem)
+// Отмена
+workItem.cancel()
+
+// Полноценная отмена через OperationQueue
+let queue = OperationQueue()
+queue.maxConcurrentOperationCount = 2
+let operation = BlockOperation {
+    guard !operation.isCancelled else { return }
+    // Этап 1
+    guard !operation.isCancelled else { return }
+    // Этап 2
+}
+queue.addOperation(operation)
+// Отмена с таймаутом
+DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+    operation.cancel()
+}
