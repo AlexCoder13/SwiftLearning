@@ -167,3 +167,31 @@ func safeOperation() {
         updateUI()
     }
 }
+
+// Асинхронность против многопоточности
+// Асинхронность:
+// Swift Concurrency
+func fetchData() async throws -> Data {
+    let url = URL(string: "https://api.example.com/data")!
+    let (data, _) = try await URLSession.shared.data(from: url)
+    return data
+}
+// Combine
+URLSession.shared.dataTaskPublisher(for: url)
+    .map(\.data)
+    .sink(receiveCompletion: { _ in }, receiveValue: { data in })
+
+// Многопоточность:
+// GCD
+DispatchQueue.global().async {
+    let data = try! Data(contentsOf: url)
+    DispatchQueue.main.async {
+        print("Получено \(data.count) байт")
+    }
+}
+// Прямая работа с потоками
+Thread.detachNewThread {
+    let data = try! Data(contentsOf: url)
+    performSelector(onMainThread: #selector(updateUI), with: data, waitUntilDone: false)
+}
+
