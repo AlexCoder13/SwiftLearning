@@ -22,6 +22,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // 3 - какой экран будет главным
         self.window?.rootViewController = MyViewController()
+        
+        // 4 - отображаем наш Контроллер
+        self.window?.makeKeyAndVisible()
     }
 }
 

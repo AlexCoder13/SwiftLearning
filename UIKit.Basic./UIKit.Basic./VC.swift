@@ -20,6 +20,9 @@ class MyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad")
+        
+        // Устанавливаем цвет Вьюхи
+        view.backgroundColor = .lightGray
     }
     
     // Вьюха готовится к появлению на экране
@@ -51,7 +54,28 @@ class MyViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         print("viewWillLayoutSubviews")
     }
+    
+    
+    // MARK: - Создание элементов кодом
+    let pageTitle1: UILabel = {
+        let label = UILabel()
+        label.text = "Hello, World!"
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 36)
+        return label
+    }()
+    // или
+    let pageTitle2 = UILabel()
+    // а функцию писать во viewDidLoad, или сразу свойства писать во viewDidLoad, но это плохой КодСтайл
+    func setupPageTitle2() {
+        pageTitle2.text = "Hello, World!"
+        pageTitle2.textAlignment = .center
+        pageTitle2.font = UIFont.systemFont(ofSize: 36)
+    }
 }
+
+
+
 
 
 // MARK: - Удаление StoryBoard.
@@ -65,4 +89,5 @@ class MyViewController: UIViewController {
  - делаем сцену (guard let scene = (scene as? UIWindowScene) else { return })
  - инициализируем window (self.window = UIWindow(windowScene: scene))
  - говорим, какой экран будет главным (self.window?.rootViewController = MyViewController())
+ - отображаем наш Контроллер (self.window?.makeKeyAndVisible())
  */
