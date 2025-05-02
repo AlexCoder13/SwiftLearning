@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = UIWindow(windowScene: scene)
         
         // 3 - какой экран будет главным
-        self.window?.rootViewController = TableVCCustomCell()
+        self.window?.rootViewController = ViewController()
         
         // 4 - отображаем наш Контроллер
         self.window?.makeKeyAndVisible()
