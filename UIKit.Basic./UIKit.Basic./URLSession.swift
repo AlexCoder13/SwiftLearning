@@ -21,22 +21,20 @@ class ViewController: UIViewController {
     }()
     
     private lazy var nextPhotoButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton(
+            frame: CGRect(
+                x: imageUIImageView.frame.maxX - 250,
+                y: imageUIImageView.frame.maxY + 40,
+                width: 200,
+                height: 50
+            )
+        )
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 10
         button.setTitle("Next photo", for: .normal)
         button.addTarget(self, action: #selector(nextPhoto), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate(
-[
-    button.bottomAnchor
-                .constraint(
-                    equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-                    constant: -16
-                ),
-    button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-    button.trailingAnchor
-        .constraint(equalTo: view.trailingAnchor, constant: 16),
-        ]
-)
+        button.frame(forAlignmentRect: CGRect(x: 100, y: 200, width: 200, height: 50))
         return button
     }()
     
