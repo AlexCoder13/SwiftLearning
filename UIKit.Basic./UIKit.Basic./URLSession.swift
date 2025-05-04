@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         view.addSubview(nextPhotoButton)
         
         // Отправляем запрос
-        networkManager.sendRequest(query: "car") { [weak self] urlString in
+        networkManager.sendRequest(query: "cat") { [weak self] urlString in
             guard let self = self else { return }
             guard let urlString = URL(string: urlString) else { return }
             imageUIImageView.load(url: urlString)
