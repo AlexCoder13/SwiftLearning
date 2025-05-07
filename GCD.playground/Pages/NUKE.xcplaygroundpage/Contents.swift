@@ -59,3 +59,21 @@ let imageURL = URL(string: "https://example.com/animation.gif")!
 // Используем LazyImageView (поддерживает GIF)
 let imageView = LazyImageView()
 imageView.url = imageURL
+
+// ⚡ Оптимизация для UITableView / UICollectionView
+// Отмена загрузки при скроллинге
+func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+    let imageURL = URL(string: images[indexPath.row])!
+    // Загружаем изображение с тэгом (для отмены)
+    let request = ImageRequest(
+        url: imageURL,
+        userInfo: [.cellReuseKey: "cell_\(indexPath.row)"] // Уникальный ключ
+    )
+    Nuke.loadImage(with: request, into: cell.imageView!)
+    return cell
+}
+// Отменяем загрузку при скроллинге
+func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    Nuke.cancelRequest(for: cell.imageView!)
+}
