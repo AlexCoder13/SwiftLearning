@@ -33,6 +33,21 @@ class ViewController: UIViewController {
             .center() // Центрируем относительно родителя
     }
 }
+// Аналогичный пример на SnapKit:
+import SnapKit
+
+redView.snp.makeConstraints { make in
+    make.width.height.equalTo(100)
+    make.center.equalToSuperview()
+}
+// Аналогичный пример на AutoLayout:
+redView.translatesAutoresizingMaskIntoConstraints = false
+NSLayoutConstraint.activate([
+    redView.widthAnchor.constraint(equalToConstant: 100),
+    redView.heightAnchor.constraint(equalToConstant: 100),
+    redView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+    redView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+])
 
 // 2. Относительное позиционирование (отступы)
 redView.pin
@@ -40,3 +55,26 @@ redView.pin
     .left(20)          // Отступ слева 20pt
     .width(100)
     .height(100)
+
+// 3. Выравнивание относительно другого элемента
+let blueView = UIView()
+blueView.backgroundColor = .blue
+view.addSubview(blueView)
+blueView.pin
+    .top(to: redView.edge.bottom)  // Размещаем под redView
+    .left(to: redView.edge.left)   // Выравниваем по левому краю
+    .width(100)
+    .height(100)
+
+// 4. Процентные размеры и маргины
+redView.pin
+    .top(10%)
+    .left(10%)
+    .width(80%)  // 80% от ширины родителя
+    .height(200)
+
+// 5. Анимация с PinLayout
+UIView.animate(withDuration: 0.3) {
+    self.redView.pin.top(100).left(100).layout()
+    self.view.layoutIfNeeded()
+}
