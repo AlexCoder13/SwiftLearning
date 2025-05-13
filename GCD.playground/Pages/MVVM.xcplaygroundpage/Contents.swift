@@ -131,4 +131,28 @@ class UserViewController: UIViewController {
     }
 }
 
-// 
+// 4. Сборка всего вместе (AppDelegate или SceneDelegate)
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    var window: UIWindow?
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        // 1. Создаем окно
+        window = UIWindow(frame: UIScreen.main.bounds)
+        
+        // 2. Создаем зависимости
+        let userService = UserService()
+        let viewModel = UserViewModel(userService: userService)
+        
+        // 3. Создаем ViewController
+        let viewController = UserViewController(viewModel: viewModel)
+        
+        // 4. Устанавливаем rootViewController
+        window?.rootViewController = viewController
+        window?.makeKeyAndVisible()
+        
+        return true
+    }
+}
+
