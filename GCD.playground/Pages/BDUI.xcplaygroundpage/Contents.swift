@@ -106,4 +106,23 @@ class DynamicViewController: UIViewController {
     }
 }
 
-// 
+// 4. Использование
+let screenState = ScreenState(
+    title: "Авторизация",
+    buttonState: ButtonState(
+        title: "Войти",
+        isEnabled: false,
+        action: { print("Кнопка нажата") }
+    ),
+    textFieldState: TextFieldState(
+        text: "",
+        placeholder: "Введите email",
+        onTextChanged: { text in
+            print("Текст изменен: \(text)")
+            // Здесь можно обновлять состояние кнопки
+        }
+    )
+)
+// 2. Создаем и показываем контроллер
+let vc = DynamicViewController(state: screenState)
+window?.rootViewController = vc
