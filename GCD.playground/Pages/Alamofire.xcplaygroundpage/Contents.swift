@@ -43,3 +43,24 @@ let task = URLSession.shared.dataTask(with: url) { data, response, error in
 }
 // 8. Запускаем задачу (по умолчанию она приостановлена)
 task.resume()
+
+// POST-запрос с Alamofire
+// 1. Подготавливаем параметры (тело запроса)
+let parameters: [String: Any] = ["key1": "value1", "key2": "value2"]
+// 2. Отправляем POST-запрос с параметрами
+AF.request(
+    "https://api.example.com/post",
+    method: .post,
+    parameters: parameters,
+    encoding: JSONEncoding.default // Автоматически кодирует в JSON
+).responseJSON { response in
+    // 3. Обрабатываем ответ (успех/ошибка)
+    switch response.result {
+    case .success(let value):
+        // 4. Выводим JSON-ответ
+        print(value)
+    case .failure(let error):
+        // 5. Выводим ошибку
+        print("Error: \(error.localizedDescription)")
+    }
+}
