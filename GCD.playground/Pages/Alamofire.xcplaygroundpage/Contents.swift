@@ -64,3 +64,35 @@ AF.request(
         print("Error: \(error.localizedDescription)")
     }
 }
+
+// Пример АНАЛОГИЧНОГО запроса на URL-Session
+// 1. Проверяем URL
+guard let url = URL(string: "https://api.example.com/post") else { return }
+// 2. Создаём запрос (URLRequest) и указываем метод POST
+var request = URLRequest(url: url)
+request.httpMethod = "POST"
+// 3. Устанавливаем заголовок (Content-Type: application/json)
+request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+// 4. Подготавливаем тело запроса (словарь → JSON-данные)
+let body: [String: Any] = ["key1": "value1", "key2": "value2"]
+request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+// 5. Отправляем запрос
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+    // 6. Обрабатываем ошибку (если есть)
+    if let error = error {
+        print("Error: \(error.localizedDescription)")
+        return
+    }
+    // 7. Проверяем, что данные получены
+    guard let data = data else { return }
+    // 8. Пытаемся преобразовать ответ в JSON
+    do {
+        let jsonResponse = try JSONSerialization.jsonObject(with: data)
+        print(jsonResponse)
+    } catch {
+        print("Decoding error: \(error)")
+    }
+}
+// 9. Запускаем задачу
+task.resume()
+
