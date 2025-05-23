@@ -33,3 +33,20 @@ imageView.kf.setImage(
         }
     }
 )
+
+// 3. Трансформации (ресайз, скругление углов)
+import Kingfisher
+let url = URL(string: "https://example.com/image.jpg")!
+// Создаем трансформацию: ресайз + скругление углов
+let processor = DownsamplingImageProcessor(size: imageView.bounds.size)
+    |> RoundCornerImageProcessor(cornerRadius: 20)
+imageView.kf.setImage(
+    with: url,
+    options: [
+        .processor(processor), // Применяем трансформацию
+        .scaleFactor(UIScreen.main.scale), // Учитываем плотность пикселей
+        .cacheOriginalImage // Кешируем оригинал
+    ]
+)
+
+//
