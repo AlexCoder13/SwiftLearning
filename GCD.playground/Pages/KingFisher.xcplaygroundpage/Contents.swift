@@ -49,4 +49,18 @@ imageView.kf.setImage(
     ]
 )
 
-//
+// 4. Загрузка с кастомными заголовками (например, для API с авторизацией)
+import Kingfisher
+let url = URL(string: "https://api.example.com/private-image.jpg")!
+// Создаем модификатор запроса
+let modifier = AnyModifier { request in
+    var request = request
+    request.addValue("Bearer YOUR_TOKEN", forHTTPHeaderField: "Authorization")
+    return request
+}
+imageView.kf.setImage(
+    with: url,
+    options: [
+        .requestModifier(modifier) // Добавляем заголовок
+    ]
+)
