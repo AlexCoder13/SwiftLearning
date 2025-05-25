@@ -64,3 +64,20 @@ imageView.kf.setImage(
         .requestModifier(modifier) // Добавляем заголовок
     ]
 )
+
+// ⚡ Оптимизация для UITableView / UICollectionView
+// Отмена загрузки при скроллинге
+func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+    let url = URL(string: images[indexPath.row])!
+    cell.imageView?.kf.setImage(
+        with: url,
+        options: [
+            .transition(.fade(0.3))
+        ]
+    )
+    return cell
+}
+// Автоматическая отмена загрузки при скроллинге
+func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+   
