@@ -19,3 +19,13 @@ let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
 print(username) // "Алексей"
 print(age)      // 25
 print(isDarkMode) // true
+
+// 2. Удаление данных
+UserDefaults.standard.removeObject(forKey: "username")
+
+// 3. Проверка наличия ключа
+if UserDefaults.standard.object(forKey: "username") != nil {
+    print("Ключ существует")
+} else {
+    print("Ключ не найден")
+}
