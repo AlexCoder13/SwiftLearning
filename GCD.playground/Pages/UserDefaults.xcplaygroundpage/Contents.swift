@@ -29,3 +29,20 @@ if UserDefaults.standard.object(forKey: "username") != nil {
 } else {
     print("Ключ не найден")
 }
+
+// 4. Сохранение сложных объектов (через Codable)
+// Если нужно сохранить кастомный объект, его можно сериализовать в Data:
+struct User: Codable {
+    let name: String
+    let age: Int
+}
+let user = User(name: "Мария", age: 30)
+// Сохранение
+if let encodedData = try? JSONEncoder().encode(user) {
+    UserDefaults.standard.set(encodedData, forKey: "savedUser")
+}
+// Чтение
+if let savedData = UserDefaults.standard.data(forKey: "savedUser"),
+   let decodedUser = try? JSONDecoder().decode(User.self, from: savedData) {
+    print(decodedUser.name) // "Мария"
+}
