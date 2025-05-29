@@ -46,3 +46,13 @@ if let savedData = UserDefaults.standard.data(forKey: "savedUser"),
    let decodedUser = try? JSONDecoder().decode(User.self, from: savedData) {
     print(decodedUser.name) // "Мария"
 }
+
+// 🔹 Пример: Сохранение настроек приложения
+// Сохраняем настройки
+UserDefaults.standard.set(true, forKey: "notificationsEnabled")
+UserDefaults.standard.set(10, forKey: "fontSize")
+// Загружаем настройки при запуске
+let notificationsEnabled = UserDefaults.standard.bool(forKey: "notificationsEnabled")
+let fontSize = UserDefaults.standard.integer(forKey: "fontSize")
+print("Уведомления: \(notificationsEnabled)") // true
+print("Размер шрифта: \(fontSize)")          // 10
