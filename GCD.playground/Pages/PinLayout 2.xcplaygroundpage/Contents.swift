@@ -48,3 +48,15 @@ view.pin.all()             // Все края (заполнить родител
 view.pin.all(10)           // Все края с отступом 10px
 view.pin.horizontally()    // Левый и правый края
 view.pin.vertically()      // Верхний и нижний края
+
+// Комбинированные позиции (Anchors)
+// Углы
+view.pin.topLeft()         // Верхний левый угол
+view.pin.topRight()        // Верхний правый угол
+view.pin.bottomLeft()      // Нижний левый угол
+view.pin.bottomRight()     // Нижний правый угол
+// Центрированные позиции
+view.pin.topCenter()       // Верх по центру
+view.pin.bottomCenter()    // Низ по центру
+view.pin.centerLeft()      // Центр слева
+view.pin.centerRight()     // Центр справа
