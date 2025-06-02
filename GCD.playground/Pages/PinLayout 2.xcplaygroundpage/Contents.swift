@@ -60,3 +60,14 @@ view.pin.topCenter()       // Верх по центру
 view.pin.bottomCenter()    // Низ по центру
 view.pin.centerLeft()      // Центр слева
 view.pin.centerRight()     // Центр справа
+
+//Позиционирование относительно других view
+
+// Относительное позиционирование
+// Базовые направления
+view.pin.above(of: otherView)    // Выше указанного view
+view.pin.below(of: otherView)    // Ниже указанного view
+view.pin.left(of: otherView)     // Слева от указанного view
+view.pin.right(of: otherView)    // Справа от указанного view
+// Множественные view
+view.pin.below(of: [view1, view2, view3])  // Ниже всех указанных view
