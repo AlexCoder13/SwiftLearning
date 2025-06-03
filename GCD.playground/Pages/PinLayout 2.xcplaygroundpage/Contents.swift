@@ -71,3 +71,13 @@ view.pin.left(of: otherView)     // Слева от указанного view
 view.pin.right(of: otherView)    // Справа от указанного view
 // Множественные view
 view.pin.below(of: [view1, view2, view3])  // Ниже всех указанных view
+
+// Относительное позиционирование с выравниванием
+// Горизонтальное выравнивание
+view.pin.above(of: otherView, aligned: .left)    // Выше и по левому краю
+view.pin.below(of: otherView, aligned: .center)  // Ниже и по центру
+view.pin.below(of: otherView, aligned: .right)   // Ниже и по правому краю
+// Вертикальное выравнивание
+view.pin.left(of: otherView, aligned: .top)      // Слева и по верху
+view.pin.right(of: otherView, aligned: .center)  // Справа и по центру
+view.pin.right(of: otherView, aligned: .bottom)  // Справа и по низу
