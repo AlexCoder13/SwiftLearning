@@ -81,3 +81,11 @@ view.pin.below(of: otherView, aligned: .right)   // Ниже и по право�
 view.pin.left(of: otherView, aligned: .top)      // Слева и по верху
 view.pin.right(of: otherView, aligned: .center)  // Справа и по центру
 view.pin.right(of: otherView, aligned: .bottom)  // Справа и по низу
+
+// Позиционирование между view
+// Горизонтальное размещение между двумя view
+view.pin.horizontallyBetween(viewA, and: viewB)
+view.pin.horizontallyBetween(viewA, and: viewB, aligned: .top)
+// Вертикальное размещение между двумя view
+view.pin.verticallyBetween(viewA, and: viewB)
+view.pin.verticallyBetween(viewA, and: viewB, aligned: .center)
