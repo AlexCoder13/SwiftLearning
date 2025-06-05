@@ -89,3 +89,9 @@ view.pin.horizontallyBetween(viewA, and: viewB, aligned: .top)
 // Вертикальное размещение между двумя view
 view.pin.verticallyBetween(viewA, and: viewB)
 view.pin.verticallyBetween(viewA, and: viewB, aligned: .center)
+
+// Позиционирование через края других view
+// Привязка к краям других view
+view.pin.top(to: otherView.edge.bottom)      // Верх к низу другого view
+view.pin.left(to: otherView.edge.right)      // Лево к правому краю другого view
+view.pin.hCenter(to: otherView.edge.hCenter) // Центр к центру другого view
