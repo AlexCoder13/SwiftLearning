@@ -95,3 +95,10 @@ view.pin.verticallyBetween(viewA, and: viewB, aligned: .center)
 view.pin.top(to: otherView.edge.bottom)      // Верх к низу другого view
 view.pin.left(to: otherView.edge.right)      // Лево к правому краю другого view
 view.pin.hCenter(to: otherView.edge.hCenter) // Центр к центру другого view
+
+// Позиционирование через якоря (Anchors)
+// Привязка к якорям других view
+view.pin.topLeft(to: otherView.anchor.bottomRight)     // Левый верх к правому низу
+view.pin.center(to: otherView.anchor.topLeft)          // Центр к левому верху
+view.pin.bottomRight(to: otherView.anchor.topRight)    // Правый низ к правому верху
+
