@@ -102,3 +102,12 @@ view.pin.topLeft(to: otherView.anchor.bottomRight)     // Левый верх к
 view.pin.center(to: otherView.anchor.topLeft)          // Центр к левому верху
 view.pin.bottomRight(to: otherView.anchor.topRight)    // Правый низ к правому верху
 
+
+// 📏 2. РАЗМЕРЫ (Width, Height, Size)
+// Абсолютные размеры
+
+// Фиксированные размеры
+view.pin.width(100)        // Ширина 100px
+view.pin.height(50)        // Высота 50px
+view.pin.size(100, 50)     // Ширина 100px, высота 50px
+view.pin.size(100)         // Квадрат 100x100px
