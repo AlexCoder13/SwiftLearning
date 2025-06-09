@@ -117,3 +117,9 @@ view.pin.size(100)         // Квадрат 100x100px
 view.pin.width(50%)        // 50% ширины родителя
 view.pin.height(25%)       // 25% высоты родителя
 view.pin.size(80%)         // 80% от ширины и высоты родителя
+
+// Размеры относительно других view
+// Размеры как у других view
+view.pin.width(of: otherView)    // Ширина как у другого view
+view.pin.height(of: otherView)   // Высота как у другого view
+view.pin.size(of: otherView)     // Размер как у другого view
