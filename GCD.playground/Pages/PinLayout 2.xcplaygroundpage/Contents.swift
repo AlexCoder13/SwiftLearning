@@ -123,3 +123,12 @@ view.pin.size(80%)         // 80% от ширины и высоты родите
 view.pin.width(of: otherView)    // Ширина как у другого view
 view.pin.height(of: otherView)   // Высота как у другого view
 view.pin.size(of: otherView)     // Размер как у другого view
+
+// Ограничения размеров
+// Минимальные и максимальные размеры
+view.pin.minWidth(50)      // Минимальная ширина 50px
+view.pin.maxWidth(200)     // Максимальная ширина 200px
+view.pin.minHeight(30)     // Минимальная высота 30px
+view.pin.maxHeight(100)    // Максимальная высота 100px
+// Проценты тоже работают
+view.pin.maxWidth(80%)     // Максимум 80% ширины родителя
