@@ -162,3 +162,15 @@ view.pin.left().width(100%).marginHorizontal(20)  // View сдвинется в�
 
 // С pinEdges() - отступы уменьшат размер view
 view.pin.left().width(100%).pinEdges().marginHorizontal(20)  // View уменьшится на 40px
+
+// 📏 6. ОТСТУПЫ (Margins)
+// Отдельные отступы
+// Отдельные стороны
+view.pin.marginTop(10)     // Отступ сверху 10px
+view.pin.marginLeft(15)    // Отступ слева 15px
+view.pin.marginBottom(10)  // Отступ снизу 10px
+view.pin.marginRight(15)   // Отступ справа 15px
+
+// Проценты
+view.pin.marginTop(5%)     // 5% от высоты родителя
+view.pin.marginLeft(10%)   // 10% от ширины родителя
