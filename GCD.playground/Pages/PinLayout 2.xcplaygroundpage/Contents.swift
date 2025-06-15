@@ -170,7 +170,17 @@ view.pin.marginTop(10)     // Отступ сверху 10px
 view.pin.marginLeft(15)    // Отступ слева 15px
 view.pin.marginBottom(10)  // Отступ снизу 10px
 view.pin.marginRight(15)   // Отступ справа 15px
-
 // Проценты
 view.pin.marginTop(5%)     // 5% от высоты родителя
 view.pin.marginLeft(10%)   // 10% от ширины родителя
+
+// Групповые отступы
+// Все стороны одинаково
+view.pin.margin(10)        // 10px со всех сторон
+// Вертикальные и горизонтальные
+view.pin.marginVertical(10)      // Верх и низ 10px
+view.pin.marginHorizontal(15)    // Лево и право 15px
+// Комбинированные
+view.pin.margin(10, 15)          // Верх/низ 10px, лево/право 15px
+view.pin.margin(5, 10, 15)       // Верх 5px, лево/право 10px, низ 15px
+view.pin.margin(5, 10, 15, 20)   // Верх 5px, право 10px, низ 15px, лево 20px
