@@ -184,3 +184,11 @@ view.pin.marginHorizontal(15)    // Лево и право 15px
 view.pin.margin(10, 15)          // Верх/низ 10px, лево/право 15px
 view.pin.margin(5, 10, 15)       // Верх 5px, лево/право 10px, низ 15px
 view.pin.margin(5, 10, 15, 20)   // Верх 5px, право 10px, низ 15px, лево 20px
+
+// Отступы с UIEdgeInsets
+// Использование safeArea
+view.pin.all(pin.safeArea)                    // Заполнить safeArea
+view.pin.margin(pin.safeArea)                 // Отступы по safeArea
+// Кастомные UIEdgeInsets
+let insets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
+view.pin.margin(insets)
