@@ -201,3 +201,9 @@ view.pin.left().right().width(100).justify(.center)   // По центру
 view.pin.left().right().width(100).justify(.right)    // По правому краю
 // Пример с maxWidth
 view.pin.horizontally().maxWidth(200).justify(.center) // Центрирование при превышении maxWidth
+
+//Вертикальное выравнивание (align)
+//Когда заданы top, bottom и height - view может быть меньше доступного пространства:
+view.pin.top().bottom().height(50).align(.top)        // По верхнему краю
+view.pin.top().bottom().height(50).align(.center)     // По центру
+view.pin.top().bottom().height(50).align(.bottom)     // По нижнему краю
