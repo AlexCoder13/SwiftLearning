@@ -192,3 +192,12 @@ view.pin.margin(pin.safeArea)                 // Отступы по safeArea
 // Кастомные UIEdgeInsets
 let insets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
 view.pin.margin(insets)
+
+//🎯 7. ВЫРАВНИВАНИЕ (Justify & Align)
+//Горизонтальное выравнивание (justify)
+//Когда заданы left, right и width - view может быть меньше доступного пространства:
+view.pin.left().right().width(100).justify(.left)     // По левому краю
+view.pin.left().right().width(100).justify(.center)   // По центру
+view.pin.left().right().width(100).justify(.right)    // По правому краю
+// Пример с maxWidth
+view.pin.horizontally().maxWidth(200).justify(.center) // Центрирование при превышении maxWidth
