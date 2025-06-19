@@ -207,3 +207,18 @@ view.pin.horizontally().maxWidth(200).justify(.center) // Центрирован
 view.pin.top().bottom().height(50).align(.top)        // По верхнему краю
 view.pin.top().bottom().height(50).align(.center)     // По центру
 view.pin.top().bottom().height(50).align(.bottom)     // По нижнему краю
+
+//🌍 8. ПОДДЕРЖКА RTL/LTR
+//PinLayout поддерживает право-лево языки (RTL):
+// Настройка направления
+Pin.layoutDirection(.leftToRight)  // Слева направо (по умолчанию)
+Pin.layoutDirection(.rightToLeft)  // Справа налево
+// RTL-совместимые методы
+view.pin.start(10)         // В LTR = left(10), в RTL = right(10)
+view.pin.end(10)           // В LTR = right(10), в RTL = left(10)
+// RTL-совместимые якоря
+view.pin.topStart()        // В LTR = topLeft(), в RTL = topRight()
+view.pin.topEnd()          // В LTR = topRight(), в RTL = topLeft()
+// RTL-совместимые позиционирования
+view.pin.before(of: otherView)  // В LTR = left(of:), в RTL = right(of:)
+view.pin.after(of: otherView)   // В LTR = right(of:), в RTL = left(of:)
