@@ -230,3 +230,9 @@ view.pin.all(pin.safeArea)                    // Заполнить safeArea
 view.pin.top(pin.safeArea)                    // Верх на safeArea.top
 view.pin.left(pin.safeArea.left + 10)         // Лево на safeArea.left + 10px
 view.pin.horizontally(pin.safeArea)           // Горизонтально в safeArea
+
+//ReadableMargins и LayoutMargins
+// ReadableMargins (для оптимального чтения текста)
+view.pin.horizontally(pin.readableMargins)    // Горизонтально в readable области
+// LayoutMargins
+view.pin.all(pin.layoutMargins)               // По layoutMargins
