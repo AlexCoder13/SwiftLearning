@@ -222,3 +222,11 @@ view.pin.topEnd()          // В LTR = topRight(), в RTL = topLeft()
 // RTL-совместимые позиционирования
 view.pin.before(of: otherView)  // В LTR = left(of:), в RTL = right(of:)
 view.pin.after(of: otherView)   // В LTR = right(of:), в RTL = left(of:)
+
+//🔧 9. СПЕЦИАЛЬНЫЕ ОБЛАСТИ
+//SafeArea (поддержка iOS 7+)
+// PinLayout предоставляет safeArea даже на iOS 7-10!
+view.pin.all(pin.safeArea)                    // Заполнить safeArea
+view.pin.top(pin.safeArea)                    // Верх на safeArea.top
+view.pin.left(pin.safeArea.left + 10)         // Лево на safeArea.left + 10px
+view.pin.horizontally(pin.safeArea)           // Горизонтально в safeArea
