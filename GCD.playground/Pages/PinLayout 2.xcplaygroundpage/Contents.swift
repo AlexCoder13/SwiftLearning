@@ -236,3 +236,7 @@ view.pin.horizontally(pin.safeArea)           // Горизонтально в s
 view.pin.horizontally(pin.readableMargins)    // Горизонтально в readable области
 // LayoutMargins
 view.pin.all(pin.layoutMargins)               // По layoutMargins
+
+//KeyboardArea (iOS 15+)
+// Область клавиатуры
+view.pin.bottom(pin.keyboardArea.top)         // Низ view над клавиатурой
