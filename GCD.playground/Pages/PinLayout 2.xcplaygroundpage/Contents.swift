@@ -240,3 +240,16 @@ view.pin.all(pin.layoutMargins)               // По layoutMargins
 //KeyboardArea (iOS 15+)
 // Область клавиатуры
 view.pin.bottom(pin.keyboardArea.top)         // Низ view над клавиатурой
+
+//🎯 10. WRAPCONTENT
+//Автоматическая подгонка размера под дочерние элементы:
+// Подгонка по всем дочерним элементам
+containerView.pin.wrapContent()               // Ширина и высота по содержимому
+// С отступами
+containerView.pin.wrapContent(padding: 10)    // + отступ 10px вокруг содержимого
+// Только по одной оси
+containerView.pin.wrapContent(.horizontally)  // Только ширина
+containerView.pin.wrapContent(.vertically)    // Только высота
+// С UIEdgeInsets
+let padding = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+containerView.pin.wrapContent(padding: padding)
