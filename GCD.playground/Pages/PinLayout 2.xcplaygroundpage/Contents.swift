@@ -253,3 +253,11 @@ containerView.pin.wrapContent(.vertically)    // Только высота
 // С UIEdgeInsets
 let padding = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
 containerView.pin.wrapContent(padding: padding)
+
+//⚠️ 11. ЧАСТЫЕ ОШИБКИ И BEST PRACTICES
+//Частые ошибки:
+//1. Неправильный порядок PinLayout модификаторов
+// ❌ НЕПРАВИЛЬНО - хотя работает, но нелогично
+view.pin.margin(10).width(100).top()
+// ✅ ПРАВИЛЬНО - логичный порядок
+view.pin.top().width(100).margin(10)
