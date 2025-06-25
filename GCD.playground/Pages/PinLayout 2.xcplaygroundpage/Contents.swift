@@ -261,3 +261,11 @@ containerView.pin.wrapContent(padding: padding)
 view.pin.margin(10).width(100).top()
 // ✅ ПРАВИЛЬНО - логичный порядок
 view.pin.top().width(100).margin(10)
+
+//2. Использование bounds.width до layout pass
+// ❌ НЕПРАВИЛЬНО - bounds.width может быть 0
+if bounds.width > 0 {  // Нужна проверка
+    imageView.pin.width(bounds.width)
+}
+// ✅ ПРАВИЛЬНО - использование layoutContainerWidth
+imageView.pin.width(UIView.layoutContainerWidth)
