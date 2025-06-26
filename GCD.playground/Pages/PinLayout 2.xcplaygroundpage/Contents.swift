@@ -269,3 +269,9 @@ if bounds.width > 0 {  // Нужна проверка
 }
 // ✅ ПРАВИЛЬНО - использование layoutContainerWidth
 imageView.pin.width(UIView.layoutContainerWidth)
+
+//3. Gesture на неполную область
+// ❌ НЕПРАВИЛЬНО - gesture только на imageView
+imageView.addGestureRecognizer(tapGesture)
+// ✅ ПРАВИЛЬНО - gesture на весь widget
+self.addGestureRecognizer(tapGesture)
