@@ -275,3 +275,13 @@ imageView.pin.width(UIView.layoutContainerWidth)
 imageView.addGestureRecognizer(tapGesture)
 // ✅ ПРАВИЛЬНО - gesture на весь widget
 self.addGestureRecognizer(tapGesture)
+
+//Best Practices:
+//1. Порядок методов:
+// Рекомендуемый порядок
+view.pin
+    .ПОЗИЦИЯ_И_КРАЯ          // top, left, after(of:), etc.
+    .РАЗМЕРЫ                 // width, height, size
+    .pinEdges()              // если нужно
+    .ОТСТУПЫ                 // margin, marginHorizontal, etc.
+    .sizeToFit()             // если нужно
