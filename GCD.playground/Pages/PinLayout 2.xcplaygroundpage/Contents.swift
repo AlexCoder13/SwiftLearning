@@ -291,3 +291,10 @@ view.pin
 view.pin.top().bottom().left(10%).right(10%)
 // ✅ Еще лучше - использование convenience методов
 view.pin.vertically().horizontally(10%)
+
+// 3. Использование safe методов:
+// ✅ Безопасная проверка видимости
+view.pinIfVisible()?.top().left().size(100)
+// ✅ Проверка на существование superview
+guard view.superview != nil else { return }
+view.pin.center()
