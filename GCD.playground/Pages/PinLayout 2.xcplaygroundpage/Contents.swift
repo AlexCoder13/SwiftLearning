@@ -298,3 +298,23 @@ view.pinIfVisible()?.top().left().size(100)
 // ✅ Проверка на существование superview
 guard view.superview != nil else { return }
 view.pin.center()
+
+
+
+
+//📱 12. ПРИМЕРЫ ПРАКТИЧЕСКОГО ИСПОЛЬЗОВАНИЯ
+//Пример 1: Форма с полями
+override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    let margin: CGFloat = 16
+    
+    // Заголовок
+    titleLabel.pin
+        .top(pin.safeArea)
+        .horizontally()
+        .marginTop(margin)
+        .marginHorizontal(margin)
+        .sizeToFit(.width)
+
+
