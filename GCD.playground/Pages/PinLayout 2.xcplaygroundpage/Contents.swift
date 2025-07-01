@@ -317,4 +317,11 @@ override func layoutSubviews() {
         .marginHorizontal(margin)
         .sizeToFit(.width)
 
+    // Поле ввода
+        textField.pin
+            .below(of: titleLabel)
+            .horizontally()
+            .height(44)
+            .marginTop(margin)
+            .marginHorizontal(margin)
 
