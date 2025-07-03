@@ -334,3 +334,45 @@ override func layoutSubviews() {
         .marginHorizontal(margin)
 }
 
+
+
+
+
+//Пример 2: Адаптивный layout
+override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    let margin: CGFloat = 12
+    
+    if frame.width < 500 {
+        // Узкий экран - вертикальная компоновка
+        imageView.pin
+            .top()
+            .horizontally()
+            .height(200)
+            .margin(margin)
+        
+        textLabel.pin
+            .below(of: imageView)
+            .horizontally()
+            .marginTop(margin)
+            .marginHorizontal(margin)
+            .sizeToFit(.width)
+    } else {
+        // Широкий экран - горизонтальная компоновка
+        imageView.pin
+            .left()
+            .vertically()
+            .width(40%)
+            .margin(margin)
+        
+        textLabel.pin
+            .after(of: imageView)
+            .vertically()
+            .right()
+            .marginLeft(margin)
+            .marginVertical(margin)
+            .marginRight(margin)
+            .sizeToFit(.width)
+    }
+}
