@@ -402,3 +402,18 @@ private func performLayout() {
         .marginLeft(spacing)
         .marginRight(margin)
         .sizeToFit(.width)
+
+    // Описание под именем
+        descriptionLabel.pin
+            .below(of: nameLabel)
+            .left(to: nameLabel.edge.left)
+            .right(to: nameLabel.edge.right)
+            .marginTop(4)
+            .sizeToFit(.width)
+        
+        // Кнопка в правом нижнем углу
+        actionButton.pin
+            .bottomRight()
+            .size(100, 40)
+            .margin(margin)
+    }
