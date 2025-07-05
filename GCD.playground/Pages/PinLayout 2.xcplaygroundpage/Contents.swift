@@ -376,3 +376,29 @@ override func layoutSubviews() {
             .sizeToFit(.width)
     }
 }
+
+
+
+
+
+//Пример 3: Сложная карточка
+private func performLayout() {
+    let margin: CGFloat = 16
+    let spacing: CGFloat = 8
+    
+    // Фоновая картинка на всю карточку
+    backgroundImageView.pin.all()
+    
+    // Аватар в левом верхнем углу
+    avatarImageView.pin
+        .topLeft()
+        .size(60)
+        .margin(margin)
+    
+    // Имя справа от аватара
+    nameLabel.pin
+        .after(of: avatarImageView, aligned: .top)
+        .right()
+        .marginLeft(spacing)
+        .marginRight(margin)
+        .sizeToFit(.width)
