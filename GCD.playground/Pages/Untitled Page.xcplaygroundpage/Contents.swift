@@ -29,6 +29,13 @@ lazy var myLabel: UILabel = {
     // Выравнивание текста
     label.textAlignment = .left // .center, .right, .justified, .natural
     
+    // MARK: - Многострочный текст
+    
+    // Количество строк (0 - неограниченное количество)
+    label.numberOfLines = 0
+    
+    // Как текст должен обрезаться, если не помещается
+    label.lineBreakMode = .byTruncatingTail // варианты: .byWordWrapping, .byCharWrapping, .byClipping, .byTruncatingHead, .byTruncatingMiddle, .byTruncatingTail
     
     
 }
