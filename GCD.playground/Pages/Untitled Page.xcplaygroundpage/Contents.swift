@@ -37,5 +37,18 @@ lazy var myLabel: UILabel = {
     // Как текст должен обрезаться, если не помещается
     label.lineBreakMode = .byTruncatingTail // варианты: .byWordWrapping, .byCharWrapping, .byClipping, .byTruncatingHead, .byTruncatingMiddle, .byTruncatingTail
     
+    // MARK: - Внешний вид и стиль
+    
+    // Фоновый цвет
+    label.backgroundColor = .clear
+    
+    // Прозрачность (от 0.0 до 1.0)
+    label.alpha = 1.0
+    
+    // Видимость
+    label.isHidden = false
+    
+    // Включение/выключение пользовательского взаимодействия
+    label.isUserInteractionEnabled = false // для UILabel обычно false
     
 }
