@@ -51,4 +51,12 @@ lazy var myLabel: UILabel = {
     // Включение/выключение пользовательского взаимодействия
     label.isUserInteractionEnabled = false // для UILabel обычно false
     
+    // MARK: - Тени
+    
+    // Цвет тени
+    label.shadowColor = nil // например: UIColor.gray.withAlphaComponent(0.5)
+    
+    // Смещение тени
+    label.shadowOffset = CGSize(width: 0, height: -1) // отрицательный height - тень сверху
+    
 }
