@@ -66,6 +66,16 @@ lazy var myLabel: UILabel = {
     attributedString.addAttribute(.foregroundColor, value: UIColor.red, range: NSRange(location: 0, length: 5))
     label.attributedText = attributedString
     
+    // MARK: - Размер и расположение
+    
+    // Автоматическое изменение размера шрифта для вписывания текста
+    label.adjustsFontSizeToFitWidth = false
+    
+    // Минимальный масштаб шрифта при adjustsFontSizeToFitWidth
+    label.minimumScaleFactor = 0.5 // например, шрифт может уменьшиться до 50% от исходного
+    
+    // Позволяет ли UILabel сжимать межбуквенные интервалы для вписывания текста
+    label.allowsDefaultTighteningForTruncation = false
     
     
     
