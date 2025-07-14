@@ -59,4 +59,14 @@ lazy var myLabel: UILabel = {
     // Смещение тени
     label.shadowOffset = CGSize(width: 0, height: -1) // отрицательный height - тень сверху
     
+    // MARK: - Особые стили текста
+    
+    // Атрибутированный текст (позволяет задать разные стили для частей текста)
+    let attributedString = NSMutableAttributedString(string: "Attributed text")
+    attributedString.addAttribute(.foregroundColor, value: UIColor.red, range: NSRange(location: 0, length: 5))
+    label.attributedText = attributedString
+    
+    
+    
+    
 }
