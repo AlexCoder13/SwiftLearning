@@ -77,6 +77,14 @@ lazy var myLabel: UILabel = {
     // Позволяет ли UILabel сжимать межбуквенные интервалы для вписывания текста
     label.allowsDefaultTighteningForTruncation = false
     
+    // MARK: - Высококонтрастный режим
     
+    // Увеличивает контрастность текста при включенном режиме повышенной контрастности
+    label.adjustsFontForContentSizeCategory = true
+    
+    // MARK: - Взаимодействие
+    
+    // Включение/выключение жестов (для UILabel обычно не используется)
+    label.isExclusiveTouch = true
     
 }
