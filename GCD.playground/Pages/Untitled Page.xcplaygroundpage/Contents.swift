@@ -87,4 +87,24 @@ lazy var myLabel: UILabel = {
     // Включение/выключение жестов (для UILabel обычно не используется)
     label.isExclusiveTouch = true
     
+    // MARK: - Интерфейс Builder
+    
+    // Стиль интерфейса (светлый/темный)
+    label.overrideUserInterfaceStyle = .unspecified // .light, .dark
+    
+    // MARK: - Настройка вида
+    
+    // Обрезка по границам
+    label.clipsToBounds = false
+    
+    // Углы с закруглением
+    label.layer.cornerRadius = 0
+    label.layer.masksToBounds = false
+    
+    
+    
+    
+    
+    
+    
 }
