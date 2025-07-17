@@ -101,7 +101,20 @@ lazy var myLabel: UILabel = {
     label.layer.cornerRadius = 0
     label.layer.masksToBounds = false
     
+    // MARK: - Многострочные специфические настройки
     
+    // Базовая линия текста (выравнивание по базовой линии для многострочного текста)
+    label.baselineAdjustment = .alignBaselines // .alignCenters, .none
+    
+    // Предпочтительная максимальная ширина для многострочных текстов
+    label.preferredMaxLayoutWidth = 0 // 0 означает, что используется ширина фрейма
+    
+    // MARK: - Визуальные эффекты
+    
+    // Добавление вибрации (размытия)
+    if #available(iOS 13.0, *) {
+        label.addVibrancyEffect() // если нужно добавить эффект вибрации
+    }
     
     
     
