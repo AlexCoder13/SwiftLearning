@@ -115,9 +115,10 @@ lazy var myLabel: UILabel = {
     if #available(iOS 13.0, *) {
         label.addVibrancyEffect() // если нужно добавить эффект вибрации
     }
+    // MARK: - Настройка Auto Layout
     
+    // Отключаем autoresizing mask в constraints
+    label.translatesAutoresizingMaskIntoConstraints = false
     
-    
-    
-    
-}
+    return label
+}()
