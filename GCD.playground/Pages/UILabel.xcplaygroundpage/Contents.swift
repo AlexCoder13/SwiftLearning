@@ -122,3 +122,33 @@ lazy var myLabel: UILabel = {
     
     return label
 }()
+
+
+
+
+
+// UIButton
+// Создаем кнопку через ленивое свойство
+lazy var myButton: UIButton = {
+    let button = UIButton(type: .system) // Тип кнопки (об этом ниже)
+    
+    // MARK: - Основные свойства
+    
+    // Устанавливаем заголовок для разных состояний
+    button.setTitle("Нажми меня", for: .normal)
+    button.setTitle("Нажимается...", for: .highlighted)
+    button.setTitle("Отключено", for: .disabled)
+    
+    // Устанавливаем цвет заголовка
+    button.setTitleColor(.white, for: .normal)
+    button.setTitleColor(.lightGray, for: .highlighted)
+    button.setTitleColor(.gray, for: .disabled)
+    
+    // Устанавливаем цвет фона (для кастомных кнопок)
+    button.backgroundColor = .systemBlue
+    
+    
+    
+    
+    
+}
