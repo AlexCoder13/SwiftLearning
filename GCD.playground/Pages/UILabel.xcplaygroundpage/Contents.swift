@@ -147,6 +147,14 @@ lazy var myButton: UIButton = {
     // Устанавливаем цвет фона (для кастомных кнопок)
     button.backgroundColor = .systemBlue
     
+    // MARK: - Шрифт и текст
+    
+    // Настройка шрифта заголовка
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+    
+    // Тень текста
+    button.titleLabel?.shadowOffset = CGSize(width: 0, height: 1)
+    button.setTitleShadowColor(.black.withAlphaComponent(0.3), for: .normal)
     
     
     
