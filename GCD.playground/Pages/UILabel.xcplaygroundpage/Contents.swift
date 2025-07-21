@@ -156,6 +156,15 @@ lazy var myButton: UIButton = {
     button.titleLabel?.shadowOffset = CGSize(width: 0, height: 1)
     button.setTitleShadowColor(.black.withAlphaComponent(0.3), for: .normal)
     
+    // MARK: - Изображения
+    
+    // Установка изображений для разных состояний
+    button.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+    button.setImage(UIImage(systemName: "heart"), for: .selected)
+    
+    // Позиционирование изображения относительно текста
+    button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+    button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
     
     
     
