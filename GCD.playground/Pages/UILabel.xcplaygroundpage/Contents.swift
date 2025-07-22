@@ -166,6 +166,14 @@ lazy var myButton: UIButton = {
     button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
     button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
     
+    // MARK: - Фоновые изображения
+    
+    // Создаем кастомный фон для кнопки
+    let backgroundImage = UIImage(color: .systemBlue, size: CGSize(width: 1, height: 1))
+    button.setBackgroundImage(backgroundImage, for: .normal)
+    
+    let highlightedImage = UIImage(color: .systemBlue.withAlphaComponent(0.7), size: CGSize(width: 1, height: 1))
+    button.setBackgroundImage(highlightedImage, for: .highlighted)
     
     
 }
