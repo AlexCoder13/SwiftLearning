@@ -175,5 +175,25 @@ lazy var myButton: UIButton = {
     let highlightedImage = UIImage(color: .systemBlue.withAlphaComponent(0.7), size: CGSize(width: 1, height: 1))
     button.setBackgroundImage(highlightedImage, for: .highlighted)
     
+    // MARK: - Внешний вид
+    
+    // Скругление углов
+    button.layer.cornerRadius = 10
+    button.layer.masksToBounds = true
+    
+    // Граница
+    button.layer.borderWidth = 1
+    button.layer.borderColor = UIColor.white.cgColor
+    
+    // Тень
+    button.layer.shadowColor = UIColor.black.cgColor
+    button.layer.shadowOffset = CGSize(width: 0, height: 2)
+    button.layer.shadowRadius = 4
+    button.layer.shadowOpacity = 0.3
+    
+    
+    
+    
+    
     
 }
