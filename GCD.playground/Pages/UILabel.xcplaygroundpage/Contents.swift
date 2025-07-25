@@ -191,6 +191,20 @@ lazy var myButton: UIButton = {
     button.layer.shadowRadius = 4
     button.layer.shadowOpacity = 0.3
     
+    // MARK: - Состояния
+    
+    button.isEnabled = true // Включена ли кнопка
+    button.isSelected = false // Выбрана ли кнопка
+    button.isHighlighted = false // Подсвечена ли в данный момент
+    
+    // MARK: - Контент
+    
+    // Выравнивание контента
+    button.contentVerticalAlignment = .center
+    button.contentHorizontalAlignment = .center
+    
+    // Отступы контента
+    button.contentEdgeInsets = UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 20)
     
     
     
