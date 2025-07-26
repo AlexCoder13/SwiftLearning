@@ -206,7 +206,13 @@ lazy var myButton: UIButton = {
     // Отступы контента
     button.contentEdgeInsets = UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 20)
     
+    // MARK: - Поведение
     
+    // Показывать подсветку при нажатии
+    button.showsTouchWhenHighlighted = true
+    
+    // Задержка перед началом действия (для предотвращения случайных нажатий)
+    button.isExclusiveTouch = true
     
     
     
