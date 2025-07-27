@@ -214,6 +214,12 @@ lazy var myButton: UIButton = {
     // Задержка перед началом действия (для предотвращения случайных нажатий)
     button.isExclusiveTouch = true
     
+    // MARK: - Настройка Auto Layout
     
+    button.translatesAutoresizingMaskIntoConstraints = false
     
-}
+    // Добавляем действие при нажатии
+    button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+    
+    return button
+}()
