@@ -235,3 +235,17 @@ lazy var myButton: UIButton = {
 .infoDark // Кнопка с иконкой информации (темная)
 .contactAdd // Кнопка с плюсом для добавления контактов
 .close // Кнопка закрытия (крестик)
+
+
+//2. Состояния кнопки
+// Основные состояния:
+.normal // Обычное состояние
+.highlighted // Когда кнопка нажата
+.disabled // Когда кнопка выключена
+.selected // Когда кнопка выбрана
+.focused // Когда кнопка в фокусе (для TV и пр.)
+
+// Управление состояниями:
+myButton.isEnabled = true/false
+myButton.isSelected = true/false
+myButton.isHighlighted = true/false
