@@ -249,3 +249,28 @@ lazy var myButton: UIButton = {
 myButton.isEnabled = true/false
 myButton.isSelected = true/false
 myButton.isHighlighted = true/false
+
+
+//3. Контент кнопки
+//Текст:
+// Установка текста для разных состояний
+button.setTitle("Нажми", for: .normal)
+button.setTitle("Нажимается", for: .highlighted)
+
+// Получение текущего заголовка
+let currentTitle = button.title(for: .normal)
+
+// Установка атрибутированного текста
+let attributedString = NSAttributedString(string: "Нажми", attributes: [.font: UIFont.boldSystemFont(ofSize: 16)])
+button.setAttributedTitle(attributedString, for: .normal)
+
+//Изображения:
+// Установка изображений
+button.setImage(UIImage(named: "icon"), for: .normal)
+
+// Фоновые изображения
+button.setBackgroundImage(UIImage(named: "bg"), for: .normal)
+
+// Получение текущих изображений
+let currentImage = button.image(for: .normal)
+let currentBgImage = button.backgroundImage(for: .normal)
