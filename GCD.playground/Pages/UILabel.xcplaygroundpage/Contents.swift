@@ -274,3 +274,26 @@ button.setBackgroundImage(UIImage(named: "bg"), for: .normal)
 // Получение текущих изображений
 let currentImage = button.image(for: .normal)
 let currentBgImage = button.backgroundImage(for: .normal)
+
+
+//4. Стилизация
+//Цвета:
+// Цвет текста
+button.setTitleColor(.red, for: .normal)
+button.setTitleColor(.lightGray, for: .disabled)
+
+// Цвет тени текста
+button.setTitleShadowColor(.black, for: .normal)
+
+// Tint color (влияет на системные иконки)
+button.tintColor = .systemBlue
+
+//Геометрия:
+// Отступы контента
+button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+
+// Отступы изображения
+button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
+
+// Отступы текста
+button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: -10)
