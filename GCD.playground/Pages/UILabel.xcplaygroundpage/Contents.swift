@@ -297,3 +297,17 @@ button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
 
 // Отступы текста
 button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: -10)
+
+
+//5. Взаимодействие
+//Добавление действий:
+// Основные события:
+button.addTarget(self, action: #selector(handleTap), for: .touchUpInside) // Нажатие
+button.addTarget(self, action: #selector(handleTouchDown), for: .touchDown) // Коснулись
+button.addTarget(self, action: #selector(handleDragOutside), for: .touchDragOutside) // Вышли за границы
+
+//Настройка поведения:
+button.showsTouchWhenHighlighted = true // Подсветка при нажатии
+button.adjustsImageWhenHighlighted = true // Изображение при нажатии
+button.adjustsImageWhenDisabled = true // Изображение при отключении
+button.isExclusiveTouch = true // Блокировка других нажатий
