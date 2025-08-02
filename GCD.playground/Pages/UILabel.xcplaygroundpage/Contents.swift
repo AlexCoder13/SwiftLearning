@@ -311,3 +311,15 @@ button.showsTouchWhenHighlighted = true // Подсветка при нажат�
 button.adjustsImageWhenHighlighted = true // Изображение при нажатии
 button.adjustsImageWhenDisabled = true // Изображение при отключении
 button.isExclusiveTouch = true // Блокировка других нажатий
+
+
+//6. Конфигурации (iOS 15+)
+if #available(iOS 15.0, *) {
+    var config = UIButton.Configuration.filled()
+    config.title = "Новая кнопка"
+    config.image = UIImage(systemName: "star.fill")
+    config.imagePadding = 10
+    config.cornerStyle = .large
+    config.baseBackgroundColor = .systemPurple
+    myButton.configuration = config
+}
