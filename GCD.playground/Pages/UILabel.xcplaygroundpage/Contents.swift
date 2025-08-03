@@ -228,22 +228,22 @@ lazy var myButton: UIButton = {
 
 //1. Типы кнопок (UIButton.ButtonType)
 // Доступные типы при инициализации:
-.system // Стандартная системная кнопка с адаптивным стилем
-.custom // Полностью кастомная кнопка
-.detailDisclosure // Кнопка с иконкой "i"
-.infoLight // Кнопка с иконкой информации (светлая)
-.infoDark // Кнопка с иконкой информации (темная)
-.contactAdd // Кнопка с плюсом для добавления контактов
-.close // Кнопка закрытия (крестик)
+    .system // Стандартная системная кнопка с адаптивным стилем
+    .custom // Полностью кастомная кнопка
+    .detailDisclosure // Кнопка с иконкой "i"
+    .infoLight // Кнопка с иконкой информации (светлая)
+    .infoDark // Кнопка с иконкой информации (темная)
+    .contactAdd // Кнопка с плюсом для добавления контактов
+    .close // Кнопка закрытия (крестик)
 
 
 //2. Состояния кнопки
 // Основные состояния:
-.normal // Обычное состояние
-.highlighted // Когда кнопка нажата
-.disabled // Когда кнопка выключена
-.selected // Когда кнопка выбрана
-.focused // Когда кнопка в фокусе (для TV и пр.)
+    .normal // Обычное состояние
+    .highlighted // Когда кнопка нажата
+    .disabled // Когда кнопка выключена
+    .selected // Когда кнопка выбрана
+    .focused // Когда кнопка в фокусе (для TV и пр.)
 
 // Управление состояниями:
 myButton.isEnabled = true/false
@@ -323,3 +323,41 @@ if #available(iOS 15.0, *) {
     config.baseBackgroundColor = .systemPurple
     myButton.configuration = config
 }
+
+
+
+
+
+// UIView
+// Создаем UIView через ленивое свойство
+lazy var customView: UIView = {
+    let view = UIView()
+    
+    // MARK: - Геометрия и положение
+    
+    // Ручная установка frame (не рекомендуется с Auto Layout)
+    view.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+    
+    // Положение центра view относительно superview
+    view.center = self.view.center
+    
+    // MARK: - Иерархия представлений
+    
+    // Добавляем subview (пример)
+    let subview = UIView(frame: CGRect(x: 10, y: 10, width: 50, height: 50))
+    subview.backgroundColor = .red
+    view.addSubview(subview)
+    
+    // Удаление subview
+    subview.removeFromSuperview()
+    
+    // Доступ к superview
+    let superview = view.superview
+    
+    // Доступ ко всем subviews
+    let subviews = view.subviews
+    
+    
+    
+    
+}()
