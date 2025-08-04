@@ -357,6 +357,16 @@ lazy var customView: UIView = {
     // Доступ ко всем subviews
     let subviews = view.subviews
     
+    // MARK: - Внешний вид
+    
+    // Фоновый цвет
+    view.backgroundColor = .systemBlue
+    
+    // Прозрачность (0.0 - полностью прозрачный, 1.0 - полностью непрозрачный)
+    view.alpha = 0.9
+    
+    // Скрытие view (не удаляет из иерархии)
+    view.isHidden = false
     
     
     
