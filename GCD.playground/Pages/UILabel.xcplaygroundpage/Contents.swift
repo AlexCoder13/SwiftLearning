@@ -368,6 +368,23 @@ lazy var customView: UIView = {
     // Скрытие view (не удаляет из иерархии)
     view.isHidden = false
     
+    // MARK: - Слои (CALayer свойства)
     
+    // Скругление углов
+    view.layer.cornerRadius = 10
+    
+    // Граница
+    view.layer.borderWidth = 2
+    view.layer.borderColor = UIColor.white.cgColor
+    
+    // Тень
+    view.layer.shadowColor = UIColor.black.cgColor
+    view.layer.shadowOffset = CGSize(width: 0, height: 5)
+    view.layer.shadowRadius = 10
+    view.layer.shadowOpacity = 0.5
+    view.layer.shadowPath = UIBezierPath(roundedRect: view.bounds, cornerRadius: 10).cgPath
+    
+    // Маска для скругления (если clipsToBounds = true)
+    view.layer.masksToBounds = false
     
 }()
