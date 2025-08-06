@@ -387,4 +387,29 @@ lazy var customView: UIView = {
     // Маска для скругления (если clipsToBounds = true)
     view.layer.masksToBounds = false
     
+    // MARK: - Преобразования
+    
+    // Масштабирование
+    view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+    
+    // Поворот
+    // view.transform = CGAffineTransform(rotationAngle: .pi/4)
+    
+    // Перенос
+    // view.transform = CGAffineTransform(translationX: 10, y: 10)
+    
+    // MARK: - Пользовательское взаимодействие
+    
+    // Включение пользовательского взаимодействия
+    view.isUserInteractionEnabled = true
+    
+    // Множественные касания
+    view.isMultipleTouchEnabled = false
+    
+    
+    
+    
+    
+    
+    
 }()
