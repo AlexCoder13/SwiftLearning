@@ -406,7 +406,18 @@ lazy var customView: UIView = {
     // Множественные касания
     view.isMultipleTouchEnabled = false
     
+    // MARK: - Теги
     
+    // Установка тега для последующего поиска
+    view.tag = 100
+    
+    // Поиск по тегу
+    // let foundView = self.view.viewWithTag(100)
+    
+    // MARK: - Auto Layout
+    
+    // Отключение автоматического преобразования autoresizing mask в constraints
+    view.translatesAutoresizingMaskIntoConstraints = false
     
     
     
