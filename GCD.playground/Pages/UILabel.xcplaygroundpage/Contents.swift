@@ -419,6 +419,18 @@ lazy var customView: UIView = {
     // Отключение автоматического преобразования autoresizing mask в constraints
     view.translatesAutoresizingMaskIntoConstraints = false
     
+    // MARK: - Контент и отрисовка
+    
+    // Режим отображения контента
+    view.contentMode = .scaleToFill // .scaleAspectFit, .redraw и др.
+    
+    // Очистка графического контекста перед отрисовкой
+    view.clearsContextBeforeDrawing = true
+    
+    // MARK: - Флаг клавиатуры
+    
+    // Влияет ли view на расположение клавиатуры
+    view.keyboardDismissMode = .interactive
     
     
     
