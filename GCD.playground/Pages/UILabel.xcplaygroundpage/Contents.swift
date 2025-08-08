@@ -432,7 +432,11 @@ lazy var customView: UIView = {
     // Влияет ли view на расположение клавиатуры
     view.keyboardDismissMode = .interactive
     
+    // MARK: - Жесты
     
+    // Добавление распознавателя жестов
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+    view.addGestureRecognizer(tapGesture)
     
-    
+    return view
 }()
