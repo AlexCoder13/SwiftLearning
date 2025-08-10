@@ -440,3 +440,25 @@ lazy var customView: UIView = {
     
     return view
 }()
+
+
+
+//Полный разбор всех свойств UIView
+//1. Геометрия и положение
+// Прямоугольник view в координатах superview
+view.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+
+// Границы view в собственной системе координат
+view.bounds = CGRect(x: 0, y: 0, width: 100, height: 100)
+
+// Центр view относительно superview
+view.center = CGPoint(x: 50, y: 50)
+
+// Преобразование координат между view
+let convertedPoint = view.convert(CGPoint(x: 10, y: 10), to: otherView)
+
+// Размер, который view хочет получить
+view.intrinsicContentSize
+
+// Определяет, должен ли view изменить размер при изменении содержимого
+view.invalidateIntrinsicContentSize()
