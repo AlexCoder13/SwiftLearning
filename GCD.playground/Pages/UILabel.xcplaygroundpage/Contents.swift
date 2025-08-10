@@ -462,3 +462,25 @@ view.intrinsicContentSize
 
 // Определяет, должен ли view изменить размер при изменении содержимого
 view.invalidateIntrinsicContentSize()
+
+
+//2. Иерархия представлений
+// Добавление subview
+parentView.addSubview(childView)
+
+// Удаление из иерархии
+childView.removeFromSuperview()
+
+// Перемещение на передний план
+parentView.bringSubviewToFront(childView)
+
+// Перемещение на задний план
+parentView.sendSubviewToBack(childView)
+
+// Вставка между другими subviews
+parentView.insertSubview(childView, at: 2)
+parentView.insertSubview(childView, aboveSubview: siblingView)
+parentView.insertSubview(childView, belowSubview: siblingView)
+
+// Поиск по тегу
+let foundView = parentView.viewWithTag(100)
