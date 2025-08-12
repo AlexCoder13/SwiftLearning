@@ -484,3 +484,29 @@ parentView.insertSubview(childView, belowSubview: siblingView)
 
 // Поиск по тегу
 let foundView = parentView.viewWithTag(100)
+
+
+//3. Внешний вид
+// Фоновый цвет
+view.backgroundColor = .systemBlue
+
+// Прозрачность (0.0 - 1.0)
+view.alpha = 0.5
+
+// Видимость (не удаляет из иерархии)
+view.isHidden = true
+
+// Обрезка содержимого за границами
+view.clipsToBounds = true
+
+// Режим отображения контента
+view.contentMode = .scaleAspectFit // .center, .top, .scaleToFill и др.
+
+// Tint color (влияет на системные элементы)
+view.tintColor = .systemRed
+
+// Очистка графического контекста перед отрисовкой
+view.clearsContextBeforeDrawing = true
+
+// Определяет, нужно ли view обновляться при изменении bounds
+view.contentScaleFactor = UIScreen.main.scale
