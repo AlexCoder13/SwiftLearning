@@ -537,3 +537,14 @@ view.layer.mask = someOtherLayer
 if #available(iOS 13.0, *) {
     view.layer.filters = [CIFilter(name: "CIGaussianBlur")]
 }
+
+
+//5. Преобразования
+// Аффинные преобразования (2D)
+view.transform = CGAffineTransform.identity // Сброс преобразований
+view.transform = CGAffineTransform(scaleX: 1.5, y: 1.5) // Масштабирование
+view.transform = CGAffineTransform(rotationAngle: .pi/4) // Поворот
+view.transform = CGAffineTransform(translationX: 10, y: 10) // Перенос
+
+// 3D преобразования (через layer)
+view.layer.transform = CATransform3DMakeRotation(.pi/4, 1, 0, 0)
