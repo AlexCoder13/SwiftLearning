@@ -510,3 +510,30 @@ view.clearsContextBeforeDrawing = true
 
 // Определяет, нужно ли view обновляться при изменении bounds
 view.contentScaleFactor = UIScreen.main.scale
+
+
+//4. Слои (CALayer)
+// Скругление углов
+view.layer.cornerRadius = 10
+
+// Граница
+view.layer.borderWidth = 2
+view.layer.borderColor = UIColor.white.cgColor
+
+// Тень
+view.layer.shadowColor = UIColor.black.cgColor
+view.layer.shadowOffset = CGSize(width: 0, height: 5)
+view.layer.shadowRadius = 10
+view.layer.shadowOpacity = 0.5
+view.layer.shadowPath = UIBezierPath(rect: view.bounds).cgPath
+
+// Маска для скругления
+view.layer.masksToBounds = true
+
+// Маска слоя
+view.layer.mask = someOtherLayer
+
+// Фильтр размытия (iOS 13+)
+if #available(iOS 13.0, *) {
+    view.layer.filters = [CIFilter(name: "CIGaussianBlur")]
+}
