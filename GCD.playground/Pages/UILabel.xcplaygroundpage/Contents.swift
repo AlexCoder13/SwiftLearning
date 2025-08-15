@@ -548,3 +548,24 @@ view.transform = CGAffineTransform(translationX: 10, y: 10) // Перенос
 
 // 3D преобразования (через layer)
 view.layer.transform = CATransform3DMakeRotation(.pi/4, 1, 0, 0)
+
+
+//6. Пользовательское взаимодействие
+// Включение взаимодействия
+view.isUserInteractionEnabled = true
+
+// Множественные касания
+view.isMultipleTouchEnabled = true
+
+// Эксклюзивное касание (блокирует другие жесты)
+view.isExclusiveTouch = false
+
+// Тест на попадание точки
+let point = CGPoint(x: 50, y: 50)
+if view.point(inside: point, with: nil) {
+    print("Точка внутри view")
+}
+
+// Жесты
+let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+view.addGestureRecognizer(tapGesture)
