@@ -569,3 +569,23 @@ if view.point(inside: point, with: nil) {
 // Жесты
 let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
 view.addGestureRecognizer(tapGesture)
+
+
+//7. Auto Layout
+// Отключение autoresizing mask преобразования
+view.translatesAutoresizingMaskIntoConstraints = false
+
+// Сжатие содержимого
+view.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+
+// Сопротивление растяжению
+view.setContentHuggingPriority(.defaultLow, for: .vertical)
+
+// Системные spacing constraints
+let systemSpacing = view.directionalLayoutMargins
+
+// Кастомные margins
+view.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+
+// Безопасные области (iOS 11+)
+view.insetsLayoutMarginsFromSafeArea = true
