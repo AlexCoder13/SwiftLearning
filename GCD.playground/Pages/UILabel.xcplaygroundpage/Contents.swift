@@ -589,3 +589,24 @@ view.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
 
 // Безопасные области (iOS 11+)
 view.insetsLayoutMarginsFromSafeArea = true
+
+
+//8. Отрисовка и обновление
+// Принудительная отрисовка
+view.setNeedsDisplay()
+
+// Отрисовка конкретного прямоугольника
+view.setNeedsDisplay(CGRect(x: 0, y: 0, width: 50, height: 50))
+
+// Кастомная отрисовка (переопределить draw(_:))
+class CustomView: UIView {
+    override func draw(_ rect: CGRect) {
+        let path = UIBezierPath(ovalIn: rect)
+        UIColor.red.setFill()
+        path.fill()
+    }
+}
+
+// Обновление layout
+view.setNeedsLayout()
+view.layoutIfNeeded()
