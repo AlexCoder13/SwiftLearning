@@ -610,3 +610,33 @@ class CustomView: UIView {
 // Обновление layout
 view.setNeedsLayout()
 view.layoutIfNeeded()
+
+
+//9. Анимации
+// Простая анимация
+UIView.animate(withDuration: 0.3) {
+    view.alpha = 0.5
+    view.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+}
+
+// Spring анимация
+UIView.animate(withDuration: 0.5,
+               delay: 0,
+               usingSpringWithDamping: 0.5,
+               initialSpringVelocity: 0,
+               options: []) {
+    view.center.y += 100
+}
+
+// Keyframe анимация
+UIView.animateKeyframes(withDuration: 1.0, delay: 0) {
+    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.25) {
+        view.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+    }
+    UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.25) {
+        view.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+    }
+    UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5) {
+        view.transform = .identity
+    }
+}
