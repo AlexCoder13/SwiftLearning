@@ -640,3 +640,27 @@ UIView.animateKeyframes(withDuration: 1.0, delay: 0) {
         view.transform = .identity
     }
 }
+
+//
+//10. Жизненный цикл
+// Вызывается при добавлении в иерархию view
+override func didMoveToSuperview() {
+    super.didMoveToSuperview()
+    if superview != nil {
+        print("View было добавлено в иерархию")
+    }
+}
+
+// Вызывается при добавлении в окно
+override func didMoveToWindow() {
+    super.didMoveToWindow()
+    if window != nil {
+        print("View появилось в окне")
+    }
+}
+
+// Вызывается при изменении layout
+override func layoutSubviews() {
+    super.layoutSubviews()
+    print("View обновило layout")
+}
