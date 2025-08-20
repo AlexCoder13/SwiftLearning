@@ -664,3 +664,40 @@ override func layoutSubviews() {
     super.layoutSubviews()
     print("View обновило layout")
 }
+
+
+
+
+
+// UITextField
+// Создаем UIView через ленивое свойство
+lazy var myTextField: UITextField = {
+    let textField = UITextField()
+    
+    // MARK: - Основные свойства текста
+    textField.text = "Начальный текст"
+    textField.textColor = .darkText
+    textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+    textField.textAlignment = .left
+    
+    // MARK: - Внешний вид и стиль
+    textField.backgroundColor = .systemBackground
+    textField.layer.cornerRadius = 8
+    textField.layer.borderWidth = 1
+    textField.layer.borderColor = UIColor.systemGray4.cgColor
+    
+    // MARK: - Плейсхолдер
+    textField.placeholder = "Введите текст здесь"
+    textField.attributedPlaceholder = NSAttributedString(
+        string: "Стилизованный плейсхолдер",
+        attributes: [.foregroundColor: UIColor.systemGray2]
+    )
+    
+    
+    
+    
+    
+    
+    
+    
+}
