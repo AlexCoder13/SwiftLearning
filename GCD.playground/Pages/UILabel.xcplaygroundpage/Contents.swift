@@ -693,7 +693,14 @@ lazy var myTextField: UITextField = {
         attributes: [.foregroundColor: UIColor.systemGray2]
     )
     
-    
+    // MARK: - Границы и отступы
+    textField.borderStyle = .none // .line, .bezel, .roundedRect
+    textField.contentVerticalAlignment = .center
+    textField.contentHorizontalAlignment = .leading
+    textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 1))
+    textField.leftViewMode = .always
+    textField.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 1))
+    textField.rightViewMode = .unlessEditing
     
     
     
