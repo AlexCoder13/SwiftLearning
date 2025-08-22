@@ -702,6 +702,16 @@ lazy var myTextField: UITextField = {
     textField.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 1))
     textField.rightViewMode = .unlessEditing
     
+    // MARK: - Клавиатура и ввод
+    textField.keyboardType = .default // .emailAddress, .numberPad, .phonePad и т.д.
+    textField.keyboardAppearance = .default // .dark
+    textField.returnKeyType = .done // .go, .search, .send и т.д.
+    textField.autocapitalizationType = .sentences // .none, .words, .allCharacters
+    textField.autocorrectionType = .default // .no, .yes
+    textField.spellCheckingType = .default // .no, .yes
+    textField.smartQuotesType = .yes // .no
+    textField.smartDashesType = .yes // .no
+    textField.smartInsertDeleteType = .yes // .no
     
     
     
