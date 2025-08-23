@@ -713,7 +713,19 @@ lazy var myTextField: UITextField = {
     textField.smartDashesType = .yes // .no
     textField.smartInsertDeleteType = .yes // .no
     
+    // MARK: - Безопасность ввода
+    textField.isSecureTextEntry = false // для паролей
+    textField.textContentType = .none // .username, .password, .emailAddress и т.д.
     
+    // MARK: - Инструменты ввода
+    textField.inputAccessoryView = {
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44))
+        toolbar.items = [
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: "Готово", style: .done, target: self, action: #selector(doneButtonTapped))
+        ]
+        return toolbar
+    }()
     
     
     
