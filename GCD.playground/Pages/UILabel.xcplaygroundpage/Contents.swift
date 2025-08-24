@@ -727,6 +727,22 @@ lazy var myTextField: UITextField = {
         return toolbar
     }()
     
+    // MARK: - Очистка текста
+    textField.clearButtonMode = .whileEditing // .never, .unlessEditing, .always
+    textField.clearsOnBeginEditing = false
+    textField.clearsOnInsertion = false
     
+    // MARK: - Делегат и события
+    textField.delegate = self
     
-}
+    // MARK: - Auto Layout
+    textField.translatesAutoresizingMaskIntoConstraints = false
+    
+    // MARK: - Дополнительные настройки
+    textField.adjustsFontSizeToFitWidth = false
+    textField.minimumFontSize = 12
+    textField.allowsEditingTextAttributes = false
+    textField.tintColor = .systemBlue // цвет курсора
+    
+    return textField
+}()
