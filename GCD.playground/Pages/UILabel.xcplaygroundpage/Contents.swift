@@ -746,3 +746,19 @@ lazy var myTextField: UITextField = {
     
     return textField
 }()
+
+
+
+//Подробный разбор всех свойств UITextField
+//1. Основные свойства текста
+// Текущий текст
+textField.text = "Текст поля"
+
+// Цвет текста
+textField.textColor = .black
+
+// Шрифт
+textField.font = UIFont.systemFont(ofSize: 16)
+
+// Выравнивание текста
+textField.textAlignment = .left // .center, .right, .justified, .natural
