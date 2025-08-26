@@ -773,3 +773,13 @@ textField.attributedPlaceholder = NSAttributedString(
     string: "Введите пароль",
     attributes: [.foregroundColor: UIColor.gray, .font: UIFont.italicSystemFont(ofSize: 14)]
 )
+
+
+//3. Границы и отступы
+// Стиль границы
+textField.borderStyle = .roundedRect // .none, .line, .bezel
+
+// Кастомные отступы через leftView/rightView
+let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 1))
+textField.leftView = paddingView
+textField.leftViewMode = .always // .never, .whileEditing, .unlessEditing
