@@ -762,3 +762,14 @@ textField.font = UIFont.systemFont(ofSize: 16)
 
 // Выравнивание текста
 textField.textAlignment = .left // .center, .right, .justified, .natural
+
+
+//2. Плейсхолдер
+// Простой плейсхолдер
+textField.placeholder = "Введите имя"
+
+// Стилизованный атрибутированный плейсхолдер
+textField.attributedPlaceholder = NSAttributedString(
+    string: "Введите пароль",
+    attributes: [.foregroundColor: UIColor.gray, .font: UIFont.italicSystemFont(ofSize: 14)]
+)
