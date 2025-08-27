@@ -783,3 +783,21 @@ textField.borderStyle = .roundedRect // .none, .line, .bezel
 let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 1))
 textField.leftView = paddingView
 textField.leftViewMode = .always // .never, .whileEditing, .unlessEditing
+
+
+//4. Клавиатура и ввод
+// Тип клавиатуры
+textField.keyboardType = .emailAddress // .default, .numberPad, .phonePad, .URL и др.
+
+// Вид клавиатуры
+textField.keyboardAppearance = .dark // .default, .light (iOS 13+)
+
+// Тип кнопки Return
+textField.returnKeyType = .search // .default, .go, .done, .send и др.
+
+// Автокоррекция и капитализация
+textField.autocorrectionType = .no
+textField.autocapitalizationType = .words // .none, .sentences, .allCharacters
+
+// Проверка орфографии
+textField.spellCheckingType = .yes // .no, .default
