@@ -801,3 +801,14 @@ textField.autocapitalizationType = .words // .none, .sentences, .allCharacters
 
 // Проверка орфографии
 textField.spellCheckingType = .yes // .no, .default
+
+
+//5. Безопасность ввода
+// Скрытие вводимых символов (для паролей)
+textField.isSecureTextEntry = true
+
+// Подсказки для автозаполнения
+textField.textContentType = .password // .username, .emailAddress, .oneTimeCode и др.
+
+// Временное отключение secureTextEntry (чтобы показать символ)
+textField.isSecureTextEntry = false
