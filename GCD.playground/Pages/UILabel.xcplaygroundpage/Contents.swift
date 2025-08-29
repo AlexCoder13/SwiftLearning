@@ -812,3 +812,17 @@ textField.textContentType = .password // .username, .emailAddress, .oneTimeCode 
 
 // Временное отключение secureTextEntry (чтобы показать символ)
 textField.isSecureTextEntry = false
+
+
+//6. Инструменты ввода
+// Кастомная панель инструментов над клавиатурой
+let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44))
+toolbar.items = [
+    UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+    UIBarButtonItem(title: "Готово", style: .done, target: self, action: #selector(doneTapped))
+]
+textField.inputAccessoryView = toolbar
+
+// Кастомная клавиатура (например, UIPickerView)
+let picker = UIPickerView()
+textField.inputView = picker
