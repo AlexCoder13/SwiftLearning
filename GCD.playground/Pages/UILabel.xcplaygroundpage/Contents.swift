@@ -826,3 +826,14 @@ textField.inputAccessoryView = toolbar
 // Кастомная клавиатура (например, UIPickerView)
 let picker = UIPickerView()
 textField.inputView = picker
+
+
+//7. Управление очисткой текста
+// Режим отображения кнопки очистки
+textField.clearButtonMode = .whileEditing // .never, .unlessEditing, .always
+
+// Очищать ли поле при начале редактирования
+textField.clearsOnBeginEditing = false
+
+// Очищать ли при вставке
+textField.clearsOnInsertion = false
