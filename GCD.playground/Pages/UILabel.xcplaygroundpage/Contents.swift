@@ -837,3 +837,38 @@ textField.clearsOnBeginEditing = false
 
 // Очищать ли при вставке
 textField.clearsOnInsertion = false
+
+
+//8. Делегат и обработка событий
+// Основные методы делегата
+extension ViewController: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return true // Разрешить редактирование
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("Начато редактирование")
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        return true // Разрешить завершение редактирования
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("Завершено редактирование")
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // Валидация ввода
+        return true
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        return true // Разрешить очистку
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
