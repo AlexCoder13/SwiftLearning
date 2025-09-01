@@ -872,3 +872,19 @@ extension ViewController: UITextFieldDelegate {
         return true
     }
 }
+
+
+//9. Дополнительные настройки
+// Подгонка размера шрифта
+textField.adjustsFontSizeToFitWidth = true
+textField.minimumFontSize = 10 // Минимальный размер шрифта
+
+// Разрешение редактирования атрибутов
+textField.allowsEditingTextAttributes = false
+
+// Цвет курсора
+textField.tintColor = .systemBlue
+
+// Контекстное меню
+textField.canPaste = true // Разрешить вставку
+textField.canCopy = true // Разрешить копирование
