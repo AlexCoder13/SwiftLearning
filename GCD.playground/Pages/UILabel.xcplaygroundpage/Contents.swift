@@ -888,3 +888,16 @@ textField.tintColor = .systemBlue
 // Контекстное меню
 textField.canPaste = true // Разрешить вставку
 textField.canCopy = true // Разрешить копирование
+
+
+//10. Работа с клавиатурой
+// Активация клавиатуры
+textField.becomeFirstResponder()
+
+// Скрытие клавиатуры
+textField.resignFirstResponder()
+
+// Проверка, активно ли поле
+if textField.isFirstResponder {
+    print("Поле активно, клавиатура отображена")
+}
