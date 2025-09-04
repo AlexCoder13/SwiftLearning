@@ -901,3 +901,20 @@ textField.resignFirstResponder()
 if textField.isFirstResponder {
     print("Поле активно, клавиатура отображена")
 }
+
+
+
+
+//Полный список методов делегата UITextFieldDelegate
+//1. textFieldShouldBeginEditing(_:)
+//Вызывается: Когда текстовое поле собирается стать активным (получить фокус).
+//Возвращаемое значение: Bool - разрешить (true) или запретить (false) редактирование.
+//Пример использования:
+func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+    // Проверяем, можно ли редактировать поле
+    if textField.tag == 1 && !userIsLoggedIn {
+        showLoginAlert()
+        return false
+    }
+    return true
+}
