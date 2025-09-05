@@ -918,3 +918,21 @@ func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
     }
     return true
 }
+
+
+//2. textFieldDidBeginEditing(_:)
+//Вызывается: После того как текстовое поле стало активным (клавиатура показана).
+//Идеально для:
+//* Анимаций
+//* Подготовки интерфейса
+//* Логирования
+//Пример:
+func textFieldDidBeginEditing(_ textField: UITextField) {
+    // Поднимаем view при активации поля ввода
+    UIView.animate(withDuration: 0.3) {
+        self.view.transform = CGAffineTransform(translationX: 0, y: -100)
+    }
+    
+    // Подсветка активного поля
+    textField.layer.borderColor = UIColor.systemBlue.cgColor
+}
