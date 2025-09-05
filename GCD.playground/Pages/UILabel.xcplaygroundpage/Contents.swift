@@ -936,3 +936,16 @@ func textFieldDidBeginEditing(_ textField: UITextField) {
     // Подсветка активного поля
     textField.layer.borderColor = UIColor.systemBlue.cgColor
 }
+
+
+//3. textFieldShouldEndEditing(_:)
+//Вызывается: Когда текстовое поле собирается потерять фокус.
+//Возвращаемое значение: Bool - разрешить (true) или запретить (false) потерю фокуса.
+//Пример валидации:
+func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+    guard let text = textField.text, !text.isEmpty else {
+        textField.shake() // Анимация ошибки
+        return false // Не даем потерять фокус
+    }
+    return true
+}
